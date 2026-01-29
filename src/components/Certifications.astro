@@ -1,10 +1,22 @@
 ---
 const certifications = [
  {
+  name: "Iniciación al desarrollo IA",
+  issuer: "BigSchool",
+  date: "2025",
+  link: "/cursos/bigschool_ia.pdf",
+ },
+ {
+  name: "Curso Intensivo de Model Context Protocol",
+  issuer: "MiduDev",
+  date: "2025",
+  link: "/cursos/midu_mcp.pdf",
+ },
+ {
   name: "Angular: De cero a experto",
   issuer: "Udemy",
-  date: "2021",
-  link: "#",
+  date: "2024",
+  link: "/cursos/udemy_angular.pdf",
  },
  {
   name: "Angular Advanced: Best Practices",
@@ -31,6 +43,7 @@ const certifications = [
    certifications.map((cert) => (
     <a
      href={cert.link}
+     target="_blank"
      class="group bg-neutral-900 border border-neutral-800 p-6 rounded-lg hover:border-emerald-500/50 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.1)] flex flex-col justify-between h-full">
      <div>
       <div class="flex justify-between items-start mb-4">

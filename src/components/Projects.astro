@@ -20,8 +20,15 @@ const projects = [
   title: "Portfolio",
   description: "Portfolio personal creado con Astro",
   tech: ["Astro", "Tailwind", "HTML", "CSS"],
+  link: "https://portfolio.raulmorales.eu",
+  github: "https://github.com/raulmoralesruiz/portfolio-astro",
+ },
+ {
+  title: "AboutMe",
+  description: "Versión anterior del portfolio personal creado con Angular",
+  tech: ["Angular", "Tailwind", "HTML", "CSS", "TypeScript"],
   link: "https://aboutme.raulmorales.eu",
-  github: "https://github.com/raulmoralesruiz/aboutme-astro",
+  github: "https://github.com/raulmoralesruiz/aboutme",
  },
 ];
 ---
@@ -53,7 +60,8 @@ const projects = [
         <a
          href={project.github}
          class="text-gray-400 hover:text-emerald-400 transition-colors"
-         aria-label="GitHub">
+         aria-label="GitHub"
+         target="_blank">
          <svg
           class="w-6 h-6"
           fill="currentColor"
@@ -69,7 +77,8 @@ const projects = [
         <a
          href={project.link}
          class="text-gray-400 hover:text-emerald-400 transition-colors"
-         aria-label="Demo">
+         aria-label="Demo"
+         target="_blank">
          <svg
           class="w-6 h-6"
           fill="none"
