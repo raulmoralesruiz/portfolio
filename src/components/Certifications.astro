@@ -39,37 +39,41 @@ const certifications = [
  </h2>
  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   {
-   certifications.map((cert) => (
-    <a
-     href={cert.link}
-     target="_blank"
-     class="group bg-neutral-900 border border-neutral-800 p-6 rounded-lg hover:border-emerald-500/50 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.1)] flex flex-col justify-between h-full">
-     <div>
-      <div class="flex justify-between items-start mb-4">
-       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path
-         stroke-linecap="round"
-         stroke-linejoin="round"
-         stroke-width="1.5"
-         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-       </svg>
-       <span class="text-xs font-mono text-gray-500">{cert.date}</span>
+   certifications.map((cert) => {
+    const Element = cert.link ? "a" : "div";
+    const props = cert.link ? { href: cert.link, target: "_blank" } : {};
+
+    return (
+     <Element
+      {...props}
+      class="group bg-neutral-900 border border-neutral-800 p-6 rounded-lg hover:border-emerald-500/50 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.1)] flex flex-col justify-between h-full">
+      <div>
+       <div class="flex justify-between items-start mb-4">
+        <svg
+         xmlns="http://www.w3.org/2000/svg"
+         class="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+         <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+         />
+        </svg>
+        <span class="text-xs font-mono text-gray-500">{cert.date}</span>
+       </div>
+       <h3 class="text-lg font-bold text-gray-200 mb-2 group-hover:text-white transition-colors">
+        {cert.name}
+       </h3>
       </div>
-      <h3 class="text-lg font-bold text-gray-200 mb-2 group-hover:text-white transition-colors">
-       {cert.name}
-      </h3>
-     </div>
-     <p class="text-sm text-emerald-400/80 group-hover:text-emerald-400 mt-2">
-      {cert.issuer}
-     </p>
-    </a>
-   ))
+      <p class="text-sm text-emerald-400/80 group-hover:text-emerald-400 mt-2">
+       {cert.issuer}
+      </p>
+     </Element>
+    );
+   })
   }
  </div>
 </section>
