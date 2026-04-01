@@ -1,43 +1,73 @@
-# Astro Starter Kit: Minimal
+# Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+Portfolio personal para mostrar proyectos, habilidades y experiencia.
+
+## 🚀 Sobre el proyecto
+
+Este proyecto es una web de portfolio personal donde presento mi trabajo como desarrollador, incluyendo:
+
+* Proyectos (frontend / backend / fullstack)
+* Tecnologías que utilizo
+* Información de contacto
+
+El objetivo es tener un sitio limpio, rápido y sencillo para demostrar mi trabajo.
+
+## 📦 Instalación
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/raulmoralesruiz/portfolio.git
+cd portfolio
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Instala las dependencias:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Ejecuta el proyecto:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🧪 Uso
 
-## 🧞 Commands
+Abre el navegador y accede a:
 
-All commands are run from the root of the project, from a terminal:
+```
+http://localhost:4321
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 📁 Estructura del proyecto
 
-## 👀 Want to learn more?
+```
+/src
+  /components
+  /layouts
+  /pages
+  /styles
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## ✨ Características
+
+* Diseño responsive
+* Visualización de proyectos
+* Interfaz limpia
+* Buen rendimiento
+
+## 📌 Notas
+
+Este proyecto es intencionadamente simple y minimalista.
+
+El foco está en:
+
+* Claridad del código
+* Mantenibilidad
+* Rendimiento
+
+## 📄 Licencia
+AGPL-3.0
+
