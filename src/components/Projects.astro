@@ -19,28 +19,35 @@ const projects = [
  {
   title: "Kéfir Control",
   description:
-   "Aplicación minimalista para el gestionar la fermentación de kéfir de leche.",
+   "Aplicación minimalista para el gestionar la fermentación de kéfir de leche",
   tech: ["Flutter", "Dart", "Android", "iOS"],
   link: "https://f-droid.org/packages/eu.raulmorales.kefircontrol",
   github: "https://github.com/raulmoralesruiz/kefir-control",
  },
  {
-  title: "Virus! docs",
-  description: "Documentación de la aplicación web del juego de cartas Virus!",
-  tech: ["Astro", "HTML", "CSS", "JavaScript", "TypeScript"],
-  link: "https://virusdocs.raulmorales.eu",
-  github: "https://github.com/raulmoralesruiz/virus-docs",
+  title: "Portfolio Radio",
+  description: "Portfolio de voz de radio",
+  tech: ["Astro", "Tailwind", "HTML", "CSS"],
+  link: "https://radio.raulmorales.eu",
+  github: "https://github.com/raulmoralesruiz/radio-portfolio",
  },
  {
-  title: "Portfolio",
+  title: "Mi Portfolio",
   description: "Portfolio personal creado con Astro",
   tech: ["Astro", "Tailwind", "HTML", "CSS"],
   link: "https://portfolio.raulmorales.eu",
   github: "https://github.com/raulmoralesruiz/portfolio",
  },
  {
+  title: "Virus! Docs",
+  description: "Documentación de la aplicación web del juego de cartas Virus!",
+  tech: ["Astro", "HTML", "CSS", "JavaScript", "TypeScript"],
+  link: "https://virusdocs.raulmorales.eu",
+  github: "https://github.com/raulmoralesruiz/virus-docs",
+ },
+ {
   title: "AboutMe",
-  description: "Versión anterior del portfolio personal creado con Angular",
+  description: "Versión anterior del portfolio personal",
   tech: ["Angular", "Tailwind", "HTML", "CSS", "TypeScript"],
   link: "https://aboutme.raulmorales.eu",
   github: "https://github.com/raulmoralesruiz/aboutme",
@@ -112,7 +119,7 @@ const projects = [
       <h3 class="text-xl font-bold text-gray-200 mb-2 group-hover:text-emerald-400 transition-colors">
        {project.title}
       </h3>
-      <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+      <p class="text-gray-400 text-sm mb-6 grow leading-relaxed">
        {project.description}
       </p>
       <ul class="flex flex-wrap gap-3 mt-auto font-mono text-xs">
