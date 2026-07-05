@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import raul from "../assets/img/raul.png";
+import { aboutData } from "../data/cv";
 ---
 
 <section id="sobre-mi" class="py-20 container mx-auto px-4 max-w-4xl">
@@ -9,24 +10,9 @@ import raul from "../assets/img/raul.png";
  </h2>
  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:items-center">
   <div class="md:col-span-2 text-gray-300 text-lg leading-relaxed space-y-4">
-   <p>
-    ¡Hola! Soy un desarrollador apasionado por construir cosas en internet. Mi
-    interés en el desarrollo web comenzó cuando decidí experimentar con código
-    más allá de lo básico, descubriendo el poder de crear interfaces
-    interactivas.
-   </p>
-   <p>
-    Hoy en día, mi enfoque principal es el <strong class="text-emerald-400"
-     >Desarrollo Frontend</strong
-    >, donde disfruto creando interfaces fluidas y accesibles. Sin embargo, mi
-    experiencia como <strong class="text-white">Full-Stack Developer</strong> me da
-    una ventaja única para entender el ciclo de vida completo de un proyecto, desde
-    la base de datos hasta el píxel final.
-   </p>
-   <p>
-    Me esfuerzo por seguir buenas prácticas, escribir código limpio y optimizar
-    cada detalle para asegurar la mejor experiencia de usuario posible.
-   </p>
+   {aboutData.map((paragraph) => (
+    <p set:html={paragraph} />
+   ))}
   </div>
 
   <div tabindex="0" class="relative group w-72 h-72 mx-auto focus:outline-none">
