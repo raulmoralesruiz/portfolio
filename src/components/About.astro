@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import raul from "../assets/img/raul.png";
 import { cv, type Lang } from "../data/cv";
+import { getSection } from "../utils/sections";
 
 interface Props {
   lang: Lang;
@@ -9,11 +10,12 @@ interface Props {
 
 const { lang } = Astro.props;
 const data = cv[lang];
+const section = getSection(lang, "about");
 ---
 
 <section id={data.anchors.about} class="py-20 container mx-auto px-4 max-w-4xl">
  <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">01.</span> {data.ui.sectionAbout}
+  <span class="text-emerald-400 mr-2 font-mono text-2xl">{section.num}.</span> {data.ui.sectionAbout}
  </h2>
  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:items-center">
   <div class="md:col-span-2 text-gray-300 text-lg leading-relaxed space-y-4">

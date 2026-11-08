@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Keep anchored sections clear of the fixed section nav */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}

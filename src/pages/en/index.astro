@@ -1,12 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import SectionNav from "../../components/SectionNav.astro";
 import Header from "../../components/Header.astro";
 import About from "../../components/About.astro";
 import Skills from "../../components/Skills.astro";
+import Projects from "../../components/Projects.astro";
 import Experience from "../../components/Experience.astro";
 import Education from "../../components/Education.astro";
 import Certifications from "../../components/Certifications.astro";
-import Projects from "../../components/Projects.astro";
 import Contact from "../../components/Contact.astro";
 import { cv } from "../../data/cv";
 
@@ -15,14 +16,15 @@ const data = cv[lang];
 ---
 
 <Layout lang={lang} title={data.pageTitle} description={data.metaDescription}>
+  <SectionNav lang={lang} />
   <main class="flex flex-col">
     <Header lang={lang} />
     <About lang={lang} />
     <Skills lang={lang} />
+    <Projects lang={lang} />
     <Experience lang={lang} />
     <Education lang={lang} />
     <Certifications lang={lang} />
-    <Projects lang={lang} />
     <Contact lang={lang} />
   </main>
 </Layout>

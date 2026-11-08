@@ -1,5 +1,6 @@
 ---
 import { cv, type Lang } from "../data/cv";
+import { getSection } from "../utils/sections";
 
 interface Props {
   lang: Lang;
@@ -7,6 +8,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const ui = cv[lang].ui;
+const section = getSection(lang, "contact");
 ---
 
 <section
@@ -14,7 +16,7 @@ const ui = cv[lang].ui;
  class="py-24 text-center container mx-auto px-4 max-w-4xl">
  <h2
   class="text-3xl font-bold text-white mb-2 flex justify-center items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">07.</span> {ui.sectionContact}
+  <span class="text-emerald-400 mr-2 font-mono text-2xl">{section.num}.</span> {ui.sectionContact}
  </h2>
  <h3 class="text-4xl md:text-5xl font-bold text-gray-200 mb-6 mt-4">
   {ui.contactTitle}
