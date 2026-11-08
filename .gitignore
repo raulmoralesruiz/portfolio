@@ -5,6 +5,9 @@ dist/
 
 # dependencies
 node_modules/
+# pnpm artifacts (project uses npm)
+pnpm-lock.yaml
+pnpm-workspace.yaml
 
 # logs
 npm-debug.log*
