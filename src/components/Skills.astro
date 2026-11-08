@@ -8,7 +8,7 @@ interface Props {
 const { lang } = Astro.props;
 const data = cv[lang];
 ---
-<section id="habilidades" class="py-20 container mx-auto px-4 max-w-4xl">
+<section id={data.anchors.skills} class="py-20 container mx-auto px-4 max-w-4xl">
     <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
         <span class="text-emerald-400 mr-2 font-mono text-2xl">02.</span> {data.ui.sectionSkills}
     </h2>

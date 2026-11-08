@@ -3,6 +3,15 @@ export type Lang = "es" | "en";
 export interface CV {
   pageTitle: string;
   metaDescription: string;
+  anchors: {
+    about: string;
+    skills: string;
+    experience: string;
+    education: string;
+    certifications: string;
+    projects: string;
+    contact: string;
+  };
 
   header: {
     name: string;
@@ -73,6 +82,15 @@ export const cv: Record<Lang, CV> = {
   es: {
     pageTitle: "Raúl Morales | Desarrollador Frontend",
     metaDescription: "Portfolio de Desarrollador Frontend",
+    anchors: {
+      about: "sobre-mi",
+      skills: "habilidades",
+      experience: "experiencia",
+      education: "estudios",
+      certifications: "certificaciones",
+      projects: "proyectos",
+      contact: "contacto",
+    },
 
     header: {
       name: "Raúl Morales",
@@ -150,6 +168,15 @@ export const cv: Record<Lang, CV> = {
   en: {
     pageTitle: "Raúl Morales | Frontend Developer",
     metaDescription: "Frontend Developer Portfolio",
+    anchors: {
+      about: "about",
+      skills: "skills",
+      experience: "experience",
+      education: "education",
+      certifications: "certifications",
+      projects: "projects",
+      contact: "contact",
+    },
 
     header: {
       name: "Raúl Morales",

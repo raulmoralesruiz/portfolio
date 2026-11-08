@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const data = cv[lang];
 ---
 
-<section id="certificaciones" class="py-20 container mx-auto px-4 max-w-4xl">
+<section id={data.anchors.certifications} class="py-20 container mx-auto px-4 max-w-4xl">
  <h2 class="text-3xl font-bold text-white mb-10 flex items-center">
   <span class="text-emerald-400 mr-2 font-mono text-2xl">05.</span> {data.ui.sectionCertifications}
  </h2>
