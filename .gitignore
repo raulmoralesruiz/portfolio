@@ -25,3 +25,10 @@ pnpm-debug.log*
 
 # assets img
 src/assets/img/
+
+# agent tooling (skill installs, local to each harness)
+.opencode/
+.pi/
+
+# impeccable local config (keep shared config tracked)
+.impeccable/config.local.json

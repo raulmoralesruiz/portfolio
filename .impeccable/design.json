@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T21:40:50Z",
+  "title": "Design System: Raúl Morales — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Graphite Canvas",
+        "canonical": "#0a0a0a",
+        "tonalRamp": ["#050505", "#0a0a0a", "#171717", "#262626", "#404040", "#737373", "#a3a3a3", "#e5e5e5"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Graphite Surface",
+        "canonical": "#171717",
+        "tonalRamp": ["#0a0a0a", "#171717", "#262626", "#404040", "#525252", "#737373", "#a3a3a3", "#d4d4d4"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Graphite Line",
+        "canonical": "#262626",
+        "tonalRamp": ["#171717", "#262626", "#404040", "#525252", "#737373", "#a3a3a3", "#d4d4d4", "#e5e5e5"]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "canonical": "#9ca3af",
+        "tonalRamp": ["#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#f3f4f6"]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Text Muted",
+        "canonical": "#6b7280",
+        "tonalRamp": ["#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#d1d5db", "#f3f4f6"]
+      },
+      "signal-emerald": {
+        "role": "primary",
+        "displayName": "Signal Emerald",
+        "canonical": "#34d399",
+        "tonalRamp": ["#052e21", "#0a4a35", "#0f6b4d", "#10996a", "#10b981", "#34d399", "#6ee7b7", "#a7f3d0"]
+      },
+      "signal-emerald-deep": {
+        "role": "primary",
+        "displayName": "Signal Emerald Deep",
+        "canonical": "#10b981",
+        "tonalRamp": ["#052e21", "#0a4a35", "#0f6b4d", "#10996a", "#10b981", "#34d399", "#6ee7b7", "#a7f3d0"]
+      },
+      "signal-emerald-bright": {
+        "role": "primary",
+        "displayName": "Signal Emerald Bright",
+        "canonical": "#6ee7b7",
+        "tonalRamp": ["#0a4a35", "#0f6b4d", "#10996a", "#10b981", "#34d399", "#6ee7b7", "#a7f3d0", "#d1fae5"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The name, hero only (3rem → 4.5rem, bold)." },
+      "headline": { "displayName": "Headline", "purpose": "The role line beneath the name (2.25rem → 3.75rem, bold)." },
+      "title": { "displayName": "Title", "purpose": "Section headings, always preceded by a mono NN. number." },
+      "body": { "displayName": "Body", "purpose": "Human prose; capped at 36rem in hero and contact." },
+      "label": { "displayName": "Label", "purpose": "The developer's voice: numbers, labels, buttons, tags, dates, footer." }
+    },
+    "shadows": [
+      {
+        "name": "hover-lift",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1), 0 0 20px rgba(16, 185, 129, 0.1)",
+        "purpose": "Feature (project) cards on hover, paired with a -5px lift."
+      },
+      {
+        "name": "hover-glow",
+        "value": "0 0 15px rgba(16, 185, 129, 0.1)",
+        "purpose": "Certification cards on hover."
+      },
+      {
+        "name": "hover-glow-soft",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 0 15px rgba(16, 185, 129, 0.05)",
+        "purpose": "Skill cards on hover."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-quick",
+        "value": "150ms (Tailwind default transition)",
+        "purpose": "Color transitions on buttons, links, borders."
+      },
+      {
+        "name": "ease-standard",
+        "value": "300ms ease-out",
+        "purpose": "Transform transitions: portrait ring, card lift, icon scale."
+      },
+      {
+        "name": "scroll",
+        "value": "scroll-smooth on <html>",
+        "purpose": "Anchor navigation (Ver mis proyectos → #proyectos)."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ghost Button — Signal",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Primary CTA: emerald outline, mono label, 10% emerald fill on hover.",
+      "html": "<a class=\"ds-btn-signal\" href=\"#proyectos\">Ver mis proyectos</a>",
+      "css": ".ds-btn-signal { display: inline-block; border: 1px solid #34d399; color: #34d399; padding: 16px 32px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; font-size: 1rem; line-height: 1.5; background: transparent; text-decoration: none; cursor: pointer; transition: background-color 150ms; } .ds-btn-signal:hover { background: rgba(52, 211, 153, 0.1); } .ds-btn-signal:focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button — Inverse",
+      "kind": "button",
+      "refersTo": "button-outline-inverse",
+      "description": "Secondary CTA: white outline with 20px stroke icon; loading state drops to 70% opacity.",
+      "html": "<button class=\"ds-btn-inverse\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ds-ico\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\" /></svg><span>Descargar CV</span></button>",
+      "css": ".ds-btn-inverse { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #ffffff; color: #ffffff; padding: 16px 32px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; font-size: 1rem; line-height: 1.5; background: transparent; cursor: pointer; transition: background-color 150ms; } .ds-btn-inverse:hover { background: rgba(255, 255, 255, 0.1); } .ds-btn-inverse:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; } .ds-btn-inverse:disabled { opacity: 0.7; cursor: not-allowed; } .ds-ico { width: 20px; height: 20px; }"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "description": "Mono NN. number in Signal Emerald followed by a bold white title.",
+      "html": "<h2 class=\"ds-section-title\"><span class=\"ds-num\">01.</span> Sobre Mí</h2>",
+      "css": ".ds-section-title { display: flex; align-items: center; font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; color: #ffffff; margin-bottom: 48px; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-num { color: #34d399; margin-right: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; font-size: 1.5rem; font-weight: 400; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card-project",
+      "description": "Feature card: 12px radius, lifts -5px on hover with emerald-tinted glow; title shifts to emerald.",
+      "html": "<article class=\"ds-card-project\"><div class=\"ds-card-inner\"><div class=\"ds-card-head\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ds-card-ico\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z\" /></svg><div class=\"ds-links\"><a class=\"ds-link-ico\" href=\"#\" aria-label=\"GitHub\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"currentColor\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z\" clip-rule=\"evenodd\" /></svg></a><a class=\"ds-link-ico\" href=\"#\" aria-label=\"Demo\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" aria-hidden=\"true\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14\" /></svg></a></div></div><h3 class=\"ds-card-title\">Virus!</h3><p class=\"ds-card-text\">Juego de memoria con frontend, backend y documentación propios.</p><ul class=\"ds-tags\"><li>React</li><li>Node</li><li>Express</li></ul></div></article>",
+      "css": ".ds-card-project { position: relative; background: #171717; border: 1px solid #262626; border-radius: 12px; overflow: hidden; transition: transform 300ms ease-out, box-shadow 300ms ease-out; } .ds-card-project:hover { transform: translateY(-5px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1), 0 0 20px rgba(16, 185, 129, 0.1); } .ds-card-inner { padding: 32px; display: flex; flex-direction: column; min-height: 100%; } .ds-card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; } .ds-card-ico { width: 40px; height: 40px; color: #34d399; } .ds-links { display: flex; gap: 16px; } .ds-link-ico { color: #9ca3af; transition: color 150ms; display: inline-flex; } .ds-link-ico:hover { color: #34d399; } .ds-card-title { font-size: 1.25rem; font-weight: 700; color: #e5e7eb; margin-bottom: 8px; transition: color 150ms; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-card-project:hover .ds-card-title { color: #34d399; } .ds-card-text { color: #9ca3af; font-size: 0.875rem; line-height: 1.625; margin-bottom: 24px; flex-grow: 1; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; font-size: 0.75rem; list-style: none; padding: 0; margin: 0; } .ds-tags li { color: rgba(52, 211, 153, 0.9); }"
+    },
+    {
+      "name": "Skill Card",
+      "kind": "card",
+      "refersTo": "card-skill",
+      "description": "Utility card: 50%-opacity surface, mono emerald category, ▹ bullets; soft glow on hover.",
+      "html": "<div class=\"ds-card-skill\"><h3 class=\"ds-skill-cat\">JavaScript</h3><ul class=\"ds-skill-list\"><li>React</li><li>Astro</li><li>TypeScript</li></ul></div>",
+      "css": ".ds-card-skill { background: rgba(23, 23, 23, 0.5); padding: 24px; border-radius: 8px; border: 1px solid #262626; transition: border-color 150ms, box-shadow 150ms; } .ds-card-skill:hover { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 0 15px rgba(16, 185, 129, 0.05); } .ds-skill-cat { font-size: 1.25rem; font-weight: 600; color: #34d399; margin-bottom: 16px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; } .ds-skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-skill-list li { display: flex; align-items: center; color: #9ca3af; font-size: 1rem; } .ds-skill-list li::before { content: \"▹\"; color: #10b981; margin-right: 8px; }"
+    },
+    {
+      "name": "Certification Card",
+      "kind": "card",
+      "refersTo": "card-certification",
+      "description": "Utility card: emerald badge icon, 15px glow and 50%-emerald border on hover; icon scales 1.1×.",
+      "html": "<a class=\"ds-card-cert\" href=\"#\"><div><div class=\"ds-cert-head\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ds-cert-ico\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\" /></svg><span class=\"ds-cert-date\">2024</span></div><h3 class=\"ds-cert-name\">MongoDB M001</h3></div><p class=\"ds-cert-issuer\">MongoDB University</p></a>",
+      "css": ".ds-card-cert { display: flex; flex-direction: column; justify-content: space-between; height: 100%; background: #171717; border: 1px solid #262626; padding: 24px; border-radius: 8px; transition: border-color 150ms, box-shadow 150ms; text-decoration: none; } .ds-card-cert:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); } .ds-cert-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; } .ds-cert-ico { width: 32px; height: 32px; color: #34d399; transition: transform 150ms; } .ds-card-cert:hover .ds-cert-ico { transform: scale(1.1); } .ds-cert-date { font-size: 0.75rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; color: #6b7280; } .ds-cert-name { font-size: 1.125rem; font-weight: 700; color: #e5e7eb; margin-bottom: 8px; transition: color 150ms; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-card-cert:hover .ds-cert-name { color: #ffffff; } .ds-cert-issuer { font-size: 0.875rem; color: rgba(52, 211, 153, 0.8); margin-top: 8px; transition: color 150ms; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-card-cert:hover .ds-cert-issuer { color: #34d399; }"
+    },
+    {
+      "name": "Timeline Item",
+      "kind": "custom",
+      "description": "Experience entry: 12px emerald dot on a 1px rail, mono emerald period, role @ company.",
+      "html": "<div class=\"ds-timeline\"><div class=\"ds-tl-item\"><span class=\"ds-tl-dot\"></span><span class=\"ds-tl-period\">2021 — Presente</span><h3 class=\"ds-tl-role\">Frontend Developer <span class=\"ds-at\">@</span> <span class=\"ds-tl-company\">Babel</span></h3><p class=\"ds-tl-text\">Desarrollo de interfaces y mantenimiento de productos web.</p></div></div>",
+      "css": ".ds-timeline { position: relative; border-left: 1px solid #262626; margin-left: 12px; display: flex; flex-direction: column; gap: 48px; } .ds-tl-item { position: relative; padding-left: 32px; } .ds-tl-dot { position: absolute; left: -5px; top: 8px; height: 12px; width: 12px; border-radius: 9999px; background: #34d399; box-shadow: 0 0 0 4px #171717; } .ds-tl-period { font-size: 0.875rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; color: #34d399; display: block; margin-bottom: 4px; } .ds-tl-role { font-size: 1.25rem; font-weight: 700; color: #e5e7eb; margin-bottom: 4px; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-at { color: #34d399; } .ds-tl-company { color: #d1d5db; } .ds-tl-text { color: #9ca3af; line-height: 1.625; max-width: 42rem; font-family: ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Year Chip",
+      "kind": "chip",
+      "refersTo": "chip-year",
+      "description": "Fully circular mono chip for years and meta labels.",
+      "html": "<span class=\"ds-chip-year\">2021</span>",
+      "css": ".ds-chip-year { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; font-size: 0.875rem; color: #6b7280; background: #171717; padding: 4px 12px; border-radius: 9999px; border: 1px solid #262626; display: inline-block; }"
+    },
+    {
+      "name": "Portrait Ring",
+      "kind": "custom",
+      "description": "Signature: 288px circle; outer emerald ring eases from 110% to 100% scale on hover/focus; disc border saturates.",
+      "html": "<div class=\"ds-portrait\" tabindex=\"0\"><div class=\"ds-portrait-ring\"></div><div class=\"ds-portrait-disc\">RM</div></div>",
+      "css": ".ds-portrait { position: relative; width: 288px; height: 288px; margin: 0 auto; } .ds-portrait-ring { position: absolute; inset: 0; border-radius: 9999px; border: 2px solid #34d399; transform: scale(1.1); transition: transform 300ms ease-out; } .ds-portrait:hover .ds-portrait-ring, .ds-portrait:focus .ds-portrait-ring { transform: scale(1); } .ds-portrait-disc { position: relative; z-index: 10; width: 100%; height: 100%; background: #171717; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(52, 211, 153, 0.3); transition: border-color 300ms; font-size: 3rem; font-weight: 700; color: #9ca3af; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-portrait:hover .ds-portrait-disc, .ds-portrait:focus .ds-portrait-disc { border-color: #34d399; } .ds-portrait:focus { outline: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Terminal Garden",
+    "overview": "Calm, precise, developer-native. The page is a dark workbench — a Graphite field of near-black neutrals — in which a single living voice, Signal Emerald, grows exactly where it means something: section numbers, labels, links, hover states, the selection highlight. Nothing shouts. Confidence comes from craft: hairline borders, a disciplined two-voice type system (sans for prose, mono for the developer's voice), generous whitespace, and evidence laid out plainly.\n\nThe composition is deliberately plain: one column, one measure, numbered sections that read like steps in a changelog. Motion is reserved — a color shift on hover, a small lift on feature cards, a faint emerald glow. The restraint is the point: a recruiter or a client should be able to read the page the way they'd read a well-formatted terminal session, and find the next step (write an email, download the CV) within one click.",
+    "keyCharacteristics": [
+      "One Signal Emerald voice on a Graphite workbench; no second accent, no gradients",
+      "Two type voices: system sans for prose, system mono for the developer's voice (numbers, labels, buttons, tags, dates)",
+      "Flat surfaces at rest; depth appears only as a response to state (hover lift + faint emerald glow)",
+      "Ghost (outline) buttons with mono labels; 1px hairline borders as the primary structural device",
+      "One column, one measure (max 896px), numbered sections, 80px vertical rhythm"
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Signal Emerald is the only chromatic color in the system. It marks meaning — numbers, links, state — and is never used as a large fill. Its rarity is the point.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Sans for prose, mono for the developer's voice. Mono never carries a paragraph; prose never sits in a mono label.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces are flat at rest. Shadows appear only in response to state (hover), and only as a faint emerald-tinted glow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep Signal Emerald on meaning-bearing elements (numbers, links, borders, hover, selection) — never as a large fill.",
+      "Do use the mono voice for section numbers, labels, buttons, tech tags, dates, and the footer.",
+      "Do keep one column at max 896px with 80px section rhythm.",
+      "Do respond to hover with a border-color shift and a faint emerald glow (≤10% opacity); lift only feature cards (−5px).",
+      "Do keep focus states visible (2px outline, 2px offset; the portrait responds to :focus as well as :hover).",
+      "Do preserve the two-voice type system: sans prose, mono developer voice."
+    ],
+    "donts": [
+      "Don't add a second accent color, a gradient, or a chromatic background.",
+      "Don't give any surface a resting shadow.",
+      "Don't use solid-filled primary buttons — the system is ghost (outline) only.",
+      "Don't set Inter as the body font without an @theme override — it is currently loaded but not applied; the body renders in the system sans stack.",
+      "Don't put prose in the mono voice or labels in the sans voice.",
+      "Don't break the numbered-section rhythm (01.–07.) when adding sections."
+    ]
+  }
+}
