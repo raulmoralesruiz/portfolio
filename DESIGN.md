@@ -135,7 +135,7 @@ One chromatic voice on a mineral dark field: Signal Emerald is the only hue in t
 **Body Font:** same system sans stack
 **Label/Mono Font:** system mono stack (`ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`)
 
-**Character:** Two voices, never mixed: sans carries the human prose, mono carries the developer's voice — section numbers, labels, buttons, tech tags, dates, footer. Inter is loaded from Google Fonts but not applied (no `@theme` override); the body renders in the system stack, and that is the current truth.
+**Character:** Two voices, never mixed: sans carries the human prose, mono carries the developer's voice — section numbers, labels, buttons, tech tags, dates, footer. The body renders in the system sans stack — no webfont is loaded or applied.
 
 ### Hierarchy
 
@@ -224,6 +224,6 @@ Three corner sizes, each with a job: 4px for buttons (the smallest, most mechani
 - **Don't** add a second accent color, a gradient, or a chromatic background.
 - **Don't** give any surface a resting shadow.
 - **Don't** use solid-filled primary buttons — the system is ghost (outline) only.
-- **Don't** set Inter as the body font without an `@theme` override — it is currently loaded but not applied; the body renders in the system sans stack.
+- **Don't** load or apply a webfont (e.g. Inter) — the system is the native system sans/mono stack and no external font is shipped.
 - **Don't** put prose in the mono voice or labels in the sans voice.
 - **Don't** break the numbered-section rhythm (`01.`–`07.`) when adding sections.
