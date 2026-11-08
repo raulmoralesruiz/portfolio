@@ -1,5 +1,12 @@
 ---
+import { cv, type Lang } from "../data/cv";
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const ui = cv[lang].ui;
 ---
 
 <section
@@ -7,19 +14,18 @@
  class="py-24 text-center container mx-auto px-4 max-w-4xl">
  <h2
   class="text-3xl font-bold text-white mb-2 flex justify-center items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">07.</span> ¿Qué sigue?
+  <span class="text-emerald-400 mr-2 font-mono text-2xl">07.</span> {ui.sectionContact}
  </h2>
  <h3 class="text-4xl md:text-5xl font-bold text-gray-200 mb-6 mt-4">
-  Ponte en contacto
+  {ui.contactTitle}
  </h3>
  <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-  Actualmente estoy abierto a nuevas oportunidades. Ya sea que tengas una
-  pregunta o simplemente quieras saludar, ¡haré todo lo posible por responder!
+  {ui.contactBody}
  </p>
  <a
   href="mailto:raulmoralesruiz@outlook.com"
   class="inline-block border border-emerald-400 text-emerald-400 px-8 py-4 rounded font-mono hover:bg-emerald-400/10 transition-colors">
-  Saludar
+  {ui.contactCta}
  </a>
 
  <div class="mt-20 flex justify-center gap-8">
@@ -59,6 +65,6 @@
 
  <footer
   class="mt-20 border-t border-neutral-800 pt-8 text-neutral-500 text-sm font-mono">
-  <p>Diseñado y desarrollado por Raúl Morales</p>
+  <p>{ui.footer}</p>
  </footer>
 </section>

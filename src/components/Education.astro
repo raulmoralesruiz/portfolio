@@ -1,27 +1,34 @@
 ---
-import { educationData as education } from "../data/cv";
+import { cv, type Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const data = cv[lang];
 ---
 
 <section id="estudios" class="py-20 container mx-auto px-4 max-w-4xl">
  <h2 class="text-3xl font-bold text-white mb-10 flex items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">04.</span> Formación
+  <span class="text-emerald-400 mr-2 font-mono text-2xl">04.</span> {data.ui.sectionEducation}
  </h2>
  <div class="grid grid-cols-1 gap-6">
   {
-   education.map((edu) => (
-    <div class="flex flex-col md:flex-row md:items-start md:justify-between border-b border-neutral-800 pb-8 last:border-0 last:pb-0">
-     <div class="md:w-3/4">
-      <h3 class="text-xl font-bold text-gray-200 mb-1">{edu.degree}</h3>
-      <p class="text-lg text-emerald-400 mb-2">{edu.school}</p>
-      <p class="text-gray-400 leading-relaxed">{edu.description}</p>
-     </div>
-     <div class="md:w-1/4 md:text-right mt-2 md:mt-0">
-      <span class="font-mono text-sm text-gray-500 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800 inline-block">
-       {edu.year}
-      </span>
-     </div>
+   data.education.map((edu) => (
+   <div class="flex flex-col md:flex-row md:items-start md:justify-between border-b border-neutral-800 pb-8 last:border-0 last:pb-0">
+    <div class="md:w-3/4">
+     <h3 class="text-xl font-bold text-gray-200 mb-1">{edu.degree}</h3>
+     <p class="text-lg text-emerald-400 mb-2">{edu.school}</p>
+     <p class="text-gray-400 leading-relaxed">{edu.description}</p>
     </div>
-   ))
+    <div class="md:w-1/4 md:text-right mt-2 md:mt-0">
+     <span class="font-mono text-sm text-gray-500 bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800 inline-block">
+      {edu.year}
+     </span>
+    </div>
+   </div>
+  ))
   }
  </div>
 </section>

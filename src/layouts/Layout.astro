@@ -1,27 +1,39 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../data/cv';
 
 interface Props {
-	title: string;
+  lang: Lang;
+  title: string;
+  description: string;
 }
 
-const { title } = Astro.props;
+const { lang, title, description } = Astro.props;
+
+const SITE = 'https://portfolio.raulmorales.eu';
+const esUrl = `${SITE}/`;
+const enUrl = `${SITE}/en/`;
+const currentUrl = lang === 'es' ? esUrl : enUrl;
 ---
 
 <!doctype html>
-<html lang="es" class="dark scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Portfolio de Desarrollador Frontend" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-	</head>
-	<body class="bg-neutral-950 text-gray-200 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
-		<slot />
-	</body>
+<html lang={lang} class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+    <link rel="canonical" href={currentUrl} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-neutral-950 text-gray-200 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+    <slot />
+  </body>
 </html>

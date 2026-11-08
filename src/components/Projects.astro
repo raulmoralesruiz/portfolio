@@ -1,14 +1,21 @@
 ---
-import { projectsData as projects } from "../data/cv";
+import { cv, type Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const data = cv[lang];
 ---
 
 <section id="proyectos" class="py-20 container mx-auto px-4 max-w-4xl">
- <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">06.</span> Proyectos
- </h2>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {
-   projects.map((project) => (
+  <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
+   <span class="text-emerald-400 mr-2 font-mono text-2xl">06.</span> {data.ui.sectionProjects}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+   {
+    data.projects.map((project) => (
     <div class="group relative bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:translate-y-[-5px] transition-all duration-300 shadow-md hover:shadow-emerald-500/10">
      <div class="p-8 flex flex-col h-full">
       <div class="flex justify-between items-start mb-6">
@@ -77,6 +84,6 @@ import { projectsData as projects } from "../data/cv";
      </div>
     </div>
    ))
-  }
- </div>
+   }
+  </div>
 </section>

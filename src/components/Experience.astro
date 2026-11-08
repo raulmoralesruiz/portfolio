@@ -1,26 +1,33 @@
 ---
-import { experienceData as experience } from "../data/cv";
+import { cv, type Lang } from "../data/cv";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const data = cv[lang];
 ---
 
 <section id="experiencia" class="py-20 container mx-auto px-4 max-w-4xl">
  <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
-  <span class="text-emerald-400 mr-2 font-mono text-2xl">03.</span> Experiencia
+  <span class="text-emerald-400 mr-2 font-mono text-2xl">03.</span> {data.ui.sectionExperience}
  </h2>
  <div class="relative border-l border-neutral-800 ml-3 md:ml-6 space-y-12">
   {
-   experience.map((job, index) => (
-    <div class="relative pl-8 md:pl-12">
-     <span class="absolute -left-[5px] top-2 h-3 w-3 rounded-full bg-emerald-400 ring-4 ring-neutral-900" />
-     <span class="text-sm font-mono text-emerald-400 mb-1 block">
-      {job.period}
-     </span>
-     <h3 class="text-xl font-bold text-gray-200 mb-1">
-      {job.role} <span class="text-emerald-400">@</span>{" "}
-      <span class="text-gray-300">{job.company}</span>
-     </h3>
-     <p class="text-gray-400 leading-relaxed max-w-2xl">{job.description}</p>
-    </div>
-   ))
+   data.experience.map((job) => (
+   <div class="relative pl-8 md:pl-12">
+    <span class="absolute -left-[5px] top-2 h-3 w-3 rounded-full bg-emerald-400 ring-4 ring-neutral-900" />
+    <span class="text-sm font-mono text-emerald-400 mb-1 block">
+     {job.period}
+    </span>
+    <h3 class="text-xl font-bold text-gray-200 mb-1">
+     {job.role} <span class="text-emerald-400">@</span>{" "}
+     <span class="text-gray-300">{job.company}</span>
+    </h3>
+    <p class="text-gray-400 leading-relaxed max-w-2xl">{job.description}</p>
+   </div>
+  ))
   }
  </div>
 </section>

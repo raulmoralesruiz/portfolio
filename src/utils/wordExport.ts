@@ -8,20 +8,12 @@ import {
   ExternalHyperlink,
   BorderStyle,
 } from "docx";
-import {
-  headerData,
-  aboutData,
-  experienceData,
-  educationData,
-  skillsData,
-  certificationsData,
-  projectsData,
-} from "../data/cv";
+import { cv, type Lang } from "../data/cv";
 
 // Helper to parse HTML strings into TextRuns with colors and bold
 function parseHtmlToTextRuns(htmlString: string): TextRun[] {
   const runs: TextRun[] = [];
-  
+
   const regex = /(<strong[^>]*>|<span[^>]*>)(.*?)(<\/strong>|<\/span>)/g;
   let lastIndex = 0;
   let match;
@@ -30,14 +22,14 @@ function parseHtmlToTextRuns(htmlString: string): TextRun[] {
     if (match.index > lastIndex) {
       runs.push(new TextRun({ text: htmlString.substring(lastIndex, match.index) }));
     }
-    
+
     const tag = match[1];
     const text = match[2];
-    
+
     let color = "e5e7eb";
     let bold = false;
     let font = "Segoe UI";
-    
+
     if (tag.includes('strong')) bold = true;
     if (tag.includes('text-emerald-400')) color = "34d399";
     if (tag.includes('text-white')) color = "ffffff";
@@ -54,7 +46,10 @@ function parseHtmlToTextRuns(htmlString: string): TextRun[] {
   return runs;
 }
 
-export async function generateWordDocument(): Promise<Blob> {
+export async function generateWordDocument(lang: Lang): Promise<Blob> {
+  const data = cv[lang];
+  const ui = data.ui;
+
   const doc = new Document({
     background: {
       color: "0a0a0a", // bg-neutral-950
@@ -118,25 +113,25 @@ export async function generateWordDocument(): Promise<Blob> {
           // HEADER SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "HOLA, MI NOMBRE ES", font: "Consolas", color: "34d399" }),
+              new TextRun({ text: ui.greeting, font: "Consolas", color: "34d399" }),
             ],
             alignment: AlignmentType.CENTER,
             spacing: { after: 100 },
           }),
           new Paragraph({
-            text: headerData.name,
+            text: data.header.name,
             heading: HeadingLevel.TITLE,
             alignment: AlignmentType.CENTER,
             spacing: { after: 100 },
           }),
           new Paragraph({
-            text: headerData.role,
+            text: data.header.role,
             heading: HeadingLevel.HEADING_2,
             alignment: AlignmentType.CENTER,
             spacing: { after: 200 },
           }),
           new Paragraph({
-            children: parseHtmlToTextRuns(headerData.description.replace('Full-Stack', '<span class="text-emerald-400">Full-Stack</span>')),
+            children: parseHtmlToTextRuns(data.header.description.replace('Full-Stack', '<span class="text-emerald-400">Full-Stack</span>')),
             alignment: AlignmentType.CENTER,
             spacing: { after: 400 },
           }),
@@ -145,14 +140,14 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "01. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Sobre Mí" })
+              new TextRun({ text: ui.sectionAbout })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
             border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
             keepNext: true,
           }),
-          ...aboutData.map(
+          ...data.about.map(
             (paragraph) =>
               new Paragraph({
                 children: parseHtmlToTextRuns(paragraph),
@@ -164,14 +159,14 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "02. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Habilidades" }) // Oh wait, in web Skills is 02, let's keep the order we had or follow web
+              new TextRun({ text: ui.sectionSkills })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
             border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
             keepNext: true,
           }),
-          ...skillsData.flatMap((skillGroup) => [
+          ...data.skills.flatMap((skillGroup) => [
             new Paragraph({
               text: skillGroup.category,
               heading: HeadingLevel.HEADING_3,
@@ -190,7 +185,7 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "03. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Experiencia" })
+              new TextRun({ text: ui.sectionExperience })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
@@ -198,7 +193,7 @@ export async function generateWordDocument(): Promise<Blob> {
             pageBreakBefore: true,
             keepNext: true,
           }),
-          ...experienceData.flatMap((job) => [
+          ...data.experience.flatMap((job) => [
             new Paragraph({
               children: [
                 new TextRun({ text: job.role, bold: true, color: "e5e7eb" }),
@@ -225,14 +220,14 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "04. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Formación" })
+              new TextRun({ text: ui.sectionEducation })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
             border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
             keepNext: true,
           }),
-          ...educationData.flatMap((edu) => [
+          ...data.education.flatMap((edu) => [
             new Paragraph({
               children: [
                 new TextRun({ text: edu.degree, bold: true, color: "e5e7eb" }),
@@ -263,20 +258,20 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "05. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Certificaciones" })
+              new TextRun({ text: ui.sectionCertifications })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
             border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
             keepNext: true,
           }),
-          ...certificationsData.flatMap((cert) => {
+          ...data.certifications.flatMap((cert) => {
             const children: any[] = [
               new TextRun({ text: `${cert.name} `, bold: true, color: "e5e7eb" }),
               new TextRun({ text: `(${cert.issuer})`, color: "34d399" }),
               new TextRun({ text: ` - ${cert.date}`, font: "Consolas", color: "6b7280" }),
             ];
-            
+
             if (cert.link) {
               const fullLink = cert.link.startsWith('http') ? cert.link : `https://portfolio.raulmorales.eu${cert.link}`;
               children.push(new TextRun({ text: ` - ` }));
@@ -284,7 +279,7 @@ export async function generateWordDocument(): Promise<Blob> {
                 new ExternalHyperlink({
                   children: [
                     new TextRun({
-                      text: "Ver",
+                      text: ui.docxView,
                       style: "Hyperlink",
                     }),
                   ],
@@ -306,7 +301,7 @@ export async function generateWordDocument(): Promise<Blob> {
           new Paragraph({
             children: [
               new TextRun({ text: "06. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: "Proyectos" })
+              new TextRun({ text: ui.sectionProjects })
             ],
             heading: HeadingLevel.HEADING_1,
             spacing: { before: 400, after: 200 },
@@ -314,7 +309,7 @@ export async function generateWordDocument(): Promise<Blob> {
             pageBreakBefore: true,
             keepNext: true,
           }),
-          ...projectsData.flatMap((project) => [
+          ...data.projects.flatMap((project) => [
             new Paragraph({
               children: [
                 new TextRun({ text: project.title, bold: true, color: "e5e7eb" }),
@@ -336,12 +331,12 @@ export async function generateWordDocument(): Promise<Blob> {
             new Paragraph({
               children: [
                 new ExternalHyperlink({
-                  children: [new TextRun({ text: "Ver Proyecto", style: "Hyperlink" })],
+                  children: [new TextRun({ text: ui.docxViewProject, style: "Hyperlink" })],
                   link: project.link,
                 }),
                 new TextRun({ text: " | " }),
                 new ExternalHyperlink({
-                  children: [new TextRun({ text: "Código Fuente", style: "Hyperlink" })],
+                  children: [new TextRun({ text: ui.docxSourceCode, style: "Hyperlink" })],
                   link: project.github,
                 })
               ],
