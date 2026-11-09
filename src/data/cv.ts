@@ -3,6 +3,7 @@ export type Lang = "es" | "en";
 export interface CV {
   pageTitle: string;
   metaDescription: string;
+  email: string;
   anchors: {
     about: string;
     skills: string;
@@ -53,28 +54,38 @@ export interface CV {
     tech: string[];
     link: string;
     github: string;
+    featured?: boolean;
+    sublinks?: { label: string; url: string }[];
   }[];
 
   ui: {
     greeting: string;
     viewProjects: string;
-    downloadCv: string;
+    download: string;
     generating: string;
     cvError: string;
+    cvFile: string;
+    cvDone: string;
+    cvCaption: string;
     sectionAbout: string;
     sectionSkills: string;
     sectionExperience: string;
     sectionEducation: string;
     sectionCertifications: string;
+    noPdf: string;
     sectionProjects: string;
     sectionContact: string;
     contactTitle: string;
     contactBody: string;
     contactCta: string;
+    copyEmail: string;
+    emailCopied: string;
+    emailCopyError: string;
     footer: string;
     docxView: string;
     docxViewProject: string;
     docxSourceCode: string;
+    heroTerminalCmd: string;
   };
 }
 
@@ -82,6 +93,7 @@ export const cv: Record<Lang, CV> = {
   es: {
     pageTitle: "Raúl Morales | Desarrollador Frontend",
     metaDescription: "Portfolio de Desarrollador Frontend",
+    email: "raulmoralesruiz@outlook.com",
     anchors: {
       about: "sobre-mi",
       skills: "habilidades",
@@ -133,41 +145,59 @@ export const cv: Record<Lang, CV> = {
     ],
 
     projects: [
-      { title: "Virus! Backend", description: "Backend para la aplicación web del famoso juego de cartas Virus!", tech: ["Node.js", "Express", "Socket.io", "TypeScript"], link: "https://virus.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-backend" },
-      { title: "Virus! Frontend", description: "Frontend para la aplicación web del famoso juego de cartas Virus!", tech: ["Angular", "Socket.io", "HTML", "CSS", "TypeScript"], link: "https://virus.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-frontend" },
-      { title: "Kéfir Control", description: "Aplicación minimalista para el gestionar la fermentación de kéfir de leche", tech: ["Flutter", "Dart", "Android", "iOS"], link: "https://kefircontrol.raulmorales.eu", github: "https://github.com/raulmoralesruiz/kefir-control" },
+      {
+        title: "Virus!",
+        description: "Juego de cartas en tiempo real: backend Node.js + Socket.io, frontend Angular y documentación Astro. Proyecto de extremo a extremo.",
+        tech: ["Node.js", "Express", "Socket.io", "Angular", "TypeScript"],
+        link: "https://virus.raulmorales.eu",
+        github: "https://github.com/raulmoralesruiz/virus-frontend",
+        featured: true,
+        sublinks: [
+          { label: "Backend", url: "https://github.com/raulmoralesruiz/virus-backend" },
+          { label: "Frontend", url: "https://github.com/raulmoralesruiz/virus-frontend" },
+          { label: "Docs", url: "https://virusdocs.raulmorales.eu" },
+        ],
+      },
+      { title: "Kéfir Control", description: "Aplicación minimalista para gestionar la fermentación de kéfir de leche", tech: ["Flutter", "Dart", "Android", "iOS"], link: "https://kefircontrol.raulmorales.eu", github: "https://github.com/raulmoralesruiz/kefir-control" },
       { title: "Portfolio Radio", description: "Portfolio de voz de radio", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://radio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/radio-portfolio" },
-      { title: "Mi Portfolio", description: "Portfolio personal creado con Astro", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
-      { title: "Virus! Docs", description: "Documentación de la aplicación web del juego de cartas Virus!", tech: ["Astro", "HTML", "CSS", "JavaScript", "TypeScript"], link: "https://virusdocs.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-docs" },
-      { title: "AboutMe", description: "Versión anterior del portfolio personal", tech: ["Angular", "Tailwind", "HTML", "CSS", "TypeScript"], link: "https://aboutme.raulmorales.eu", github: "https://github.com/raulmoralesruiz/aboutme" },
+      { title: "Mi Portfolio", description: "Portfolio personal creado con Astro. Evolución de AboutMe, mi iteración anterior en Angular.", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
     ],
 
     ui: {
       greeting: "HOLA, MI NOMBRE ES",
       viewProjects: "Ver mis proyectos",
-      downloadCv: "Descargar CV",
-      generating: "Generando...",
+      download: "descargar",
+      generating: "generando…",
       cvError: "Hubo un error al generar el CV. Por favor, inténtalo de nuevo.",
+      cvFile: "Raul-Morales-CV.docx",
+      cvDone: "descargado",
+      cvCaption: "Se genera en tu navegador desde los mismos datos que pintan esta página.",
       sectionAbout: "Sobre Mí",
       sectionSkills: "Habilidades",
       sectionExperience: "Experiencia",
       sectionEducation: "Formación",
       sectionCertifications: "Certificaciones",
+      noPdf: "sin PDF",
       sectionProjects: "Proyectos",
       sectionContact: "¿Qué sigue?",
       contactTitle: "Ponte en contacto",
       contactBody: "Actualmente estoy abierto a nuevas oportunidades. Ya sea que tengas una pregunta o simplemente quieras saludar, ¡haré todo lo posible por responder!",
       contactCta: "Saludar",
+      copyEmail: "Copiar email",
+      emailCopied: "Copiado",
+      emailCopyError: "No se pudo copiar",
       footer: "Diseñado y desarrollado por Raúl Morales",
       docxView: "Ver",
       docxViewProject: "Ver Proyecto",
       docxSourceCode: "Código Fuente",
+      heroTerminalCmd: "ls proyectos",
     },
   },
 
   en: {
     pageTitle: "Raúl Morales | Frontend Developer",
     metaDescription: "Frontend Developer Portfolio",
+    email: "raulmoralesruiz@outlook.com",
     anchors: {
       about: "about",
       skills: "skills",
@@ -219,35 +249,52 @@ export const cv: Record<Lang, CV> = {
     ],
 
     projects: [
-      { title: "Virus! Backend", description: "Backend for the web app of the famous card game Virus!", tech: ["Node.js", "Express", "Socket.io", "TypeScript"], link: "https://virus.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-backend" },
-      { title: "Virus! Frontend", description: "Frontend for the web app of the famous card game Virus!", tech: ["Angular", "Socket.io", "HTML", "CSS", "TypeScript"], link: "https://virus.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-frontend" },
+      {
+        title: "Virus!",
+        description: "Real-time card game: Node.js + Socket.io backend, Angular frontend, and Astro docs. End-to-end project.",
+        tech: ["Node.js", "Express", "Socket.io", "Angular", "TypeScript"],
+        link: "https://virus.raulmorales.eu",
+        github: "https://github.com/raulmoralesruiz/virus-frontend",
+        featured: true,
+        sublinks: [
+          { label: "Backend", url: "https://github.com/raulmoralesruiz/virus-backend" },
+          { label: "Frontend", url: "https://github.com/raulmoralesruiz/virus-frontend" },
+          { label: "Docs", url: "https://virusdocs.raulmorales.eu" },
+        ],
+      },
       { title: "Kéfir Control", description: "Minimalist app to manage the fermentation of milk kefir", tech: ["Flutter", "Dart", "Android", "iOS"], link: "https://kefircontrol.raulmorales.eu", github: "https://github.com/raulmoralesruiz/kefir-control" },
       { title: "Portfolio Radio", description: "Radio voice portfolio", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://radio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/radio-portfolio" },
-      { title: "My Portfolio", description: "Personal portfolio built with Astro", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
-      { title: "Virus! Docs", description: "Documentation for the web app of the card game Virus!", tech: ["Astro", "HTML", "CSS", "JavaScript", "TypeScript"], link: "https://virusdocs.raulmorales.eu", github: "https://github.com/raulmoralesruiz/virus-docs" },
-      { title: "AboutMe", description: "Previous version of the personal portfolio", tech: ["Angular", "Tailwind", "HTML", "CSS", "TypeScript"], link: "https://aboutme.raulmorales.eu", github: "https://github.com/raulmoralesruiz/aboutme" },
+      { title: "My Portfolio", description: "Personal portfolio built with Astro. Evolution of AboutMe, my earlier Angular iteration.", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
     ],
 
     ui: {
       greeting: "HI, MY NAME IS",
       viewProjects: "View my projects",
-      downloadCv: "Download CV",
-      generating: "Generating...",
+      download: "download",
+      generating: "generating…",
       cvError: "There was an error generating the CV. Please try again.",
+      cvFile: "Raul-Morales-CV.docx",
+      cvDone: "downloaded",
+      cvCaption: "Generated in your browser from the same data that renders this page.",
       sectionAbout: "About Me",
       sectionSkills: "Skills",
       sectionExperience: "Experience",
       sectionEducation: "Education",
       sectionCertifications: "Certifications",
+      noPdf: "no PDF",
       sectionProjects: "Projects",
       sectionContact: "What's next?",
       contactTitle: "Get in touch",
       contactBody: "I'm currently open to new opportunities. Whether you have a question or just want to say hi, I'll do my best to get back to you!",
       contactCta: "Say hi",
+      copyEmail: "Copy email",
+      emailCopied: "Copied",
+      emailCopyError: "Copy failed",
       footer: "Designed & built by Raúl Morales",
       docxView: "View",
       docxViewProject: "View Project",
       docxSourceCode: "Source Code",
+      heroTerminalCmd: "ls projects",
     },
   },
 };

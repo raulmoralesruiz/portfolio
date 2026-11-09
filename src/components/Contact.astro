@@ -9,6 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const ui = cv[lang].ui;
 const section = getSection(lang, "contact");
+const email = cv[lang].email;
 ---
 
 <section
@@ -24,8 +25,21 @@ const section = getSection(lang, "contact");
  <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
   {ui.contactBody}
  </p>
+ <div class="inline-flex flex-wrap items-center justify-center gap-3 border border-neutral-800 rounded px-4 py-3 mb-6">
+  <span class="font-mono text-gray-300 select-all">{email}</span>
+  <button
+   id="copy-email"
+   type="button"
+   data-email={email}
+   data-copied={ui.emailCopied}
+   data-error={ui.emailCopyError}
+   class="font-mono text-sm px-3 py-1.5 rounded border border-neutral-700 text-gray-400 hover:border-emerald-400 hover:text-emerald-400 transition-colors cursor-pointer">
+   {ui.copyEmail}
+  </button>
+ </div>
+ <p id="copy-email-status" class="sr-only" aria-live="polite"></p>
  <a
-  href="mailto:raulmoralesruiz@outlook.com"
+  href={`mailto:${email}`}
   class="inline-block border border-emerald-400 text-emerald-400 px-8 py-4 rounded font-mono hover:bg-emerald-400/10 transition-colors">
   {ui.contactCta}
  </a>
@@ -34,6 +48,7 @@ const section = getSection(lang, "contact");
   <a
    href="https://github.com/raulmoralesruiz"
    target="_blank"
+   rel="noopener noreferrer"
    class="text-gray-400 hover:text-emerald-400 transition-colors">
    <span class="sr-only">GitHub</span>
    <svg
@@ -50,6 +65,7 @@ const section = getSection(lang, "contact");
   <a
    href="https://www.linkedin.com/in/raulmoralesruiz"
    target="_blank"
+   rel="noopener noreferrer"
    class="text-gray-400 hover:text-emerald-400 transition-colors">
    <span class="sr-only">LinkedIn</span>
    <svg
@@ -66,7 +82,51 @@ const section = getSection(lang, "contact");
  </div>
 
  <footer
-  class="mt-20 border-t border-neutral-800 pt-8 text-neutral-500 text-sm font-mono">
+  class="mt-20 border-t border-neutral-800 pt-8 text-neutral-400 text-sm font-mono">
   <p>{ui.footer}</p>
  </footer>
 </section>
+
+<script>
+ const btn = document.getElementById("copy-email") as HTMLButtonElement | null;
+ if (btn) {
+  const email = btn.dataset.email ?? "";
+  const label = btn.textContent ?? "";
+  const copied = btn.dataset.copied ?? "";
+  const failed = btn.dataset.error ?? "";
+  const status = document.getElementById("copy-email-status");
+  let timer: number | undefined;
+
+  const flash = (msg: string) => {
+   btn.textContent = msg;
+   if (status) status.textContent = msg;
+   window.clearTimeout(timer);
+   timer = window.setTimeout(() => {
+    btn.textContent = label;
+    if (status) status.textContent = "";
+   }, 2000);
+  };
+
+  btn.addEventListener("click", async () => {
+   let ok = false;
+   try {
+    await navigator.clipboard.writeText(email);
+    ok = true;
+   } catch {
+    const ta = document.createElement("textarea");
+    ta.value = email;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+     ok = document.execCommand("copy");
+    } catch {
+     ok = false;
+    }
+    ta.remove();
+   }
+   flash(ok ? copied : failed);
+  });
+ }
+</script>

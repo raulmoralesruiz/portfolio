@@ -1,3 +1,18 @@
 {
-  "buildPath": "comp"
+  "buildPath": "comp",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "blinking-cursor",
+        "value": "*",
+        "files": [
+          "src/components/Header.astro"
+        ],
+        "createdAt": "2026-11-09T09:38:59.457Z",
+        "reason": "Intencional: firma terminal del hero (cursor ▊), con guardia prefers-reduced-motion. Decisión del owner 2026-11-09."
+      }
+    ]
+  }
 }

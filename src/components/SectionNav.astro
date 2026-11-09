@@ -10,22 +10,32 @@ const { lang } = Astro.props;
 const sections = getSections(lang);
 
 const toggleActive = "px-2 py-1 rounded text-emerald-400 bg-emerald-400/10";
-const toggleInactive = "px-2 py-1 rounded text-gray-500 hover:text-gray-300 transition-colors";
+const toggleInactive = "px-2 py-1 rounded text-gray-400 hover:text-gray-300 transition-colors";
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 bg-neutral-950/90 backdrop-blur border-b border-neutral-800">
   <div class="max-w-4xl mx-auto h-14 px-4 flex items-center gap-3">
     <nav class="flex-1 min-w-0" aria-label={lang === "es" ? "Secciones" : "Sections"}>
-      <ul class="flex items-center gap-0.5 overflow-x-auto">
+      <ul class="flex items-center gap-0">
+        <li class="shrink-0">
+          <a
+            href="#top"
+            data-top-link
+            class="px-1 py-1 rounded font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
+            aria-label={lang === "es" ? "Inicio" : "Home"}
+          >
+            <span>~</span>
+          </a>
+        </li>
         {sections.map((section) => (
           <li class="shrink-0">
             <a
               href={`#${section.anchor}`}
               data-section-link
-              class="px-1.5 py-1 rounded font-mono text-xs whitespace-nowrap text-neutral-500 hover:text-neutral-300 transition-colors"
+              class="px-1 py-1 rounded font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
             >
-              <span class="opacity-70">{section.num}</span>
-              <span class="hidden md:inline"> {section.label}</span>
+              <span>{section.num}</span>
+              <span class="hidden lg:inline"> {section.label}</span>
             </a>
           </li>
         ))}
@@ -43,17 +53,21 @@ const toggleInactive = "px-2 py-1 rounded text-gray-500 hover:text-gray-300 tran
 </header>
 
 <script>
-  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-section-link], [data-top-link]")
+  );
 
   if (links.length > 0) {
     const sections = links
       .map((link) => document.getElementById(link.getAttribute("href")?.slice(1) ?? ""))
       .filter((el): el is HTMLElement => el !== null);
 
-    const INACTIVE = ["text-neutral-500", "hover:text-neutral-300"];
+    const INACTIVE = ["text-neutral-400", "hover:text-neutral-300"];
     const ACTIVE = ["text-emerald-400"];
     let activeId: string | null = null;
-    const visible = new Map<string, number>();
+    let clickedId: string | null = null;
+    const visible = new Set<string>();
+    const firstId = sections[0]?.id ?? "";
 
     const applyState = (link: HTMLAnchorElement, isActive: boolean) => {
       for (const cls of INACTIVE) link.classList.toggle(cls, !isActive);
@@ -69,27 +83,83 @@ const toggleInactive = "px-2 py-1 rounded text-gray-500 hover:text-gray-300 tran
     };
 
     // Scrollspy: a section is "current" when it enters the top 45% of the
-    // viewport; among visible ones, the most recently entered wins.
+    // viewport; among the visible ones, the one closest to the bottom of that
+    // band wins. Positions are read at decision time, never cached.
+    const updateFromVisible = () => {
+      if (visible.size === 0) return;
+      let best = "";
+      let bestTop = -Infinity;
+      for (const id of visible) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top > bestTop) {
+          bestTop = top;
+          best = id;
+        }
+      }
+      setActive(best);
+    };
+
+    // "You are here": the hero (id="top") is observed like any section, so
+    // while it is in the band the `~` marker wins; the empty-band fallback
+    // below is defensive (hero → footer covers the whole page).
+    const decide = () => {
+      if (visible.size === 0) {
+        if (firstId) setActive(firstId);
+        return;
+      }
+      updateFromVisible();
+    };
+
+    // While a nav-link click is scrolling the page, the observer would keep
+    // activating the section being passed; hold its decisions until the
+    // scroll settles, then keep the clicked section if it is in view.
+    let suppressUntil = 0;
+    let suppressTimer: ReturnType<typeof setTimeout> | undefined;
+    const extendSuppression = (ms: number) => {
+      const until = performance.now() + ms;
+      if (until <= suppressUntil) return;
+      suppressUntil = until;
+      clearTimeout(suppressTimer);
+      suppressTimer = setTimeout(() => {
+        if (clickedId && visible.has(clickedId)) setActive(clickedId);
+        else decide();
+        clickedId = null;
+      }, until - performance.now());
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top);
+          if (entry.isIntersecting) visible.add(entry.target.id);
           else visible.delete(entry.target.id);
         }
-        if (visible.size === 0) return;
-        let best = "";
-        let bestTop = -Infinity;
-        for (const [id, top] of visible) {
-          if (top > bestTop) {
-            bestTop = top;
-            best = id;
-          }
-        }
-        setActive(best);
+        if (performance.now() < suppressUntil) return;
+        decide();
       },
       { rootMargin: "0px 0px -55% 0px", threshold: 0 }
     );
 
     for (const section of sections) observer.observe(section);
+
+    // Clicking a nav link: activate it immediately and hold the observer
+    // until the smooth scroll settles (each scroll event extends the hold).
+    for (const link of links) {
+      link.addEventListener("click", () => {
+        const id = link.getAttribute("href")?.slice(1) ?? "";
+        if (!id) return;
+        clickedId = id;
+        setActive(id);
+        extendSuppression(900);
+      });
+    }
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (performance.now() < suppressUntil) extendSuppression(150);
+      },
+      { passive: true }
+    );
   }
 </script>

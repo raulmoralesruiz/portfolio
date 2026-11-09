@@ -9,6 +9,7 @@ import {
   BorderStyle,
 } from "docx";
 import { cv, type Lang } from "../data/cv";
+import { getSection } from "./sections";
 
 // Helper to parse HTML strings into TextRuns with colors and bold
 function parseHtmlToTextRuns(htmlString: string): TextRun[] {
@@ -128,6 +129,23 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
             text: data.header.role,
             heading: HeadingLevel.HEADING_2,
             alignment: AlignmentType.CENTER,
+            spacing: { after: 100 },
+          }),
+          new Paragraph({
+            children: [
+              new ExternalHyperlink({
+                children: [
+                  new TextRun({
+                    text: data.email,
+                    font: "Consolas",
+                    color: "34d399",
+                    underline: { type: "single", color: "34d399" },
+                  }),
+                ],
+                link: `mailto:${data.email}`,
+              }),
+            ],
+            alignment: AlignmentType.CENTER,
             spacing: { after: 200 },
           }),
           new Paragraph({
@@ -139,7 +157,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
           // ABOUT SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "01. ", font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: `${getSection(lang, "about").num}. `, font: "Consolas", color: "34d399", size: 36 }),
               new TextRun({ text: ui.sectionAbout })
             ],
             heading: HeadingLevel.HEADING_1,
@@ -158,7 +176,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
           // SKILLS SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "02. ", font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: `${getSection(lang, "skills").num}. `, font: "Consolas", color: "34d399", size: 36 }),
               new TextRun({ text: ui.sectionSkills })
             ],
             heading: HeadingLevel.HEADING_1,
@@ -181,10 +199,74 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
             }),
           ]),
 
+          // PROJECTS SECTION
+          new Paragraph({
+            children: [
+              new TextRun({ text: `${getSection(lang, "projects").num}. `, font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: ui.sectionProjects })
+            ],
+            heading: HeadingLevel.HEADING_1,
+            spacing: { before: 400, after: 200 },
+            border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
+            pageBreakBefore: true,
+            keepNext: true,
+          }),
+          ...data.projects.flatMap((project) => {
+            const linkChildren: any[] = [
+              new ExternalHyperlink({
+                children: [new TextRun({ text: ui.docxViewProject, style: "Hyperlink" })],
+                link: project.link,
+              }),
+              new TextRun({ text: " | " }),
+              new ExternalHyperlink({
+                children: [new TextRun({ text: ui.docxSourceCode, style: "Hyperlink" })],
+                link: project.github,
+              }),
+            ];
+
+            if (project.sublinks) {
+              linkChildren.push(new TextRun({ text: "  ·  " }));
+              project.sublinks.forEach((s, i) => {
+                if (i > 0) linkChildren.push(new TextRun({ text: "  " }));
+                linkChildren.push(
+                  new ExternalHyperlink({
+                    children: [new TextRun({ text: s.label, style: "Hyperlink" })],
+                    link: s.url,
+                  })
+                );
+              });
+            }
+
+            return [
+              new Paragraph({
+                children: [
+                  new TextRun({ text: project.title, bold: true, color: "e5e7eb" }),
+                ],
+                spacing: { before: 200 },
+              }),
+              new Paragraph({
+                children: [
+                  new TextRun({ text: project.description, color: "9ca3af" })
+                ],
+                spacing: { after: 100 },
+              }),
+              new Paragraph({
+                children: [
+                  new TextRun({ text: `${project.tech.join("   ")}`, font: "Consolas", color: "34d399", size: 20 })
+                ],
+                spacing: { after: 100 },
+              }),
+              new Paragraph({
+                children: linkChildren,
+                spacing: { after: 300 },
+              }),
+            ];
+          }),
+
           // EXPERIENCE SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "03. ", font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: `${getSection(lang, "experience").num}. `, font: "Consolas", color: "34d399", size: 36 }),
               new TextRun({ text: ui.sectionExperience })
             ],
             heading: HeadingLevel.HEADING_1,
@@ -219,7 +301,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
           // EDUCATION SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "04. ", font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: `${getSection(lang, "education").num}. `, font: "Consolas", color: "34d399", size: 36 }),
               new TextRun({ text: ui.sectionEducation })
             ],
             heading: HeadingLevel.HEADING_1,
@@ -257,7 +339,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
           // CERTIFICATIONS SECTION
           new Paragraph({
             children: [
-              new TextRun({ text: "05. ", font: "Consolas", color: "34d399", size: 36 }),
+              new TextRun({ text: `${getSection(lang, "certifications").num}. `, font: "Consolas", color: "34d399", size: 36 }),
               new TextRun({ text: ui.sectionCertifications })
             ],
             heading: HeadingLevel.HEADING_1,
@@ -297,52 +379,6 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
             ];
           }),
 
-          // PROJECTS SECTION
-          new Paragraph({
-            children: [
-              new TextRun({ text: "06. ", font: "Consolas", color: "34d399", size: 36 }),
-              new TextRun({ text: ui.sectionProjects })
-            ],
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 400, after: 200 },
-            border: { bottom: { color: "1f2937", space: 1, style: BorderStyle.SINGLE, size: 6 } },
-            pageBreakBefore: true,
-            keepNext: true,
-          }),
-          ...data.projects.flatMap((project) => [
-            new Paragraph({
-              children: [
-                new TextRun({ text: project.title, bold: true, color: "e5e7eb" }),
-              ],
-              spacing: { before: 200 },
-            }),
-            new Paragraph({
-              children: [
-                new TextRun({ text: project.description, color: "9ca3af" })
-              ],
-              spacing: { after: 100 },
-            }),
-            new Paragraph({
-              children: [
-                new TextRun({ text: `${project.tech.join("   ")}`, font: "Consolas", color: "34d399", size: 20 })
-              ],
-              spacing: { after: 100 },
-            }),
-            new Paragraph({
-              children: [
-                new ExternalHyperlink({
-                  children: [new TextRun({ text: ui.docxViewProject, style: "Hyperlink" })],
-                  link: project.link,
-                }),
-                new TextRun({ text: " | " }),
-                new ExternalHyperlink({
-                  children: [new TextRun({ text: ui.docxSourceCode, style: "Hyperlink" })],
-                  link: project.github,
-                })
-              ],
-              spacing: { after: 300 },
-            }),
-          ]),
         ],
       },
     ],
