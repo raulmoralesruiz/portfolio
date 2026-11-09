@@ -31,6 +31,25 @@ section[id] {
   top: 12px;
 }
 
+/* Section nav on narrow screens: horizontal scroll, no visible scrollbar.
+   The active item is kept in view by the scrollspy (see SectionNav.astro). */
+.nav-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Typography: balanced headings, no orphaned last lines (progressive
+   enhancement — unsupported browsers ignore it). */
+:where(h1, h2, h3) {
+  text-wrap: balance;
+}
+:where(p) {
+  text-wrap: pretty;
+}
+
 /* The living voice: a terminal cursor at rest in the hero */
 .hero-cursor {
   display: inline-block;

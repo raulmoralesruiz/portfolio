@@ -16,8 +16,8 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
 
 <header class="fixed top-0 inset-x-0 z-50 bg-neutral-950/90 backdrop-blur border-b border-neutral-800">
   <div class="max-w-4xl mx-auto h-14 px-4 flex items-center gap-3">
-    <nav class="flex-1 min-w-0" aria-label={lang === "es" ? "Secciones" : "Sections"}>
-      <ul class="flex items-center gap-0">
+    <nav class="flex-1 min-w-0 overflow-x-auto nav-scroll" aria-label={lang === "es" ? "Secciones" : "Sections"}>
+      <ul class="flex items-center gap-2">
         <li class="shrink-0">
           <a
             href="#top"
@@ -58,6 +58,21 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
     document.querySelectorAll<HTMLAnchorElement>("[data-section-link], [data-top-link]")
   );
 
+  // On narrow screens the nav scrolls horizontally; keep the active item in
+  // view so "estás aquí" stays visible (the page itself never scrolls: the
+  // header is fixed, so block:"nearest" is a no-op vertically).
+  const scrollNav = links[0]?.closest("nav") ?? null;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const revealActive = (link: HTMLAnchorElement | null) => {
+    if (!scrollNav || !link) return;
+    if (scrollNav.scrollWidth <= scrollNav.clientWidth + 1) return;
+    link.scrollIntoView({
+      inline: "nearest",
+      block: "nearest",
+      behavior: reducedMotion.matches ? "auto" : "smooth",
+    });
+  };
+
   if (links.length > 0) {
     const sections = links
       .map((link) => document.getElementById(link.getAttribute("href")?.slice(1) ?? ""))
@@ -80,7 +95,13 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
     const setActive = (id: string) => {
       if (id === activeId) return;
       activeId = id;
-      for (const link of links) applyState(link, link.getAttribute("href") === `#${id}`);
+      let activeLink: HTMLAnchorElement | null = null;
+      for (const link of links) {
+        const isActive = link.getAttribute("href") === `#${id}`;
+        applyState(link, isActive);
+        if (isActive) activeLink = link;
+      }
+      revealActive(activeLink);
     };
 
     // Scrollspy: a section is "current" when it enters the top 45% of the
