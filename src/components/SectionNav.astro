@@ -36,7 +36,7 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
               class="inline-flex h-14 min-w-11 items-center justify-center font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
             >
               <span>{section.num}</span>
-              <span class="hidden lg:inline"> {section.label}</span>
+              <span class="nav-label hidden lg:inline"> {section.label}</span>
             </a>
           </li>
         ))}
@@ -79,7 +79,7 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
       .filter((el): el is HTMLElement => el !== null);
 
     const INACTIVE = ["text-neutral-400", "hover:text-neutral-300"];
-    const ACTIVE = ["text-emerald-400"];
+    const ACTIVE = ["text-emerald-400", "is-active"];
     let activeId: string | null = null;
     let clickedId: string | null = null;
     const visible = new Set<string>();

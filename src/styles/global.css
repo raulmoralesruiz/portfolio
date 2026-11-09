@@ -41,6 +41,13 @@ section[id] {
   display: none;
 }
 
+/* Mobile nav: reveal the label of the ACTIVE section so the bare numbers
+   (~ 01 02 …) stay legible on narrow screens. Desktop already shows every
+   label via lg:inline; this only un-hides the active one below lg. */
+a.is-active .nav-label {
+  display: inline;
+}
+
 /* Typography: balanced headings, no orphaned last lines (progressive
    enhancement — unsupported browsers ignore it). */
 :where(h1, h2, h3) {

@@ -149,7 +149,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
             spacing: { after: 200 },
           }),
           new Paragraph({
-            children: parseHtmlToTextRuns(data.header.description.replace('Full-Stack', '<span class="text-emerald-400">Full-Stack</span>')),
+            children: parseHtmlToTextRuns(data.header.description),
             alignment: AlignmentType.CENTER,
             spacing: { after: 400 },
           }),
