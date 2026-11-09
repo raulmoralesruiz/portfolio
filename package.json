@@ -6,6 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "bash scripts/deploy.sh",
+    "deploy:dry": "DRY_RUN=1 bash scripts/deploy.sh",
     "astro": "astro"
   },
   "dependencies": {

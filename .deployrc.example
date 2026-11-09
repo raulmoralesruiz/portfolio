@@ -1,0 +1,5 @@
+# Copia este archivo a .deployrc y rellena (el .deployrc queda gitignored):
+#   cp .deployrc.example .deployrc
+DEPLOY_HOST=192.168.x.x
+DEPLOY_USER=raul
+DEPLOY_PATH=/mnt/data-nas/www/portfolio

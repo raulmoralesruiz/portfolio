@@ -20,6 +20,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# deploy config (host/user de TrueNAS; ver .deployrc.example)
+.deployrc
+
 # macOS-specific files
 .DS_Store
 
