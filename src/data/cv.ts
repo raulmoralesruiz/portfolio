@@ -59,6 +59,7 @@ export interface CV {
   }[];
 
   ui: {
+    skipToContent: string;
     greeting: string;
     viewProjects: string;
     download: string;
@@ -164,6 +165,7 @@ export const cv: Record<Lang, CV> = {
     ],
 
     ui: {
+      skipToContent: "Saltar al contenido",
       greeting: "HOLA, MI NOMBRE ES",
       viewProjects: "Ver mis proyectos",
       download: "descargar",
@@ -268,6 +270,7 @@ export const cv: Record<Lang, CV> = {
     ],
 
     ui: {
+      skipToContent: "Skip to content",
       greeting: "HI, MY NAME IS",
       viewProjects: "View my projects",
       download: "download",

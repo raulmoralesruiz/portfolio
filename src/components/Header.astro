@@ -11,7 +11,8 @@ const ui = data.ui;
 ---
 
 <section id="top" class="min-h-svh flex flex-col justify-center container mx-auto px-4 max-w-6xl pt-16">
-  <div class="grid lg:grid-cols-[3fr_2fr] gap-12 items-center">
+  <!-- lg (1024–1279): left column 2fr so both CTAs fit one row; xl+ restores 3fr_2fr -->
+  <div class="grid lg:grid-cols-[2fr_1fr] xl:grid-cols-[3fr_2fr] gap-12 items-center">
     <div class="flex flex-col items-start">
       <span class="text-emerald-400 font-mono tracking-wider mb-4">{ui.greeting}</span>
       <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">

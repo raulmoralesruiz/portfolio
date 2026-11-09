@@ -9,8 +9,9 @@ interface Props {
 const { lang } = Astro.props;
 const sections = getSections(lang);
 
-const toggleActive = "px-2 py-1 rounded text-emerald-400 bg-emerald-400/10";
-const toggleInactive = "px-2 py-1 rounded text-gray-400 hover:text-gray-300 transition-colors";
+const toggleBase = "inline-flex h-11 min-w-11 items-center justify-center rounded";
+const toggleActive = "text-emerald-400 bg-emerald-400/10";
+const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 bg-neutral-950/90 backdrop-blur border-b border-neutral-800">
@@ -21,7 +22,7 @@ const toggleInactive = "px-2 py-1 rounded text-gray-400 hover:text-gray-300 tran
           <a
             href="#top"
             data-top-link
-            class="px-1 py-1 rounded font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
+            class="inline-flex h-14 min-w-11 items-center justify-center font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
             aria-label={lang === "es" ? "Inicio" : "Home"}
           >
             <span>~</span>
@@ -32,7 +33,7 @@ const toggleInactive = "px-2 py-1 rounded text-gray-400 hover:text-gray-300 tran
             <a
               href={`#${section.anchor}`}
               data-section-link
-              class="px-1 py-1 rounded font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
+              class="inline-flex h-14 min-w-11 items-center justify-center font-mono text-xs whitespace-nowrap text-neutral-400 hover:text-neutral-300 transition-colors"
             >
               <span>{section.num}</span>
               <span class="hidden lg:inline"> {section.label}</span>
@@ -46,8 +47,8 @@ const toggleInactive = "px-2 py-1 rounded text-gray-400 hover:text-gray-300 tran
       class="flex items-center gap-1 border border-neutral-800 rounded p-1 font-mono text-xs shrink-0"
       aria-label="Language"
     >
-      <a href="/" class={lang === "es" ? toggleActive : toggleInactive} aria-current={lang === "es" ? "true" : undefined}>ES</a>
-      <a href="/en/" class={lang === "en" ? toggleActive : toggleInactive} aria-current={lang === "en" ? "true" : undefined}>EN</a>
+      <a href="/" class={`${toggleBase} ${lang === "es" ? toggleActive : toggleInactive}`} aria-current={lang === "es" ? "true" : undefined}>ES</a>
+      <a href="/en/" class={`${toggleBase} ${lang === "en" ? toggleActive : toggleInactive}`} aria-current={lang === "en" ? "true" : undefined}>EN</a>
     </nav>
   </div>
 </header>

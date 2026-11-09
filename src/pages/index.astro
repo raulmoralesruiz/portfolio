@@ -16,8 +16,9 @@ const data = cv[lang];
 ---
 
 <Layout lang={lang} title={data.pageTitle} description={data.metaDescription}>
+  <a href="#main" class="skip-link">{data.ui.skipToContent}</a>
   <SectionNav lang={lang} />
-  <main class="flex flex-col">
+  <main id="main" tabindex="-1" class="flex flex-col outline-none">
     <Header lang={lang} />
     <About lang={lang} />
     <Skills lang={lang} />

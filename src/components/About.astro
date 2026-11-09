@@ -24,7 +24,9 @@ const section = getSection(lang, "about");
    ))}
   </div>
 
-  <div class="relative group w-72 h-72 mx-auto">
+  <!-- w-full max-w-72: the portrait never exceeds its grid column, so the
+       scale-110 halo ring can't push the page into horizontal overflow at md -->
+  <div class="relative group mx-auto w-full max-w-72 aspect-square">
    <div
     class="absolute inset-0 rounded-full border-2 border-emerald-400
            scale-110 group-hover:scale-100
