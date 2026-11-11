@@ -63,6 +63,7 @@ export interface CV {
     greeting: string;
     viewProjects: string;
     download: string;
+    downloadCv: string; // Botón de CV del hero: "Descargar CV · siempre al día"
     generating: string;
     cvError: string;
     cvFile: string;
@@ -92,6 +93,7 @@ export interface CV {
     // ---- Adelante: etiquetas de UI (ficha, toggle de tema, proyectos) ----
     ficha: string;
     rol: string;
+    web: string;
     idiomas: string;
     estado: string;
     estadoValue: string;
@@ -122,13 +124,13 @@ export const cv: Record<Lang, CV> = {
       name: "Raúl Morales",
       role: "Frontend Developer.",
       description:
-        "Especializado en crear experiencias digitales excepcionales. Combino mi experiencia Full-Stack con una pasión por el diseño limpio y la performance.",
+        "Frontend con base full-stack y de sistemas: entiendo el ciclo completo, de la base de datos al píxel final. Y lo demuestro con Virus!, un juego en tiempo real que he construido de extremo a extremo.",
     },
 
     about: [
-      "¡Hola! Soy un desarrollador apasionado por construir cosas en internet. Mi interés en el desarrollo web comenzó cuando decidí experimentar con código más allá de lo básico, descubriendo el poder de crear interfaces interactivas.",
-      `Hoy en día, mi enfoque principal es el <strong class="text-emerald-400">Desarrollo Frontend</strong>, donde disfruto creando interfaces fluidas y accesibles. Sin embargo, mi experiencia como <strong class="text-white">Full-Stack Developer</strong> me da una ventaja única para entender el ciclo de vida completo de un proyecto, desde la base de datos hasta el píxel final.`,
-      "Me esfuerzo por seguir buenas prácticas, escribir código limpio y optimizar cada detalle para asegurar la mejor experiencia de usuario posible.",
+      "¡Hola! Soy Raúl. Hoy me especializo en frontend — interfaces fluidas y accesibles — pero vengo de la otra mitad del stack: años como full-stack developer y, antes, como administrador de sistemas. Esa base me da una ventaja real: entiendo el ciclo completo, de la base de datos al píxel final.",
+      "Y no es teoría. Virus! es un juego de cartas en tiempo real que he construido de extremo a extremo — backend Node.js + Socket.io, frontend Angular y documentación Astro — y está en producción. También he hecho apps móviles como Kéfir Control (Flutter) y portfolios que viven en mi propia infraestructura.",
+      "Me obsesiona el detalle: código limpio, buenas prácticas y performance. Y como vengo de sistemas, despliego y mantengo mis proyectos yo mismo, con Docker, Nginx y Linux.",
     ],
 
     skills: [
@@ -139,9 +141,9 @@ export const cv: Record<Lang, CV> = {
     ],
 
     experience: [
-      { role: "Full-Stack Developer", company: "Babel", period: "2021 - Presente", description: "Desarrollo de aplicaciones web utilizando diferentes tecnologías. Java, JSF, Git, SQL, SVN" },
-      { role: "Full-Stack Developer", company: "NTT Data", period: "2019 - 2021", description: "Desarrollo de aplicaciones web utilizando diferentes tecnologías. Java, JSF, SQL, SVN, Testing, Python, MongoDB, Git" },
-      { role: "Systems Administrator", company: "MGS", period: "2013 - 2019", description: "Administración y mantenimiento de Sistemas Informáticos Windows/Linux." },
+      { role: "Full-Stack Developer", company: "Babel", period: "2021 - Presente", description: "Desarrollo full-stack de aplicaciones web con Java, JSF y SQL; control de versiones con Git y SVN." },
+      { role: "Full-Stack Developer", company: "NTT Data", period: "2019 - 2021", description: "Desarrollo full-stack con un stack más amplio — Java, JSF, Python, MongoDB y SQL — y énfasis en testing; Git y SVN." },
+      { role: "Systems Administrator", company: "MGS", period: "2013 - 2019", description: "Administración y mantenimiento de sistemas informáticos Windows/Linux: el origen de mi base de sistemas." },
     ],
 
     education: [
@@ -168,7 +170,6 @@ export const cv: Record<Lang, CV> = {
         featured: true,
         sublinks: [
           { label: "Backend", url: "https://github.com/raulmoralesruiz/virus-backend" },
-          { label: "Frontend", url: "https://github.com/raulmoralesruiz/virus-frontend" },
           { label: "Docs", url: "https://virusdocs.raulmorales.eu" },
         ],
       },
@@ -182,6 +183,7 @@ export const cv: Record<Lang, CV> = {
       greeting: "HOLA, MI NOMBRE ES",
       viewProjects: "Ver mis proyectos",
       download: "descargar",
+      downloadCv: "Descargar CV · siempre al día",
       generating: "generando…",
       cvError: "Hubo un error al generar el CV. Por favor, inténtalo de nuevo.",
       cvFile: "Raul-Morales-CV.docx",
@@ -209,6 +211,7 @@ export const cv: Record<Lang, CV> = {
       newDesignBanner: "✦ nuevo diseño disponible →",
       ficha: "Ficha",
       rol: "Rol",
+      web: "Web",
       idiomas: "Idiomas",
       estado: "Estado",
       estadoValue: "Abierto a nuevas oportunidades",
@@ -238,13 +241,13 @@ export const cv: Record<Lang, CV> = {
       name: "Raúl Morales",
       role: "Frontend Developer.",
       description:
-        "Specialized in creating exceptional digital experiences. I combine my Full-Stack experience with a passion for clean design and performance.",
+        "Frontend with a full-stack and systems background: I understand the full cycle, from the database to the final pixel. And I prove it with Virus! — a real-time game I built end to end.",
     },
 
     about: [
-      "Hi! I'm a developer passionate about building things on the internet. My interest in web development began when I decided to experiment with code beyond the basics, discovering the power of creating interactive interfaces.",
-      `Today, my main focus is <strong class="text-emerald-400">Frontend Development</strong>, where I enjoy creating fluid and accessible interfaces. However, my experience as a <strong class="text-white">Full-Stack Developer</strong> gives me a unique advantage to understand the full life cycle of a project, from the database to the final pixel.`,
-      "I strive to follow best practices, write clean code, and optimize every detail to ensure the best possible user experience.",
+      "Hi! I'm Raúl. Today I specialize in frontend — fluid, accessible interfaces — but I come from the other half of the stack: years as a full-stack developer and, before that, as a systems administrator. That foundation gives me a real edge: I understand the full cycle, from the database to the final pixel.",
+      "And it's not theory. Virus! is a real-time card game I built end to end — Node.js + Socket.io backend, Angular frontend, and Astro docs — and it's in production. I've also built mobile apps like Kéfir Control (Flutter) and portfolios that run on my own infrastructure.",
+      "I obsess over the details: clean code, best practices, and performance. And because I come from systems, I deploy and maintain my own projects with Docker, Nginx, and Linux.",
     ],
 
     skills: [
@@ -255,9 +258,9 @@ export const cv: Record<Lang, CV> = {
     ],
 
     experience: [
-      { role: "Full-Stack Developer", company: "Babel", period: "2021 - Present", description: "Web application development using various technologies. Java, JSF, Git, SQL, SVN" },
-      { role: "Full-Stack Developer", company: "NTT Data", period: "2019 - 2021", description: "Web application development using various technologies. Java, JSF, SQL, SVN, Testing, Python, MongoDB, Git" },
-      { role: "Systems Administrator", company: "MGS", period: "2013 - 2019", description: "Administration and maintenance of Windows/Linux computer systems." },
+      { role: "Full-Stack Developer", company: "Babel", period: "2021 - Present", description: "Full-stack development of web applications with Java, JSF, and SQL; version control with Git and SVN." },
+      { role: "Full-Stack Developer", company: "NTT Data", period: "2019 - 2021", description: "Full-stack development with a broader stack — Java, JSF, Python, MongoDB, and SQL — with an emphasis on testing; Git and SVN." },
+      { role: "Systems Administrator", company: "MGS", period: "2013 - 2019", description: "Administration and maintenance of Windows/Linux systems: the origin of my systems background." },
     ],
 
     education: [
@@ -284,7 +287,6 @@ export const cv: Record<Lang, CV> = {
         featured: true,
         sublinks: [
           { label: "Backend", url: "https://github.com/raulmoralesruiz/virus-backend" },
-          { label: "Frontend", url: "https://github.com/raulmoralesruiz/virus-frontend" },
           { label: "Docs", url: "https://virusdocs.raulmorales.eu" },
         ],
       },
@@ -298,6 +300,7 @@ export const cv: Record<Lang, CV> = {
       greeting: "HI, MY NAME IS",
       viewProjects: "View my projects",
       download: "download",
+      downloadCv: "Download CV · always up to date",
       generating: "generating…",
       cvError: "There was an error generating the CV. Please try again.",
       cvFile: "Raul-Morales-CV.docx",
@@ -325,6 +328,7 @@ export const cv: Record<Lang, CV> = {
       newDesignBanner: "✦ new design available →",
       ficha: "Profile",
       rol: "Role",
+      web: "Web",
       idiomas: "Languages",
       estado: "Status",
       estadoValue: "Open to new opportunities",

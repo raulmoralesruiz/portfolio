@@ -165,7 +165,7 @@ Grids are bold and mobile-first:
 - **Experience / Education:** rows with a fixed `10rem` period column (amber chip for experience, plain chip for education).
 - **Certifications:** 2-up at `sm`, 3-up at `lg`.
 - **Contact:** full-bleed dark panel (diamond pattern), centered `max-w-4xl`.
-- **Nav:** sticky, full-width, 3px bottom border; section links appear at `lg`, the "sitio actual" link at `xl`.
+- **Nav:** sticky, full-width, 3px bottom border; all 7 section links appear at `lg`, the name at `xl`.
 
 ## Elevation & Depth
 
@@ -247,7 +247,7 @@ See Shapes. Contact section + footer background.
 
 ### Nav (`.at-nav`)
 
-Sticky, canvas background, 3px bottom border. Left: the green "RM" monogram card + name (name hidden below `xl`). Center: section links (from `lg`). Right: theme toggle + "Ver proyectos" button. Nav links hover to amber with teal text.
+Sticky, canvas background, 3px bottom border. Left: the green "RM" monogram card + name (name hidden below `xl`). Center: all 7 section links (from `lg`). Right: language switcher (ES/EN) + theme toggle. There is no CTA button in the nav — the hero carries the "Ver mis proyectos" action, and the "Proyectos" link already targets `#proyectos`. Nav links hover to amber with teal text.
 
 ### Theme Toggle
 

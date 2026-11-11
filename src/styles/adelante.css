@@ -198,6 +198,11 @@ body {
   outline: 3px solid var(--at-amber);
   outline-offset: 3px;
 }
+.at-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
 .at-btn-solid {
   background: var(--at-green);
   color: var(--at-on-accent);
