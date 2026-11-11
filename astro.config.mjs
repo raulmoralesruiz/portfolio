@@ -10,7 +10,12 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Los prototipos de registro (/proto/*) son temporales y no indexables
+      filter: (url) => !url.includes('/proto'),
+    }),
+  ],
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],

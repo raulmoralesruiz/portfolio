@@ -1,0 +1,366 @@
+---
+import { Image } from "astro:assets";
+import raul from "../../assets/img/raul.png";
+import { cv } from "../../data/cv";
+import { getSections } from "../../utils/sections";
+import "../../styles/proto-adelante.css";
+
+const data = cv.es;
+const ui = data.ui;
+const sections = getSections("es");
+const email = data.email;
+const year = new Date().getFullYear();
+
+const tiles = [
+  // 1 · más (verde) con diamantes en esquinas
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><path d="M18 6h12v12h12v12H30v12H18V30H6V18h12z" fill="#24C87F"/><path d="M0 -7 7 0 0 7 -7 0z M48 -7 55 0 48 7 41 0z M0 41 7 48 0 55 -7 48z M48 41 55 48 48 55 41 48z" fill="#004242"/><rect x="21" y="21" width="6" height="6" fill="#FAF3E0" transform="rotate(45 24 24)"/></svg>`,
+  // 2 · rombo (ámbar)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><rect x="12" y="12" width="24" height="24" fill="#FFC233" transform="rotate(45 24 24)"/><rect x="19" y="19" width="10" height="10" fill="#004242" transform="rotate(45 24 24)"/></svg>`,
+  // 3 · zigzag (neón sobre teal)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16h8l6-8h8l6 8h12" stroke="#00FF8D"/><path d="M4 34h8l6-8h8l6 8h12" stroke="#24C87F"/></g></svg>`,
+  // 4 · círculo (teal)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><circle cx="24" cy="24" r="14" fill="#004242"/><circle cx="24" cy="24" r="6" fill="#24C87F"/></svg>`,
+  // 5 · cruz de tramas (verde)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="#24C87F"><rect x="20" y="6" width="8" height="36"/><rect x="6" y="20" width="36" height="8"/></g><g fill="#004242"><rect x="22" y="8" width="4" height="32"/><rect x="8" y="22" width="32" height="4"/></g></svg>`,
+  // 6 · onda (ámbar)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="none" stroke="#FFC233" stroke-width="5" stroke-linecap="round"><path d="M6 18c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/><path d="M6 32c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/></g></svg>`,
+  // 7 · cuadrados (teal sobre verde)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#24C87F"/><g fill="#004242"><rect x="8" y="8" width="12" height="12"/><rect x="28" y="28" width="12" height="12"/></g><g fill="#FAF3E0"><rect x="28" y="8" width="12" height="12"/><rect x="8" y="28" width="12" height="12"/></g></svg>`,
+];
+---
+
+<div class="at min-h-screen">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 at-btn at-btn-solid">
+    {ui.skipToContent}
+  </a>
+
+  <!-- ===== NAV ===== -->
+  <nav class="at-nav" aria-label="Secciones">
+    <div class="max-w-6xl mx-auto px-4 flex items-center gap-2">
+      <a href="#top" class="flex items-center gap-3 py-3" aria-label="Inicio">
+        <span class="at-card at-card-green inline-flex items-center justify-center w-10 h-10 at-display text-xl">RM</span>
+        <span class="at-display text-lg hidden xl:inline">Raúl Morales</span>
+      </a>
+      <div class="flex-1"></div>
+      <div class="hidden lg:flex items-center">
+        {sections.slice(0, 5).map((s) => (
+          <a href={`#${s.anchor}`} class="at-navlink">{s.label}</a>
+        ))}
+      </div>
+      <div class="hidden xl:flex items-center">
+        <a href="/" class="at-navlink" aria-label="Volver al sitio actual">← sitio actual</a>
+      </div>
+      <button id="at-theme-toggle" type="button" class="at-btn ml-1 !min-h-11 !py-2 !px-4 !text-xs" aria-label="Cambiar a tema claro (crema)">
+        <span id="at-theme-icon" aria-hidden="true">☀</span>
+        <span id="at-theme-label">CLARO</span>
+      </button>
+      <a href="#proyectos" class="at-btn at-btn-solid ml-2 !min-h-11 !py-2 !px-4 !text-xs">{ui.viewProjects}</a>
+    </div>
+  </nav>
+
+  <main id="contenido">
+    <!-- ===== HERO ===== -->
+    <section id="top" class="max-w-6xl mx-auto px-4 pt-14 pb-16 md:pt-20 md:pb-24">
+      <div class="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
+        <div class="reveal">
+          <p class="at-eyebrow mb-6">{ui.greeting}</p>
+          <h1 class="at-display text-[clamp(3.25rem,9vw,7rem)] mb-6">{data.header.name}</h1>
+          <p class="at-display text-[clamp(1.75rem,4vw,3rem)] font-semibold italic mb-7">
+            <span class="at-mark">Frontend</span> Developer.
+          </p>
+          <p class="text-lg leading-relaxed max-w-xl mb-9">{data.header.description}</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#proyectos" class="at-btn at-btn-solid">{ui.viewProjects} <span aria-hidden="true">↘</span></a>
+            <button id="at-cv" type="button" class="at-btn">
+              <span data-label>{ui.download} {ui.cvFile}</span>
+            </button>
+          </div>
+          <p class="mt-5 text-sm opacity-80">{ui.cvCaption}</p>
+        </div>
+
+        <div class="reveal flex flex-col gap-6 items-stretch">
+          <div class="at-card p-4">
+            <Image src={raul} alt="Raúl Morales" width={600} height={600} class="w-full aspect-square object-cover border-[3px] border-[var(--at-ink)]" />
+            <div class="flex items-center justify-between mt-4 gap-3">
+              <span class="at-chip at-chip-solid">raulmorales.eu</span>
+              <span class="at-chip at-chip-amber">ES · EN</span>
+            </div>
+          </div>
+          <div class="at-tiles" aria-hidden="true">
+            {tiles.map((t) => (<span set:html={t} />))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id={data.anchors.about} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-8 reveal"><span class="at-num">01.</span> {ui.sectionAbout}</p>
+      <div class="grid md:grid-cols-[2fr_1fr] gap-8 items-start">
+        <div class="about-text space-y-5 text-lg leading-relaxed reveal">
+          {data.about.map((paragraph) => (<p set:html={paragraph} />))}
+        </div>
+        <div class="at-card at-card-green p-6 reveal">
+          <p class="font-bold uppercase tracking-[0.18em] text-xs mb-5">Ficha</p>
+          <dl class="space-y-5">
+            <div>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Rol</dt>
+              <dd class="at-display text-2xl">{data.header.role}</dd>
+            </div>
+            <div>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Web</dt>
+              <dd class="at-num text-lg">raulmorales.eu</dd>
+            </div>
+            <div>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Idiomas</dt>
+              <dd class="at-num text-lg">ES · EN</dd>
+            </div>
+            <div>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Estado</dt>
+              <dd class="font-bold leading-snug">Abierto a nuevas oportunidades</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id={data.anchors.skills} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-10 reveal"><span class="at-num">02.</span> {ui.sectionSkills}</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {data.skills.map((group, i) => (
+          <div class={`at-card p-6 reveal self-start ${i % 2 === 1 ? "at-card-cream" : ""}`}>
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="at-display text-2xl">{group.category}</h3>
+              <span class="at-num text-sm px-2 py-1 border-[3px] border-[var(--at-ink)] bg-[var(--at-card-soft)]">0{i + 1}</span>
+            </div>
+            <ul class="flex flex-wrap gap-2.5">
+              {group.items.map((item) => (<li class="at-chip">{item}</li>))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id={data.anchors.projects} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-10 reveal"><span class="at-num">03.</span> {ui.sectionProjects}</p>
+
+      {data.projects.filter((p) => p.featured).map((project) => (
+        <article class="at-card overflow-hidden mb-8 reveal">
+          <div class="at-tiles !shadow-none !border-0 !border-b-[3px] !m-0 !p-[3px] grid !grid-cols-7" aria-hidden="true">
+            {tiles.map((t) => (<span set:html={t} />))}
+          </div>
+          <div class="p-6 md:p-10">
+            <div class="flex flex-wrap items-center gap-3 mb-5">
+              <span class="at-chip at-chip-solid">Proyecto destacado</span>
+              <span class="at-chip">{project.tech.length} tecnologías</span>
+            </div>
+            <h3 class="at-display text-4xl md:text-5xl mb-4">{project.title}</h3>
+            <p class="text-lg leading-relaxed max-w-2xl mb-7">{project.description}</p>
+            <ul class="flex flex-wrap gap-2.5 mb-8">
+              {project.tech.map((t) => (<li class="at-chip">{t}</li>))}
+            </ul>
+            <div class="flex flex-wrap gap-4">
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="at-btn at-btn-solid">{ui.docxView} proyecto <span aria-hidden="true">↗</span></a>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" class="at-btn">{ui.docxSourceCode} <span aria-hidden="true">↗</span></a>
+              {project.sublinks?.map((s) => (
+                <a href={s.url} target="_blank" rel="noopener noreferrer" class="at-btn !min-h-11 !py-2 !px-4 !text-xs">{s.label} <span aria-hidden="true">↗</span></a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {data.projects.filter((p) => !p.featured).map((project, i) => (
+          <article class={`at-card p-6 flex flex-col reveal ${i === 1 ? "at-card-amber" : ""}`}>
+            <h3 class="at-display text-2xl mb-3">{project.title}</h3>
+            <p class="leading-relaxed mb-5 flex-1">{project.description}</p>
+            <ul class="flex flex-wrap gap-2 mb-6">
+              {project.tech.map((t) => (<li class="at-chip !text-xs">{t}</li>))}
+            </ul>
+            <div class="flex gap-3">
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="at-btn at-btn-solid !min-h-11 !py-2 !px-4 !text-xs">{ui.docxView} <span aria-hidden="true">↗</span></a>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" class="at-btn !min-h-11 !py-2 !px-4 !text-xs">GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id={data.anchors.experience} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-10 reveal"><span class="at-num">04.</span> {ui.sectionExperience}</p>
+      <div class="space-y-6">
+        {data.experience.map((job) => (
+          <div class="at-row grid md:grid-cols-[10rem_1fr] gap-4 p-6 md:p-8 reveal">
+            <span class="at-chip at-chip-amber !h-auto !justify-center at-num text-lg self-start">{job.period}</span>
+            <div>
+              <h3 class="at-display text-2xl md:text-3xl mb-1">{job.role}</h3>
+              <p class="font-bold uppercase tracking-widest text-sm mb-3">{job.company}</p>
+              <p class="leading-relaxed">{job.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id={data.anchors.education} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-10 reveal"><span class="at-num">05.</span> {ui.sectionEducation}</p>
+      <div class="space-y-6">
+        {data.education.map((edu) => (
+          <div class="at-row grid md:grid-cols-[10rem_1fr] gap-4 p-6 md:p-8 reveal">
+            <span class="at-chip !h-auto !justify-center at-num text-lg self-start">{edu.year}</span>
+            <div>
+              <h3 class="at-display text-2xl mb-1">{edu.degree}</h3>
+              <p class="font-bold uppercase tracking-widest text-sm mb-3">{edu.school}</p>
+              <p class="leading-relaxed">{edu.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section id={data.anchors.certifications} class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <p class="at-eyebrow mb-10 reveal"><span class="at-num">06.</span> {ui.sectionCertifications}</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {data.certifications.map((cert) => {
+          const isLink = Boolean(cert.link);
+          const Element = isLink ? "a" : "div";
+          const props = isLink ? { href: cert.link, target: "_blank", rel: "noopener noreferrer" } : {};
+          return (
+            <Element {...props} class="at-card p-6 flex flex-col reveal">
+              <div class="flex items-center justify-between mb-4">
+                <span class="at-chip at-chip-solid at-num">{cert.date}</span>
+                <span class="at-chip" aria-hidden="true">
+                  {isLink ? "PDF ↗" : ui.noPdf}
+                </span>
+              </div>
+              <h3 class="at-display text-xl leading-snug mb-2 flex-1">{cert.name}</h3>
+              <p class="font-semibold text-sm uppercase tracking-widest">{cert.issuer}</p>
+            </Element>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id={data.anchors.contact} class="at-diamonds mt-8">
+      <div class="max-w-4xl mx-auto px-4 py-20 md:py-28 text-center text-[var(--at-panel-text)]">
+        <p class="at-eyebrow mb-8 justify-center !text-[var(--at-neon)] reveal"><span class="at-num">07.</span> {ui.sectionContact}</p>
+        <h2 class="at-display text-[clamp(2.5rem,7vw,5rem)] mb-7 reveal" set:html={ui.contactTitle.replace("contacto", "<span class='at-mark'>contacto</span>")} />
+        <p class="text-lg leading-relaxed max-w-xl mx-auto mb-10 reveal">{ui.contactBody}</p>
+
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 border-[3px] border-[var(--at-panel-text)] px-4 py-3 mb-8 bg-[var(--at-panel-deep)] reveal">
+          <span class="at-num text-base select-all">{email}</span>
+          <button id="at-copy-email" type="button" data-email={email} class="at-btn at-btn-amber !min-h-10 !py-1.5 !px-4 !text-xs">{ui.copyEmail}</button>
+        </div>
+        <div class="reveal">
+          <a href={`mailto:${email}`} class="at-btn at-btn-neon !text-base !px-8 !py-4">{ui.contactCta} <span aria-hidden="true">✳</span></a>
+        </div>
+
+        <div class="mt-14 flex justify-center gap-4 reveal">
+          <a href="https://github.com/raulmoralesruiz" target="_blank" rel="noopener noreferrer" class="at-btn !border-[var(--at-panel-text)] !text-[var(--at-panel-text)] !bg-transparent !shadow-none hover:!bg-[var(--at-neon)] hover:!text-[var(--at-on-accent)]">GitHub</a>
+          <a href="https://www.linkedin.com/in/raulmoralesruiz" target="_blank" rel="noopener noreferrer" class="at-btn !border-[var(--at-panel-text)] !text-[var(--at-panel-text)] !bg-transparent !shadow-none hover:!bg-[var(--at-neon)] hover:!text-[var(--at-on-accent)]">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="at-diamonds border-t-[3px] border-[var(--at-neon)]">
+      <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[var(--at-panel-text)] text-sm">
+        <p class="font-semibold">{ui.footer}</p>
+        <div class="flex items-center gap-4">
+          <a href="https://raulmorales.eu" class="at-num underline underline-offset-4 hover:text-[var(--at-neon)]">raulmorales.eu</a>
+          <span aria-hidden="true">·</span>
+          <span>© {year}</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ============ TOGGLE DE TEMA (script inline, sin dependencias) ============
+       Script independiente: funciona AUNQUE el módulo principal falle.
+       Oscuro por defecto; persiste en localStorage. -->
+  <script is:inline>
+    (function () {
+      var themeBtn = document.getElementById("at-theme-toggle");
+      if (!themeBtn) return;
+      var root = document.documentElement;
+      var icon = document.getElementById("at-theme-icon");
+      var label = document.getElementById("at-theme-label");
+      function paintTheme() {
+        var dark = root.dataset.theme === "dark";
+        if (icon) icon.textContent = dark ? "\u2600" : "\u263E";
+        if (label) label.textContent = dark ? "CLARO" : "OSCURO";
+        themeBtn.setAttribute("aria-label", dark ? "Cambiar a tema claro (crema)" : "Cambiar a tema oscuro");
+      }
+      themeBtn.addEventListener("click", function () {
+        var next = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        try { localStorage.setItem("at-theme", next); } catch (e) {}
+        paintTheme();
+      });
+      paintTheme();
+    })();
+  </script>
+
+  <!-- ============ CV (.docx) + EMAIL (módulo, importa wordExport) ============ -->
+  <script>
+    import { generateWordDocument } from "../../utils/wordExport";
+    import { cv } from "../../data/cv";
+
+    const ui = cv.es.ui;
+
+    // ---- Descarga de CV (.docx en el navegador) ----
+    const btn = document.getElementById("at-cv");
+    if (btn) {
+      const label = btn.querySelector("[data-label]");
+      const original = label?.textContent ?? "";
+      btn.addEventListener("click", async () => {
+        if (btn.disabled) return;
+        btn.disabled = true;
+        if (label) label.textContent = ui.generating;
+        try {
+          const blob = await generateWordDocument("es");
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = ui.cvFile;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          if (label) {
+            label.textContent = `${ui.cvDone} ✓`;
+            setTimeout(() => { if (label) label.textContent = original; }, 2500);
+          }
+        } catch (err) {
+          console.error(err);
+          if (label) label.textContent = ui.cvError;
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // ---- Copiar email ----
+    const copyBtn = document.getElementById("at-copy-email");
+    if (copyBtn) {
+      const original = copyBtn.textContent;
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.email ?? "");
+          copyBtn.textContent = ui.emailCopied;
+        } catch {
+          copyBtn.textContent = ui.emailCopyError;
+        }
+        setTimeout(() => { copyBtn.textContent = original; }, 2000);
+      });
+    }
+  </script>
+
+</div>

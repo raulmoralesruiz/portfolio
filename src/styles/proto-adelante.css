@@ -1,0 +1,353 @@
+/* ============================================================
+   PROTOTIPO "ADELANTE" — neo-brutalismo editorial
+   Lenguaje: teal + verde + neón + ámbar · Fraunces + Work Sans +
+   Clash Display · bordes 3px sin radios · sombras duras
+
+   Dos temas (mismo diseño, distinta superficie):
+   :root                    → claro (fondo crema, por defecto)
+   html[data-theme="dark"]  → oscuro (fondo teal profundo)
+   ============================================================ */
+
+/* ---------- Fuentes (self-hosted, public/fuentes/) ---------- */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fuentes/fraunces-latin-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fuentes/fraunces-latin-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fuentes/work-sans-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fuentes/work-sans-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fuentes/clash-display.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens de diseño ----------
+   El tema vive en <html data-theme="..."> (guardado en localStorage).
+   Superficies cambian por tema; acentos son invariantes. */
+:root {
+  /* Superficies (claro) */
+  --at-canvas: #faf3e0;      /* fondo de página */
+  --at-ink: #004242;         /* texto principal + bordes */
+  --at-card: #ffffff;        /* fondo de tarjetas */
+  --at-card-soft: #faf3e0;   /* fondo de tarjeta alternativa / chips */
+  --at-on-ink: #faf3e0;      /* texto sobre superficie "ink" (chip sólido) */
+  --at-shadow: #004242;      /* color de la sombra dura */
+  --at-tile-gap: #004242;    /* marco/huecos de la franja de mosaicos */
+  /* Panel oscuro (contacto / footer) */
+  --at-panel: #004242;
+  --at-panel-deep: #003030;
+  --at-panel-text: #faf3e0;
+  /* Acentos (invariantes entre temas) */
+  --at-green: #24c87f;
+  --at-neon: #00ff8d;
+  --at-amber: #ffc233;
+  --at-on-accent: #004242;   /* texto sobre botones verde/ámbar/neón */
+}
+html[data-theme="dark"] {
+  /* Superficies (oscuro) */
+  --at-canvas: #001515;
+  --at-ink: #faf3e0;
+  --at-card: #002b2b;
+  --at-card-soft: #002222;
+  --at-on-ink: #001515;
+  --at-shadow: #faf3e0;
+  --at-tile-gap: #001515;
+  /* Panel oscuro (contacto / footer) */
+  --at-panel: #002b2b;
+  --at-panel-deep: #001515;
+  --at-panel-text: #faf3e0;
+  /* Acentos (invariantes) */
+  --at-on-accent: #001515;
+}
+
+/* ---------- Base ---------- */
+.at {
+  background: var(--at-canvas);
+  color: var(--at-ink);
+  font-family: "Work Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.at .at-display {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+.at .at-num {
+  font-family: "Clash Display", "Work Sans", sans-serif;
+  font-weight: 600;
+}
+.at a {
+  color: inherit;
+}
+
+/* ---------- Mancheta (eyebrow con filete) ---------- */
+.at-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.at-eyebrow::before,
+.at-eyebrow::after {
+  content: "";
+  height: 3px;
+  background: currentColor;
+  min-width: 2rem;
+}
+.at-eyebrow::before {
+  width: 2.5rem;
+}
+.at-eyebrow::after {
+  flex: 1;
+  max-width: 8rem;
+}
+
+/* ---------- Tarjetas con borde duro ---------- */
+.at-card {
+  border: 3px solid var(--at-ink);
+  background: var(--at-card);
+  box-shadow: 5px 5px 0 var(--at-shadow);
+}
+.at-card-soft {
+  background: var(--at-card-soft);
+}
+.at-card-green {
+  background: var(--at-green);
+  color: var(--at-on-accent);
+}
+.at-card-amber {
+  background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+.at-card-cream {
+  background: var(--at-card-soft);
+}
+
+/* ---------- Botones ---------- */
+.at-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.5rem;
+  border: 3px solid var(--at-ink);
+  background: var(--at-canvas);
+  color: var(--at-ink);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--at-shadow);
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.at-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--at-shadow);
+}
+.at-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--at-shadow);
+}
+.at-btn:focus-visible {
+  outline: 3px solid var(--at-amber);
+  outline-offset: 3px;
+}
+.at-btn-solid {
+  background: var(--at-green);
+  color: var(--at-on-accent);
+}
+.at-btn-amber {
+  background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+.at-btn-neon {
+  background: var(--at-neon);
+  color: var(--at-on-accent);
+  box-shadow: 5px 5px 0 var(--at-neon);
+}
+.at-btn-neon:hover {
+  box-shadow: 3px 3px 0 var(--at-neon);
+}
+.at-btn-neon:active {
+  box-shadow: 0 0 0 var(--at-neon);
+}
+
+/* ---------- Subrayado a mano (ámbar) ---------- */
+.at-mark {
+  display: inline-block;
+  white-space: nowrap;
+  background-image: linear-gradient(var(--at-amber), var(--at-amber));
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+  background-size: 100% 0.22em;
+}
+
+/* ---------- Chips ---------- */
+.at-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.25rem 0.85rem;
+  border: 3px solid var(--at-ink);
+  background: var(--at-card-soft);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.at-chip-solid {
+  background: var(--at-ink);
+  color: var(--at-on-ink);
+}
+.at-chip-amber {
+  background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+
+/* ---------- Franja de mosaicos ---------- */
+.at-tiles {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  border: 3px solid var(--at-ink);
+  background: var(--at-tile-gap);
+  padding: 3px;
+  box-shadow: 5px 5px 0 var(--at-shadow);
+}
+.at-tiles > * {
+  aspect-ratio: 1 / 1;
+  display: block;
+}
+@media (max-width: 640px) {
+  .at-tiles {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .at-tiles > *:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+/* ---------- Patrón de diamantes (secciones oscuras) ---------- */
+.at-diamonds {
+  background-color: var(--at-panel);
+  background-image: repeating-conic-gradient(
+    from 45deg,
+    rgba(0, 255, 141, 0.07) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 28px 28px;
+}
+
+/* ---------- Filas de timeline ---------- */
+.at-row {
+  border: 3px solid var(--at-ink);
+  background: var(--at-card);
+  box-shadow: 5px 5px 0 var(--at-shadow);
+}
+
+/* ---------- Reveal (mejora progresiva, animación 100% CSS) ----------
+   El contenido es VISIBLE POR DEFECTO: no depende de ningún script.
+   La animación de entrada es un extra que el propio CSS dispara al
+   cargar (sin IntersectionObserver ni JS). Si el CSS o el JS fallan,
+   el contenido igual se ve. */
+.at .reveal {
+  opacity: 1;
+  transform: none;
+}
+@keyframes at-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+html.js .at .reveal {
+  animation: at-fade-up 650ms ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .at .reveal,
+  html.js .at .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .at .at-btn,
+  .at .at-btn:hover,
+  .at .at-btn:active {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ---------- Nav ---------- */
+.at-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--at-canvas);
+  border-bottom: 3px solid var(--at-ink);
+}
+.at-nav a.at-navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--at-ink);
+}
+.at-nav a.at-navlink:hover {
+  background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+
+/* ---------- Texto de About (resalta los <strong> del contenido) ---------- */
+.at .about-text strong {
+  font-weight: 800;
+}
+.at .about-text .text-emerald-400 {
+  color: var(--at-on-accent);
+  background: var(--at-green);
+  padding: 0 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.at .about-text .text-white {
+  color: var(--at-on-accent);
+  background: var(--at-amber);
+  padding: 0 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

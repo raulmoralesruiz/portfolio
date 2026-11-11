@@ -1,0 +1,40 @@
+---
+import ProtoLayout from "../../components/ProtoLayout.astro";
+
+const OPTIONS = [
+  {
+    key: "adelante",
+    href: "/proto/adelante/",
+    hex: "#24c87f",
+    title: "Adelante (neo-brutal editorial)",
+    desc: "Ruptura total de lenguaje sobre el mismo contenido real: teal profundo + crema, serif Fraunces gigante, bordes 3px, sombras duras, mosaicos y botones uppercase. Oscuro por defecto, con toggle a crema.",
+  },
+];
+---
+
+<ProtoLayout title="Prototipos — comparar con el sitio actual">
+  <div class="min-h-screen flex flex-col items-center justify-center px-4 py-16">
+    <p class="font-mono text-sm text-emerald-400 mb-3">$ ls prototipos/</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 text-center">Adelante vs. sitio actual</h1>
+    <p class="text-gray-400 max-w-xl text-center mb-12">
+      Una web <span class="text-gray-200">completa</span> sobre el <span class="text-gray-200">mismo contenido real</span> que el sitio actual: misma información, otro lenguaje.
+      Abre la web, navega por todas las secciones y compárala con la versión original en <span class="text-gray-200">/</span>.
+    </p>
+
+    <div class="grid gap-5 max-w-md w-full">
+      {OPTIONS.map((o) => (
+        <a
+          href={o.href}
+          class="group flex flex-col rounded-xl border border-neutral-800 bg-neutral-900/40 p-6 hover:border-neutral-600 hover:bg-neutral-900/70 transition-all"
+        >
+          <span class="w-10 h-10 rounded-lg mb-4" style={`background:${o.hex}; box-shadow:0 0 20px ${o.hex}55`}></span>
+          <h2 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">{o.title}</h2>
+          <p class="text-sm text-gray-400 leading-relaxed flex-1">{o.desc}</p>
+          <span class="mt-4 font-mono text-sm text-emerald-400">abrir web completa →</span>
+        </a>
+      ))}
+    </div>
+
+    <a href="/" class="mt-12 font-mono text-sm text-gray-500 hover:text-gray-300 transition-colors">← volver al sitio actual (registro calmado)</a>
+  </div>
+</ProtoLayout>
