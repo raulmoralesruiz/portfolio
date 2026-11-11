@@ -1,5 +1,5 @@
 ---
-import type { Lang } from "../data/cv";
+import { cv, type Lang } from "../data/cv";
 import { getSections } from "../utils/sections";
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const sections = getSections(lang);
+const ui = cv[lang].ui;
 
 const toggleBase = "inline-flex h-11 min-w-11 items-center justify-center rounded";
 const toggleActive = "text-emerald-400 bg-emerald-400/10";
@@ -15,6 +16,12 @@ const toggleInactive = "text-gray-400 hover:text-gray-300 transition-colors";
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 bg-neutral-950/90 backdrop-blur border-b border-neutral-800">
+  <a
+    href={lang === "es" ? "/" : "/en/"}
+    class="block bg-emerald-400/5 border-b border-neutral-800 px-4 py-1.5 text-center font-mono text-xs text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/10 transition-colors"
+  >
+    {ui.newDesignBanner}
+  </a>
   <div class="max-w-4xl mx-auto h-14 px-4 flex items-center gap-3">
     <nav class="flex-1 min-w-0 overflow-x-auto nav-scroll" aria-label={lang === "es" ? "Secciones" : "Sections"}>
       <ul class="flex items-center gap-2">

@@ -21,11 +21,12 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 
 ## Operating Context
 
-- Sitio de una sola página, estático, desplegado en `portfolio.raulmorales.eu`.
+- Sitio de una sola página, estático, desplegado en `portfolio.raulmorales.eu`: `/` (ES) y `/en/` (EN).
+- La versión anterior del diseño ("The Terminal Garden") vive archivada en `/original/` y `/original/en/` (noindex, fuera del sitemap).
 - Contacto principal por email (`raulmoralesruiz@outlook.com`), más GitHub y LinkedIn.
 - El CV se genera 100% en el cliente (librería `docx`) y se descarga como `Raul-Morales-CV.docx`; no hay backend.
 - Licencia del repositorio: AGPL-3.0.
-- Idioma: el producto debe soportar español e inglés (bilingüe); hoy solo existe español.
+- Idioma: bilingüe ES/EN (implementado): `/` en español, `/en/` en inglés; sin autodetección, el visitante elige.
 
 ## Capabilities and Constraints
 
@@ -34,8 +35,8 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
   - Proyectos reales con sus enlaces vivos (demo + GitHub).
   - Foto de Raúl y PDFs de certificaciones.
   - Dominio de despliegue `raulmorales.eu`.
-- **Requerimiento de idioma:** bilingüe ES/EN como estándar de producto (decisión confirmada; el inglés aún no está implementado).
-- **Stack existente:** Astro 5 + Tailwind CSS v4 + TypeScript; datos centralizados en `src/data/cv.ts`.
+- **Requerimiento de idioma:** bilingüe ES/EN como estándar de producto (decisión confirmada; implementado en producción: `/` ES + `/en/` EN).
+- **Stack existente:** Astro 7.4.7 + Tailwind CSS v4 + TypeScript; datos centralizados en `src/data/cv.ts` (fuente única de la página y del CV).
 - **Estático:** sin backend; toda la lógica (incluida la generación del CV) corre en el navegador.
 
 ## Brand Commitments
@@ -47,7 +48,7 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 
 ## Evidence on Hand
 
-- **Foto:** `src/assets/img/raul.png` — referenciada por `About.astro`; **asset local-only (gitignored)**, no está en el repositorio.
+- **Foto:** `src/assets/img/raul.png` — referenciada por `Adelante.astro` (y por `About.astro` en la versión archivada); **asset local-only (gitignored)**, no está en el repositorio.
 - **Certificaciones (PDFs, en el repo):** `public/cursos/bigschool_ia.pdf`, `public/cursos/midu_mcp.pdf`, `public/cursos/mongo_m001.pdf`, `public/cursos/udemy_angular.pdf`.
 - **Proyectos con enlaces vivos** (en `src/data/cv.ts`): Virus! (frontend, backend y docs), Kéfir Control, Portfolio Radio, AboutMe.
 - **Experiencia:** Babel (2021–presente), NTT Data (2019–2021), MGS (2013–2019).

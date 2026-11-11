@@ -87,6 +87,8 @@ export interface CV {
     docxViewProject: string;
     docxSourceCode: string;
     heroTerminalCmd: string;
+    // ---- Sitio archivado (/original/): puntero al diseño actual ----
+    newDesignBanner: string;
     // ---- Adelante: etiquetas de UI (ficha, toggle de tema, proyectos) ----
     ficha: string;
     rol: string;
@@ -206,6 +208,7 @@ export const cv: Record<Lang, CV> = {
       docxViewProject: "Ver Proyecto",
       docxSourceCode: "Código Fuente",
       heroTerminalCmd: "ls proyectos",
+      newDesignBanner: "✦ nuevo diseño disponible →",
       ficha: "Ficha",
       rol: "Rol",
       idiomas: "Idiomas",
@@ -323,6 +326,7 @@ export const cv: Record<Lang, CV> = {
       docxViewProject: "View Project",
       docxSourceCode: "Source Code",
       heroTerminalCmd: "ls projects",
+      newDesignBanner: "✦ new design available →",
       ficha: "Profile",
       rol: "Role",
       idiomas: "Languages",
