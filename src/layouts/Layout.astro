@@ -6,13 +6,19 @@ interface Props {
   lang: Lang;
   title: string;
   description: string;
+  /** true → noindex/nofollow (páginas archivadas, p. ej. /original/). */
+  noindex?: boolean;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, noindex = false } = Astro.props;
 
 const SITE = 'https://portfolio.raulmorales.eu';
-const esUrl = `${SITE}/`;
-const enUrl = `${SITE}/en/`;
+// ES/EN viven en pares: / ↔ /en/, /original/ ↔ /original/en/.
+const { pathname } = Astro.url;
+const esPath = pathname.replace(/\/en\/?$/, '/');
+const enPath = pathname.endsWith('en/') ? pathname : `${pathname.replace(/\/?$/, '/')}en/`;
+const esUrl = `${SITE}${esPath}`;
+const enUrl = `${SITE}${enPath}`;
 const currentUrl = lang === 'es' ? esUrl : enUrl;
 ---
 
@@ -25,9 +31,13 @@ const currentUrl = lang === 'es' ? esUrl : enUrl;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="alternate" hreflang="es" href={esUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={esUrl} />
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <>
+        <link rel="alternate" hreflang="es" href={esUrl} />
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="x-default" href={esUrl} />
+      </>}
     <link rel="canonical" href={currentUrl} />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

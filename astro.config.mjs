@@ -12,8 +12,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // Los prototipos de registro (/proto/*) son temporales y no indexables
-      filter: (url) => !url.includes('/proto'),
+      // /proto/* (prototipos) y /original/* (versión anterior, archivada) no son indexables
+      filter: (url) => !url.includes('/proto') && !url.includes('/original'),
     }),
   ],
   i18n: {

@@ -85,6 +85,10 @@ html[data-theme="dark"] {
 }
 
 /* ---------- Base ---------- */
+/* Fondo del <body> (evita flash blanco en overscroll; sigue el tema) */
+body {
+  background: var(--at-canvas);
+}
 .at {
   background: var(--at-canvas);
   color: var(--at-ink);
@@ -101,7 +105,9 @@ html[data-theme="dark"] {
   font-family: "Clash Display", "Work Sans", sans-serif;
   font-weight: 600;
 }
-.at a {
+/* :where() → specificidad (0,0,1): los enlaces planos heredan el color
+   sin pisar las clases de botón/chip/navlink (que declaran su propio color). */
+:where(.at) a {
   color: inherit;
 }
 

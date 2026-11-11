@@ -1,15 +1,30 @@
 ---
 import { Image } from "astro:assets";
-import raul from "../../assets/img/raul.png";
-import { cv } from "../../data/cv";
-import { getSections } from "../../utils/sections";
-import "../../styles/proto-adelante.css";
+import raul from "../assets/img/raul.png";
+import { cv, type Lang } from "../data/cv";
+import { getSections } from "../utils/sections";
+import "../styles/adelante.css";
 
-const data = cv.es;
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const data = cv[lang];
 const ui = data.ui;
-const sections = getSections("es");
+const sections = getSections(lang);
 const email = data.email;
 const year = new Date().getFullYear();
+// Hero: mancheta ámbar en la 1ª palabra del rol ("Frontend Developer." → [Frontend] Developer.)
+const roleWords = data.header.role.split(" ");
+const roleFirst = roleWords[0];
+const roleRest = roleWords.slice(1).join(" ");
+// Contacto: mancheta ámbar en la palabra clave (ES: "contacto", EN: "touch")
+const contactKey = lang === "es" ? "contacto" : "touch";
+const contactTitleMarked = ui.contactTitle.replace(
+  contactKey,
+  (m) => `<span class='at-mark'>${m}</span>`
+);
 
 const tiles = [
   // 1 · más (verde) con diamantes en esquinas
@@ -50,9 +65,9 @@ const tiles = [
       <div class="hidden xl:flex items-center">
         <a href="/" class="at-navlink" aria-label="Volver al sitio actual">← sitio actual</a>
       </div>
-      <button id="at-theme-toggle" type="button" class="at-btn ml-1 !min-h-11 !py-2 !px-4 !text-xs" aria-label="Cambiar a tema claro (crema)">
+      <button id="at-theme-toggle" type="button" class="at-btn ml-1 !min-h-11 !py-2 !px-4 !text-xs" aria-label={ui.themeAriaLight}>
         <span id="at-theme-icon" aria-hidden="true">☀</span>
-        <span id="at-theme-label">CLARO</span>
+        <span id="at-theme-label">{ui.themeToLight}</span>
       </button>
       <a href="#proyectos" class="at-btn at-btn-solid ml-2 !min-h-11 !py-2 !px-4 !text-xs">{ui.viewProjects}</a>
     </div>
@@ -66,7 +81,7 @@ const tiles = [
           <p class="at-eyebrow mb-6">{ui.greeting}</p>
           <h1 class="at-display text-[clamp(3.25rem,9vw,7rem)] mb-6">{data.header.name}</h1>
           <p class="at-display text-[clamp(1.75rem,4vw,3rem)] font-semibold italic mb-7">
-            <span class="at-mark">Frontend</span> Developer.
+            <span class="at-mark">{roleFirst}</span> {roleRest}
           </p>
           <p class="text-lg leading-relaxed max-w-xl mb-9">{data.header.description}</p>
           <div class="flex flex-wrap gap-4">
@@ -101,10 +116,10 @@ const tiles = [
           {data.about.map((paragraph) => (<p set:html={paragraph} />))}
         </div>
         <div class="at-card at-card-green p-6 reveal">
-          <p class="font-bold uppercase tracking-[0.18em] text-xs mb-5">Ficha</p>
+          <p class="font-bold uppercase tracking-[0.18em] text-xs mb-5">{ui.ficha}</p>
           <dl class="space-y-5">
             <div>
-              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Rol</dt>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">{ui.rol}</dt>
               <dd class="at-display text-2xl">{data.header.role}</dd>
             </div>
             <div>
@@ -112,12 +127,12 @@ const tiles = [
               <dd class="at-num text-lg">raulmorales.eu</dd>
             </div>
             <div>
-              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Idiomas</dt>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">{ui.idiomas}</dt>
               <dd class="at-num text-lg">ES · EN</dd>
             </div>
             <div>
-              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">Estado</dt>
-              <dd class="font-bold leading-snug">Abierto a nuevas oportunidades</dd>
+              <dt class="font-bold uppercase tracking-widest text-xs opacity-70 mb-1">{ui.estado}</dt>
+              <dd class="font-bold leading-snug">{ui.estadoValue}</dd>
             </div>
           </dl>
         </div>
@@ -153,8 +168,8 @@ const tiles = [
           </div>
           <div class="p-6 md:p-10">
             <div class="flex flex-wrap items-center gap-3 mb-5">
-              <span class="at-chip at-chip-solid">Proyecto destacado</span>
-              <span class="at-chip">{project.tech.length} tecnologías</span>
+              <span class="at-chip at-chip-solid">{ui.proyectoDestacado}</span>
+              <span class="at-chip">{project.tech.length} {ui.tecnologias}</span>
             </div>
             <h3 class="at-display text-4xl md:text-5xl mb-4">{project.title}</h3>
             <p class="text-lg leading-relaxed max-w-2xl mb-7">{project.description}</p>
@@ -162,7 +177,7 @@ const tiles = [
               {project.tech.map((t) => (<li class="at-chip">{t}</li>))}
             </ul>
             <div class="flex flex-wrap gap-4">
-              <a href={project.link} target="_blank" rel="noopener noreferrer" class="at-btn at-btn-solid">{ui.docxView} proyecto <span aria-hidden="true">↗</span></a>
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="at-btn at-btn-solid">{ui.docxView} {ui.verProyecto} <span aria-hidden="true">↗</span></a>
               <a href={project.github} target="_blank" rel="noopener noreferrer" class="at-btn">{ui.docxSourceCode} <span aria-hidden="true">↗</span></a>
               {project.sublinks?.map((s) => (
                 <a href={s.url} target="_blank" rel="noopener noreferrer" class="at-btn !min-h-11 !py-2 !px-4 !text-xs">{s.label} <span aria-hidden="true">↗</span></a>
@@ -251,7 +266,7 @@ const tiles = [
     <section id={data.anchors.contact} class="at-diamonds mt-8">
       <div class="max-w-4xl mx-auto px-4 py-20 md:py-28 text-center text-[var(--at-panel-text)]">
         <p class="at-eyebrow mb-8 justify-center !text-[var(--at-neon)] reveal"><span class="at-num">07.</span> {ui.sectionContact}</p>
-        <h2 class="at-display text-[clamp(2.5rem,7vw,5rem)] mb-7 reveal" set:html={ui.contactTitle.replace("contacto", "<span class='at-mark'>contacto</span>")} />
+        <h2 class="at-display text-[clamp(2.5rem,7vw,5rem)] mb-7 reveal" set:html={contactTitleMarked} />
         <p class="text-lg leading-relaxed max-w-xl mx-auto mb-10 reveal">{ui.contactBody}</p>
 
         <div class="inline-flex flex-wrap items-center justify-center gap-3 border-[3px] border-[var(--at-panel-text)] px-4 py-3 mb-8 bg-[var(--at-panel-deep)] reveal">
@@ -292,11 +307,15 @@ const tiles = [
       var root = document.documentElement;
       var icon = document.getElementById("at-theme-icon");
       var label = document.getElementById("at-theme-label");
+      // Etiquetas por idioma (el <html lang> lo define la página).
+      var L = root.lang === "en"
+        ? { toLight: "LIGHT", toDark: "DARK", ariaLight: "Switch to light theme (cream)", ariaDark: "Switch to dark theme" }
+        : { toLight: "CLARO", toDark: "OSCURO", ariaLight: "Cambiar a tema claro (crema)", ariaDark: "Cambiar a tema oscuro" };
       function paintTheme() {
         var dark = root.dataset.theme === "dark";
         if (icon) icon.textContent = dark ? "\u2600" : "\u263E";
-        if (label) label.textContent = dark ? "CLARO" : "OSCURO";
-        themeBtn.setAttribute("aria-label", dark ? "Cambiar a tema claro (crema)" : "Cambiar a tema oscuro");
+        if (label) label.textContent = dark ? L.toLight : L.toDark;
+        themeBtn.setAttribute("aria-label", dark ? L.ariaLight : L.ariaDark);
       }
       themeBtn.addEventListener("click", function () {
         var next = root.dataset.theme === "dark" ? "light" : "dark";
@@ -310,10 +329,12 @@ const tiles = [
 
   <!-- ============ CV (.docx) + EMAIL (módulo, importa wordExport) ============ -->
   <script>
-    import { generateWordDocument } from "../../utils/wordExport";
-    import { cv } from "../../data/cv";
+    import { generateWordDocument } from "../utils/wordExport";
+    import { cv, type Lang } from "../data/cv";
 
-    const ui = cv.es.ui;
+    // El idioma lo define la página (<html lang>).
+    const lang: Lang = document.documentElement.lang === "en" ? "en" : "es";
+    const ui = cv[lang].ui;
 
     // ---- Descarga de CV (.docx en el navegador) ----
     const btn = document.getElementById("at-cv");
@@ -325,7 +346,7 @@ const tiles = [
         btn.disabled = true;
         if (label) label.textContent = ui.generating;
         try {
-          const blob = await generateWordDocument("es");
+          const blob = await generateWordDocument(lang);
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;

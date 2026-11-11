@@ -87,6 +87,19 @@ export interface CV {
     docxViewProject: string;
     docxSourceCode: string;
     heroTerminalCmd: string;
+    // ---- Adelante: etiquetas de UI (ficha, toggle de tema, proyectos) ----
+    ficha: string;
+    rol: string;
+    idiomas: string;
+    estado: string;
+    estadoValue: string;
+    proyectoDestacado: string;
+    tecnologias: string;
+    verProyecto: string;
+    themeToLight: string;
+    themeToDark: string;
+    themeAriaLight: string;
+    themeAriaDark: string;
   };
 }
 
@@ -193,6 +206,18 @@ export const cv: Record<Lang, CV> = {
       docxViewProject: "Ver Proyecto",
       docxSourceCode: "Código Fuente",
       heroTerminalCmd: "ls proyectos",
+      ficha: "Ficha",
+      rol: "Rol",
+      idiomas: "Idiomas",
+      estado: "Estado",
+      estadoValue: "Abierto a nuevas oportunidades",
+      proyectoDestacado: "Proyecto destacado",
+      tecnologias: "tecnologías",
+      verProyecto: "proyecto",
+      themeToLight: "CLARO",
+      themeToDark: "OSCURO",
+      themeAriaLight: "Cambiar a tema claro (crema)",
+      themeAriaDark: "Cambiar a tema oscuro",
     },
   },
 
@@ -298,6 +323,18 @@ export const cv: Record<Lang, CV> = {
       docxViewProject: "View Project",
       docxSourceCode: "Source Code",
       heroTerminalCmd: "ls projects",
+      ficha: "Profile",
+      rol: "Role",
+      idiomas: "Languages",
+      estado: "Status",
+      estadoValue: "Open to new opportunities",
+      proyectoDestacado: "Featured project",
+      tecnologias: "technologies",
+      verProyecto: "project",
+      themeToLight: "LIGHT",
+      themeToDark: "DARK",
+      themeAriaLight: "Switch to light theme (cream)",
+      themeAriaDark: "Switch to dark theme",
     },
   },
 };
