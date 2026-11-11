@@ -15,6 +15,9 @@ const ui = data.ui;
 const sections = getSections(lang);
 const email = data.email;
 const year = new Date().getFullYear();
+// Trazo a mano alzada (SVG) para los subrayados: se "dibuja" al entrar
+// en viewport (clase .at-dibujado); sin JS queda estático y visible.
+const TRAZO = `<svg class='at-trazo' viewBox='0 0 200 20' preserveAspectRatio='none' aria-hidden='true'><path d='M3 12 C 60 3, 140 18, 197 7' pathLength='1'/></svg>`;
 // Hero: mancheta ámbar en la 1ª palabra del rol ("Frontend Developer." → [Frontend] Developer.)
 const roleWords = data.header.role.split(" ");
 const roleFirst = roleWords[0];
@@ -23,24 +26,45 @@ const roleRest = roleWords.slice(1).join(" ");
 const contactKey = lang === "es" ? "contacto" : "touch";
 const contactTitleMarked = ui.contactTitle.replace(
   contactKey,
-  (m) => `<span class='at-mark'>${m}</span>`
+  (m) => `<span class='at-mark'>${m}${TRAZO}</span>`
 );
 
 const tiles = [
   // 1 · más (verde) con diamantes en esquinas
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><path d="M18 6h12v12h12v12H30v12H18V30H6V18h12z" fill="#24C87F"/><path d="M0 -7 7 0 0 7 -7 0z M48 -7 55 0 48 7 41 0z M0 41 7 48 0 55 -7 48z M48 41 55 48 48 55 41 48z" fill="#004242"/><rect x="21" y="21" width="6" height="6" fill="#FAF3E0" transform="rotate(45 24 24)"/></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><path d="M18 6h12v12h12v12H30v12H18V30H6V18h12z" fill="#24C87F"/><path d="M0 -7 7 0 0 7 -7 0z M48 -7 55 0 48 7 41 0z M0 41 7 48 0 55 -7 48z M48 41 55 48 48 55 41 48z" fill="#004242"/><rect x="21" y="21" width="6" height="6" fill="#FAF3E0" transform="rotate(45 24 24)"/></svg>`,
   // 2 · rombo (ámbar)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><rect x="12" y="12" width="24" height="24" fill="#FFC233" transform="rotate(45 24 24)"/><rect x="19" y="19" width="10" height="10" fill="#004242" transform="rotate(45 24 24)"/></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><rect x="12" y="12" width="24" height="24" fill="#FFC233" transform="rotate(45 24 24)"/><rect x="19" y="19" width="10" height="10" fill="#004242" transform="rotate(45 24 24)"/></svg>`,
   // 3 · zigzag (neón sobre teal)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16h8l6-8h8l6 8h12" stroke="#00FF8D"/><path d="M4 34h8l6-8h8l6 8h12" stroke="#24C87F"/></g></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16h8l6-8h8l6 8h12" stroke="#00FF8D"/><path d="M4 34h8l6-8h8l6 8h12" stroke="#24C87F"/></g></svg>`,
   // 4 · círculo (teal)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><circle cx="24" cy="24" r="14" fill="#004242"/><circle cx="24" cy="24" r="6" fill="#24C87F"/></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><circle cx="24" cy="24" r="14" fill="#004242"/><circle cx="24" cy="24" r="6" fill="#24C87F"/></svg>`,
   // 5 · cruz de tramas (verde)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="#24C87F"><rect x="20" y="6" width="8" height="36"/><rect x="6" y="20" width="36" height="8"/></g><g fill="#004242"><rect x="22" y="8" width="4" height="32"/><rect x="8" y="22" width="32" height="4"/></g></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="#24C87F"><rect x="20" y="6" width="8" height="36"/><rect x="6" y="20" width="36" height="8"/></g><g fill="#004242"><rect x="22" y="8" width="4" height="32"/><rect x="8" y="22" width="32" height="4"/></g></svg>`,
   // 6 · onda (ámbar)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="none" stroke="#FFC233" stroke-width="5" stroke-linecap="round"><path d="M6 18c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/><path d="M6 32c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/></g></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="none" stroke="#FFC233" stroke-width="5" stroke-linecap="round"><path d="M6 18c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/><path d="M6 32c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/></g></svg>`,
   // 7 · cuadrados (teal sobre verde)
-  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><rect width="48" height="48" fill="#24C87F"/><g fill="#004242"><rect x="8" y="8" width="12" height="12"/><rect x="28" y="28" width="12" height="12"/></g><g fill="#FAF3E0"><rect x="28" y="8" width="12" height="12"/><rect x="8" y="28" width="12" height="12"/></g></svg>`,
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#24C87F"/><g fill="#004242"><rect x="8" y="8" width="12" height="12"/><rect x="28" y="28" width="12" height="12"/></g><g fill="#FAF3E0"><rect x="28" y="8" width="12" height="12"/><rect x="8" y="28" width="12" height="12"/></g></svg>`,
+];
+
+// Banda 03-Proyectos: 15 baldosas (8 nuevas + las 7 del hero) en una
+// fila de celdas cuadradas: todos los iconos al mismo tamaño,
+// completos y sin recorte en cualquier viewport.
+const tilesBand = [
+  tiles[0], // 1 · más (verde)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><path d="M12 12l24 24M36 12 12 36" fill="none" stroke="#00FF8D" stroke-width="6" stroke-linecap="round"/></svg>`, // 8 · X (neón)
+  tiles[1], // 2 · rombo (ámbar)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><path d="M20 7h8v13h13v8H28v13h-8V28H7v-8h13z" fill="#FFC233"/></svg>`, // 10 · más (ámbar)
+  tiles[3], // 4 · círculo
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><rect x="13" y="13" width="22" height="22" fill="#FAF3E0" transform="rotate(45 24 24)"/><rect x="19" y="19" width="10" height="10" fill="#FFC233" transform="rotate(45 24 24)"/></svg>`, // 11 · rombo invertido
+  tiles[4], // 5 · cruz de tramas
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#004242"/><g fill="none" stroke="#00FF8D" stroke-width="5" stroke-linecap="round"><path d="M-8 16 16 -8M4 32 32 4M16 48 48 16"/></g></svg>`, // 15 · rayas (neón)
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><circle cx="24" cy="24" r="15" fill="none" stroke="#FFC233" stroke-width="5"/><circle cx="24" cy="24" r="5.5" fill="#004242"/></svg>`, // 12 · anillo
+  tiles[2], // 3 · zigzag
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><g fill="#004242"><circle cx="14" cy="14" r="6"/><circle cx="34" cy="14" r="6"/><circle cx="14" cy="34" r="6"/><circle cx="34" cy="34" r="6"/></g><circle cx="24" cy="24" r="4" fill="#FFC233"/></svg>`, // 9 · puntos
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><path d="M9 15l15 12 15-12" fill="none" stroke="#24C87F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="20" y="33" width="8" height="8" fill="#004242"/></svg>`, // 13 · chevrón
+  tiles[6], // 7 · cuadrados
+  tiles[5], // 6 · onda
+  `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true"><rect width="48" height="48" fill="#FAF3E0"/><path d="M17 10v28l24-14z" fill="#24C87F"/><circle cx="24" cy="24" r="4" fill="#FAF3E0"/></svg>`, // 14 · triángulo
 ];
 ---
 
@@ -62,11 +86,17 @@ const tiles = [
           <a href={`#${s.anchor}`} class="at-navlink">{s.label}</a>
         ))}
       </div>
-      <button id="at-theme-toggle" type="button" class="at-btn ml-1 !min-h-11 !py-2 !px-4 !text-xs" aria-label={ui.themeAriaLight}>
+      <div class="at-langgroup ml-1" role="group" aria-label={lang === "es" ? "Idioma" : "Language"}>
+        <a href="/" class="at-lang" aria-current={lang === "es" ? "true" : undefined}>ES</a>
+        <a href="/en/" class="at-lang" aria-current={lang === "en" ? "true" : undefined}>EN</a>
+      </div>
+      <button id="at-theme-toggle" type="button" class="at-btn ml-1 !min-h-11 !py-2 !px-3 !text-sm" aria-label={ui.themeAriaLight}>
         <span id="at-theme-icon" aria-hidden="true">☀</span>
-        <span id="at-theme-label">{ui.themeToLight}</span>
       </button>
-      <a href="#proyectos" class="at-btn at-btn-solid ml-2 !min-h-11 !py-2 !px-4 !text-xs">{ui.viewProjects}</a>
+      <!-- Wrapper: .at-btn (fuera de capas) ganaría a .hidden (layer de Tailwind) -->
+      <span class="ml-2 hidden sm:inline">
+        <a href="#proyectos" class="at-btn at-btn-solid !min-h-11 !py-2 !px-4 !text-xs whitespace-nowrap">{ui.viewProjects}</a>
+      </span>
     </div>
   </nav>
 
@@ -78,16 +108,18 @@ const tiles = [
           <p class="at-eyebrow mb-6">{ui.greeting}</p>
           <h1 class="at-display text-[clamp(3.25rem,9vw,7rem)] mb-6">{data.header.name}</h1>
           <p class="at-display text-[clamp(1.75rem,4vw,3rem)] font-semibold italic mb-7">
-            <span class="at-mark">{roleFirst}</span> {roleRest}
+            <span class="at-mark" set:html={`${roleFirst}${TRAZO}`}></span> {roleRest}
           </p>
           <p class="text-lg leading-relaxed max-w-xl mb-9">{data.header.description}</p>
           <div class="flex flex-wrap gap-4">
             <a href="#proyectos" class="at-btn at-btn-solid">{ui.viewProjects} <span aria-hidden="true">↘</span></a>
             <button id="at-cv" type="button" class="at-btn">
-              <span data-label>{ui.download} {ui.cvFile}</span>
+              <span data-label>{ui.download} CV</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
+              </svg>
             </button>
           </div>
-          <p class="mt-5 text-sm opacity-80">{ui.cvCaption}</p>
         </div>
 
         <div class="reveal flex flex-col gap-6 items-stretch">
@@ -160,8 +192,8 @@ const tiles = [
 
       {data.projects.filter((p) => p.featured).map((project) => (
         <article class="at-card overflow-hidden mb-8 reveal">
-          <div class="at-tiles !shadow-none !border-0 !border-b-[3px] !m-0 !p-[3px] grid !grid-cols-7" aria-hidden="true">
-            {tiles.map((t) => (<span set:html={t} />))}
+          <div class="at-tiles at-tiles--band !shadow-none !border-0 !border-b-[3px] !m-0 !p-[3px]" aria-hidden="true">
+            {tilesBand.map((t) => (<span set:html={t} />))}
           </div>
           <div class="p-6 md:p-10">
             <div class="flex flex-wrap items-center gap-3 mb-5">
@@ -247,9 +279,9 @@ const tiles = [
             <Element {...props} class="at-card p-6 flex flex-col reveal">
               <div class="flex items-center justify-between mb-4">
                 <span class="at-chip at-chip-solid at-num">{cert.date}</span>
-                <span class="at-chip" aria-hidden="true">
-                  {isLink ? "PDF ↗" : ui.noPdf}
-                </span>
+                {isLink && (
+                  <span class="at-chip" aria-hidden="true">PDF ↗</span>
+                )}
               </div>
               <h3 class="at-display text-xl leading-snug mb-2 flex-1">{cert.name}</h3>
               <p class="font-semibold text-sm uppercase tracking-widest">{cert.issuer}</p>
@@ -282,11 +314,11 @@ const tiles = [
     </section>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="at-diamonds border-t-[3px] border-[var(--at-neon)]">
-      <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[var(--at-panel-text)] text-sm">
+    <footer class="border-t-[3px] border-[var(--at-neon)]">
+      <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
         <p class="font-semibold">{ui.footer}</p>
         <div class="flex items-center gap-4">
-          <a href="https://raulmorales.eu" class="at-num underline underline-offset-4 hover:text-[var(--at-neon)]">raulmorales.eu</a>
+          <a href="https://raulmorales.eu" class="at-num underline underline-offset-4 decoration-2 hover:decoration-[3px] hover:decoration-[var(--at-green)]">raulmorales.eu</a>
           <span aria-hidden="true">·</span>
           <span>© {year}</span>
         </div>
@@ -303,15 +335,13 @@ const tiles = [
       if (!themeBtn) return;
       var root = document.documentElement;
       var icon = document.getElementById("at-theme-icon");
-      var label = document.getElementById("at-theme-label");
-      // Etiquetas por idioma (el <html lang> lo define la página).
+      // El botón es solo icono (☀/☽); el aria-label por idioma da el contexto.
       var L = root.lang === "en"
-        ? { toLight: "LIGHT", toDark: "DARK", ariaLight: "Switch to light theme (cream)", ariaDark: "Switch to dark theme" }
-        : { toLight: "CLARO", toDark: "OSCURO", ariaLight: "Cambiar a tema claro (crema)", ariaDark: "Cambiar a tema oscuro" };
+        ? { ariaLight: "Switch to light theme (cream)", ariaDark: "Switch to dark theme" }
+        : { ariaLight: "Cambiar a tema claro (crema)", ariaDark: "Cambiar a tema oscuro" };
       function paintTheme() {
         var dark = root.dataset.theme === "dark";
         if (icon) icon.textContent = dark ? "\u2600" : "\u263E";
-        if (label) label.textContent = dark ? L.toLight : L.toDark;
         themeBtn.setAttribute("aria-label", dark ? L.ariaLight : L.ariaDark);
       }
       themeBtn.addEventListener("click", function () {
@@ -363,6 +393,24 @@ const tiles = [
           btn.disabled = false;
         }
       });
+    }
+
+    // ---- Subrayado "trazo": se dibuja al entrar en viewport ----
+    // Sin JS (o sin IntersectionObserver) el trazo queda estático y visible.
+    const marks = Array.from(document.querySelectorAll<HTMLElement>(".at-mark"));
+    if (marks.length && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("at-dibujado");
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.35 }
+      );
+      marks.forEach((m) => io.observe(m));
     }
 
     // ---- Copiar email ----

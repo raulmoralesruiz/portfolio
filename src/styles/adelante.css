@@ -154,6 +154,13 @@ body {
   background: var(--at-amber);
   color: var(--at-on-accent);
 }
+/* Chips sobre ámbar: "cajón" más oscuro que el fondo del card
+   (mismo principio que --at-card-soft sobre --at-card). El velo de
+   negro oscurece el ámbar en ambos temas; el texto on-accent se lee
+   sobre el ámbar oscurecido. */
+.at-card-amber .at-chip:not(.at-chip-solid):not(.at-chip-amber) {
+  background: rgba(0, 0, 0, 0.15);
+}
 .at-card-cream {
   background: var(--at-card-soft);
 }
@@ -211,14 +218,38 @@ body {
   box-shadow: 0 0 0 var(--at-neon);
 }
 
-/* ---------- Subrayado a mano (ámbar) ---------- */
+/* ---------- Subrayado a mano alzada (ámbar) ----------
+   Trazo SVG detrás del texto (técnica de programa.adelanteandalucia.org).
+   Estático y visible por defecto (PE); con JS se "dibuja" al entrar
+   en viewport (clase .at-dibujado, la añade el módulo). */
 .at-mark {
+  position: relative;
+  isolation: isolate;
   display: inline-block;
   white-space: nowrap;
-  background-image: linear-gradient(var(--at-amber), var(--at-amber));
-  background-repeat: no-repeat;
-  background-position: 0 90%;
-  background-size: 100% 0.22em;
+}
+.at-trazo {
+  position: absolute;
+  left: -3%;
+  bottom: -0.16em;
+  width: 106%;
+  height: 0.28em;
+  z-index: -1;
+  overflow: visible;
+}
+.at-trazo path {
+  fill: none;
+  stroke: var(--at-amber);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.at-mark.at-dibujado .at-trazo path {
+  stroke-dasharray: 1;
+  animation: at-dibuja 900ms ease-out;
+}
+@keyframes at-dibuja {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
 }
 
 /* ---------- Chips ---------- */
@@ -255,12 +286,31 @@ body {
   aspect-ratio: 1 / 1;
   display: block;
 }
+/* Banda fina (03-Proyectos): 15 baldosas en una fila, celdas
+   cuadradas (~72px en desktop, heredan aspect-ratio: 1/1 de .at-tiles).
+   Cada icono llena su celda exacta: todos al mismo tamaño, completos
+   y sin recorte en cualquier viewport. */
+.at-tiles--band {
+  grid-template-columns: repeat(15, 1fr);
+}
+.at-tiles--band > * svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 @media (max-width: 640px) {
   .at-tiles {
     grid-template-columns: repeat(4, 1fr);
   }
   .at-tiles > *:nth-child(n + 5) {
     display: none;
+  }
+  /* La banda: 1 fila de 4 baldosas (las 4 formas más distintas). */
+  .at-tiles.at-tiles--band > *:nth-child(4) {
+    display: none;
+  }
+  .at-tiles.at-tiles--band > *:nth-child(5) {
+    display: block;
   }
 }
 
@@ -311,6 +361,9 @@ html.js .at .reveal {
     transition: none;
     transform: none;
   }
+  .at-mark.at-dibujado .at-trazo path {
+    animation: none;
+  }
 }
 
 /* ---------- Nav ---------- */
@@ -336,6 +389,35 @@ html.js .at .reveal {
 }
 .at-nav a.at-navlink:hover {
   background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+
+/* ---------- Selector de idioma (nav) ---------- */
+.at-langgroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.at-lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0 0.6rem;
+  border: 3px solid var(--at-ink);
+  background: transparent;
+  color: var(--at-ink);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.at-lang:hover {
+  background: var(--at-amber);
+  color: var(--at-on-accent);
+}
+.at-lang[aria-current="true"] {
+  background: var(--at-green);
   color: var(--at-on-accent);
 }
 

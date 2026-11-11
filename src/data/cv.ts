@@ -73,7 +73,7 @@ export interface CV {
     sectionExperience: string;
     sectionEducation: string;
     sectionCertifications: string;
-    noPdf: string;
+    noPdf: string; // solo lo usa el sitio archivado (Certifications.astro)
     sectionProjects: string;
     sectionContact: string;
     contactTitle: string;
@@ -98,8 +98,6 @@ export interface CV {
     proyectoDestacado: string;
     tecnologias: string;
     verProyecto: string;
-    themeToLight: string;
-    themeToDark: string;
     themeAriaLight: string;
     themeAriaDark: string;
   };
@@ -217,8 +215,6 @@ export const cv: Record<Lang, CV> = {
       proyectoDestacado: "Proyecto destacado",
       tecnologias: "tecnologías",
       verProyecto: "proyecto",
-      themeToLight: "CLARO",
-      themeToDark: "OSCURO",
       themeAriaLight: "Cambiar a tema claro (crema)",
       themeAriaDark: "Cambiar a tema oscuro",
     },
@@ -335,8 +331,6 @@ export const cv: Record<Lang, CV> = {
       proyectoDestacado: "Featured project",
       tecnologias: "technologies",
       verProyecto: "project",
-      themeToLight: "LIGHT",
-      themeToDark: "DARK",
       themeAriaLight: "Switch to light theme (cream)",
       themeAriaDark: "Switch to dark theme",
     },
