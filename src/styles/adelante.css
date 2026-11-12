@@ -377,6 +377,21 @@ body {
   width: 100%;
   height: 100%;
 }
+/* Tira vertical (404): una columna de baldosas apiladas. El ancho lo
+   fija el consumidor (w-[clamp(...)]); cada baldosa se mantiene
+   cuadrada por el aspect-ratio: 1/1 heredado. Oculta bajo lg (1024px):
+   la 404 debe caber en la viewport sin scroll. (Aquí y no con
+   hidden/lg:grid de Tailwind porque .at-tiles, posterior en cascada,
+   le ganaría a display:none.) */
+.at-tiles--col {
+  display: none;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .at-tiles--col {
+    display: grid;
+  }
+}
 @media (max-width: 640px) {
   .at-tiles {
     grid-template-columns: repeat(4, 1fr);
@@ -526,9 +541,13 @@ html.js .at .reveal {
     print-color-adjust: exact;
   }
 
-  /* La página no es una app: sin altura mínima de pantalla ni scroll. */
+  /* La página no es una app: sin altura mínima de pantalla ni scroll.
+     La 404 se fija a la viewport en pantalla (h-svh overflow-hidden);
+     en print se libera para no recortar el contenido. */
   .at {
     min-height: 0;
+    height: auto;
+    overflow: visible;
   }
 
   /* --- Ocultar lo que solo existe en pantalla --- */
