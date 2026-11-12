@@ -17,7 +17,7 @@ Portfolio personal de Raúl Morales que demuestra su trabajo como desarrollador 
 
 ## Positioning
 
-Desarrollador frontend con profundidad full-stack real y experiencia previa de administración de sistemas: entiende el ciclo completo, de la base de datos al píxel final. Mecanismo distintivo: la página y el CV comparten la misma fuente de datos — el CV `.docx` se genera en el navegador a partir de los mismos datos que pintan la página, por lo que lo que se ve y lo que se descarga nunca divergen.
+Desarrollador frontend con profundidad full-stack real y experiencia previa de administración de sistemas: entiende el ciclo completo, de la base de datos al píxel final. Mecanismo distintivo: la página y el CV comparten la misma fuente de datos — el CV (`.docx` generado en el navegador y PDF por impresión) se produce a partir de los mismos datos que pintan la página, por lo que lo que se ve y lo que se descarga nunca divergen.
 
 ## Operating Context
 
@@ -25,6 +25,7 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 - La versión anterior del diseño ("The Terminal Garden") vive archivada en `/original/` y `/original/en/` (noindex, fuera del sitemap).
 - Contacto principal por email (`raulmoralesruiz@outlook.com`), más GitHub y LinkedIn.
 - El CV se genera 100% en el cliente (librería `docx`) y se descarga como `Raul-Morales-CV.docx`; no hay backend.
+- Exportación a PDF vía `window.print()` + reglas `@media print` (A4 a sangre completa, respeta el tema claro/oscuro, ~5 páginas, texto vectorial seleccionable); sin dependencias nuevas.
 - Licencia del repositorio: AGPL-3.0.
 - Idioma: bilingüe ES/EN (implementado): `/` en español, `/en/` en inglés; sin autodetección, el visitante elige.
 
@@ -32,6 +33,7 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 
 - **Innegociables (confirmados por el dueño):**
   - Descarga de CV `.docx` generada en el cliente.
+  - Exportación del CV a PDF (mismo contenido, ambos temas).
   - Proyectos reales con sus enlaces vivos (demo + GitHub).
   - Foto de Raúl y PDFs de certificaciones.
   - Dominio de despliegue `raulmorales.eu`.

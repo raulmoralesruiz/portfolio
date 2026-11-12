@@ -265,6 +265,16 @@ Square, not circular — the one place the archived design's circle becomes a ca
 
 Diamond pattern, 3px neon top rule, cream text; localized one-liner on the left, `raulmorales.eu` + `© year` on the right.
 
+### Print / PDF (`.at` under `@media print`)
+
+The "Exportar PDF" action is `window.print()` → the browser's "Save as PDF"; there is no PDF library. A single `@media print` block in `adelante.css` turns the live page into a ~5-page A4 CV that mirrors the active theme:
+
+- **Full-bleed:** `@page { size: A4; margin: 0 }` — the theme-aware `<body>` background paints the whole sheet (no white bands); section padding is the only inset.
+- **Both themes print:** `print-color-adjust: exact` so the dark theme keeps its surfaces and accents.
+- **Screen-only UI hidden:** nav, FAB, theme toggle, the CV/PDF buttons, copy-email and `mailto:` links; the FICHA card is hidden too (the hero already shows role, web and languages).
+- **Forced layout:** the A4 content width (~762px) sits just under Tailwind's `md` (768px), so print re-enables the 2-column hero, the `10rem 1fr` timeline rows and 2-up project buttons.
+- **Print hygiene:** hard shadows off (3px borders stay), `break-inside: avoid` on cards/rows/chips/tiles and the contact panel, and link-buttons append their real URL via `::after` so the paper CV is usable.
+
 ## Theming & Tokens
 
 All design tokens live as CSS custom properties in `src/styles/adelante.css`, namespaced `--at-*`:
@@ -295,6 +305,7 @@ The theme is a single attribute — `html[data-theme="dark"]` — toggled by the
 - **Do** keep content visible with JS disabled; the reveal animation is an enhancement, never a gate.
 - **Do** respect `prefers-reduced-motion` (no fade-up, no press).
 - **Do** keep both themes in the same design: swap surfaces, never accents.
+- **Do** keep the `@media print` block faithful to the on-screen design — the exported PDF is a first-class artifact (both themes, full-bleed, ~5 pages), not an afterthought.
 
 ### Don't:
 
