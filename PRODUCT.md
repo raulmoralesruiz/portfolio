@@ -36,7 +36,7 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
   - Exportación del CV a PDF (mismo contenido, ambos temas).
   - Proyectos reales con sus enlaces vivos (demo + GitHub).
   - Foto de Raúl y PDFs de certificaciones.
-  - Dominio de despliegue `raulmorales.eu`.
+  - Dominio de despliegue `portfolio.raulmorales.eu` (subdominio de la marca `raulmorales.eu`).
 - **Requerimiento de idioma:** bilingüe ES/EN como estándar de producto (decisión confirmada; implementado en producción: `/` ES + `/en/` EN).
 - **Stack existente:** Astro 7.4.7 + Tailwind CSS v4 + TypeScript; datos centralizados en `src/data/cv.ts` (fuente única de la página y del CV).
 - **Estático:** sin backend; toda la lógica (incluida la generación del CV) corre en el navegador.
@@ -46,11 +46,11 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 - Nombre: Raúl Morales.
 - Rol público: "Frontend Developer" (con base full-stack y de sistemas).
 - Voz: cercana y directa, en primera persona ("HOLA, MI NOMBRE ES", "Ponte en contacto").
-- Dominio `raulmorales.eu` como identidad estable (confirmado innegociable).
+- Dominio `raulmorales.eu` como identidad de marca estable (confirmado innegociable); el portfolio vive en el subdominio `portfolio.raulmorales.eu`.
 
 ## Evidence on Hand
 
-- **Foto:** `src/assets/img/raul.png` — referenciada por `Adelante.astro` (y por `About.astro` en la versión archivada); **asset local-only (gitignored)**, no está en el repositorio.
+- **Foto:** `src/assets/img/raul.png` — referenciada por `Adelante.astro` (y por `About.astro` en la versión archivada); commiteada en el repo para que el build sea autocontenido desde un clone fresco.
 - **Certificaciones (PDFs, en el repo):** `public/cursos/bigschool_ia.pdf`, `public/cursos/midu_mcp.pdf`, `public/cursos/mongo_m001.pdf`, `public/cursos/udemy_angular.pdf`.
 - **Proyectos con enlaces vivos** (en `src/data/cv.ts`): Virus! (frontend, backend y docs), Kéfir Control, Portfolio Radio, AboutMe.
 - **Experiencia:** Babel (2021–presente), NTT Data (2019–2021), MGS (2013–2019).
