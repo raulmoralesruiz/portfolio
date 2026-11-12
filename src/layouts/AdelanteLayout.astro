@@ -18,6 +18,23 @@ const enPath = pathname.endsWith('en/') ? pathname : `${pathname.replace(/\/?$/,
 const esUrl = `${SITE}${esPath}`;
 const enUrl = `${SITE}${enPath}`;
 const currentUrl = lang === 'es' ? esUrl : enUrl;
+
+// Structured data (schema.org Person) para SEO / rich results.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Raúl Morales",
+  url: SITE,
+  jobTitle: "Frontend Developer",
+  email: "mailto:raulmoralesruiz@outlook.com",
+  image: `${SITE}/og-image.png`,
+  description,
+  sameAs: [
+    "https://github.com/raulmoralesruiz",
+    "https://www.linkedin.com/in/raulmoralesruiz",
+  ],
+  knowsAbout: ["Angular", "HTML", "CSS", "JavaScript", "TypeScript", "Astro", "Tailwind"],
+};
 ---
 
 <!doctype html>
@@ -26,7 +43,12 @@ const currentUrl = lang === 'es' ? esUrl : enUrl;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- El "chrome" del navegador móvil sigue el tema (oscuro por defecto; el
+         toggle lo actualiza a crema). -->
+    <meta name="theme-color" content="#001515" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- Fraunces (fuente del hero/LCP): preload para reducir el FOUT. Solo la
          normal (la itálica no es crítica para LCP; prelastrarla gastaría banda). -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fuentes/fraunces-latin-normal.woff2" />
@@ -48,6 +70,8 @@ const currentUrl = lang === 'es' ? esUrl : enUrl;
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Raúl Morales — Frontend Developer" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- Structured data: schema.org Person (SEO / rich results) -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <script is:inline>
       // Antes del primer paint (sin flash):
       //  1) marca <html class="js"> para que el CSS sepa que hay JS (animaciones de reveal)

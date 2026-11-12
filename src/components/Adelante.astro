@@ -375,6 +375,9 @@ const tilesBand = [
         themeBtn.setAttribute("aria-label", dark ? L.ariaLight : L.ariaDark);
         // El estado (oscuro = pressed) se expone para lectores de pantalla.
         themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+        // El "chrome" del navegador móvil sigue el tema (theme-color).
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", dark ? "#001515" : "#faf3e0");
       }
       themeBtn.addEventListener("click", function () {
         const next = root.dataset.theme === "dark" ? "light" : "dark";
