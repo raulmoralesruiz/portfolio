@@ -20,11 +20,10 @@ export default defineConfig({
     defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
-      // Spanish lives at `/`, English at `/en/`
+      // Spanish lives at `/`, English at `/en/`.
+      // Astro no hace detección automática por idioma ni redirecciones:
+      // el visitante elige explícitamente con el toggle ES/EN.
       prefixDefaultLocale: false,
-      // No auto-detection or redirects: the visitor picks explicitly via the toggle
-      localeDetection: false,
-      redirectToAlternates: false,
     },
   },
 });

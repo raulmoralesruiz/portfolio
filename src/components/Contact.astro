@@ -112,7 +112,7 @@ const email = cv[lang].email;
   };
 
   btn.addEventListener("click", async () => {
-   let ok = false;
+   let ok: boolean;
    try {
     await navigator.clipboard.writeText(email);
     ok = true;

@@ -361,25 +361,25 @@ const tilesBand = [
        Oscuro por defecto; persiste en localStorage. -->
   <script is:inline>
     (function () {
-      var themeBtn = document.getElementById("at-theme-toggle");
+      const themeBtn = document.getElementById("at-theme-toggle");
       if (!themeBtn) return;
-      var root = document.documentElement;
-      var icon = document.getElementById("at-theme-icon");
+      const root = document.documentElement;
+      const icon = document.getElementById("at-theme-icon");
       // El botón es solo icono (☀/☽); el aria-label por idioma da el contexto.
-      var L = root.lang === "en"
+      const L = root.lang === "en"
         ? { ariaLight: "Switch to light theme (cream)", ariaDark: "Switch to dark theme" }
         : { ariaLight: "Cambiar a tema claro (crema)", ariaDark: "Cambiar a tema oscuro" };
       function paintTheme() {
-        var dark = root.dataset.theme === "dark";
+        const dark = root.dataset.theme === "dark";
         if (icon) icon.textContent = dark ? "\u2600" : "\u263E";
         themeBtn.setAttribute("aria-label", dark ? L.ariaLight : L.ariaDark);
         // El estado (oscuro = pressed) se expone para lectores de pantalla.
         themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
       }
       themeBtn.addEventListener("click", function () {
-        var next = root.dataset.theme === "dark" ? "light" : "dark";
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next;
-        try { localStorage.setItem("at-theme", next); } catch (e) {}
+        try { localStorage.setItem("at-theme", next); } catch { /* storage bloqueado: el tema sigue funcionando en memoria */ }
         paintTheme();
       });
       paintTheme();
@@ -397,7 +397,7 @@ const tilesBand = [
 
     // ---- Descarga de CV (.docx en el navegador) ----
     // La misma lógica se bind a los dos botones (hero + contacto) mediante [data-cv].
-    function bindCVButton(btn: HTMLElement) {
+    function bindCVButton(btn: HTMLButtonElement) {
       const label = btn.querySelector("[data-label]");
       const original = label?.textContent ?? "";
       btn.addEventListener("click", async () => {
@@ -430,7 +430,7 @@ const tilesBand = [
         }
       });
     }
-    document.querySelectorAll<HTMLElement>("[data-cv]").forEach(bindCVButton);
+    document.querySelectorAll<HTMLButtonElement>("[data-cv]").forEach(bindCVButton);
 
     // ---- Exportar PDF (window.print → "Guardar como PDF") ----
     // Abre el diálogo de impresión del navegador; el usuario elige
