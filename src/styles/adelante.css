@@ -482,3 +482,155 @@ html.js .at .reveal {
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+
+/* ============================================================
+   IMPRESIÓN / PDF
+   Botón "Exportar PDF" → window.print() → "Guardar como PDF".
+   Pinta la página en A4 respetando el tema activo (claro u oscuro),
+   igual que lo hace el .docx. Solo se oculta lo exclusivo de pantalla
+   (nav, FAB, toggle y los CTAs web que no pertenecen a un CV impreso).
+   ============================================================ */
+@page {
+  size: A4;
+  /* Sin margen de página: el fondo del <body> (que sigue el tema) pinta
+     todo el lienzo y el relleno lo pone el padding propio de cada
+     sección (pt-14/py-16/py-20). Así no quedan franjas blancas. */
+  margin: 0;
+}
+
+@media print {
+  /* Imprimir fondos y acentos en AMBOS temas (el oscuro lo necesita:
+     sin esto el navegador tira los fondos y el PDF sale blanco). */
+  html,
+  body,
+  .at,
+  .at-card,
+  .at-btn,
+  .at-chip,
+  .at-tiles,
+  .at-diamonds,
+  .at-row {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* La página no es una app: sin altura mínima de pantalla ni scroll. */
+  .at {
+    min-height: 0;
+  }
+
+  /* --- Ocultar lo que solo existe en pantalla --- */
+  .at-nav,
+  .at-fab,
+  #at-theme-toggle,
+  .sr-only,
+  /* FICHA: el hero ya muestra rol, web e idiomas; en print es redundante. */
+  #at-ficha,
+  /* CTAs web que no pertenecen a un CV impreso */
+  #at-cv,
+  #at-pdf,
+  #at-cv-contact,
+  #at-pdf-contact,
+  #at-copy-email,
+  a[href="#proyectos"],
+  a[href^="mailto:"] {
+    display: none !important;
+  }
+
+  /* Sombras duras: en papel se leen como doble borde y sangran.
+     El borde de 3px se mantiene (identidad neo-brutalista). */
+  .at-card,
+  .at-btn,
+  .at-chip,
+  .at-tiles,
+  .at-row,
+  .at-fab {
+    box-shadow: none !important;
+  }
+
+  /* --- Cabecera (hero): 2 columnas tipo CV + tipografía acotada ---
+     En A4 el ancho de contenido (~762px) es < breakpoint md (768px),
+     así que los layouts responsivos "piensan" que son móvil: forzamos
+     la cabecera a 2 columnas y acotamos la mancheta gigante. */
+  #top > div.grid {
+    grid-template-columns: 3fr 2fr !important;
+    gap: 20px !important;
+  }
+  #top h1 {
+    font-size: 3.25rem !important;
+    line-height: 0.95 !important;
+  }
+  #top .at-display.italic {
+    font-size: 1.75rem !important;
+  }
+
+  /* --- Compactación: del diseño de pantalla al CV de ~5 páginas --- */
+  /* Experiencia/Formación: en A4 el ancho de contenido (794px − 32px de
+     padding = 762px) queda por debajo del breakpoint md (768px) y la grilla
+     md:grid-cols-[10rem_1fr] no se activa → el chip de fecha se estira a
+     barra a ancho completo. Forzamos la grilla de 2 columnas del diseño. */
+  .at-row {
+    grid-template-columns: 10rem 1fr !important;
+  }
+  /* Botones de proyecto con URL: 2 por fila en vez de apilados a
+     ancho completo (la URL añadida los hacía demasiado anchos). */
+  article a.at-btn[href^="http"] {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+  }
+  /* Contacto y footer: menos aire para que el footer no termine
+     solo en una página final. */
+  section.at-diamonds > div {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  footer > div {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  /* --- Secciones: flujo limpio, sin cortar bloques a la mitad --- */
+  section {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+  /* Manchetas de sección: menos aire (mb-10 = 40px en pantalla). */
+  section h2 {
+    margin-bottom: 16px !important;
+  }
+  .at-card,
+  .at-row,
+  .at-chip,
+  .at-tiles,
+  .at-tiles--band {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .at-eyebrow {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  /* El panel de contacto (oscuro) no se parte entre páginas. */
+  section.at-diamonds {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* --- Enlaces: subrayados + URL visible en los de acción --- */
+  a[href^="http"] {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  /* Botones-enlace (proyectos, GitHub, LinkedIn): mostrar la URL real
+     para que el CV sea utilizable en papel. Los chips (raulmorales.eu)
+     y el footer quedan excluidos por no ser .at-btn. */
+  a.at-btn[href^="http"]::after {
+    content: "  ·  " attr(href);
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    word-break: break-all;
+    text-decoration: none;
+  }
+}

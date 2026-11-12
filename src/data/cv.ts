@@ -64,6 +64,7 @@ export interface CV {
     viewProjects: string;
     download: string;
     downloadCv: string; // Botón de CV del hero: "Descargar CV · siempre al día"
+    exportPdf: string; // Botón "Exportar PDF" (window.print → "Guardar como PDF")
     generating: string;
     cvError: string;
     cvFile: string;
@@ -185,6 +186,7 @@ export const cv: Record<Lang, CV> = {
       viewProjects: "Ver mis proyectos",
       download: "descargar",
       downloadCv: "Descargar CV · siempre al día",
+      exportPdf: "Exportar PDF",
       generating: "generando…",
       cvError: "Hubo un error al generar el CV. Por favor, inténtalo de nuevo.",
       cvFile: "Raul-Morales-CV.docx",
@@ -303,6 +305,7 @@ export const cv: Record<Lang, CV> = {
       viewProjects: "View my projects",
       download: "download",
       downloadCv: "Download CV · always up to date",
+      exportPdf: "Download PDF",
       generating: "generating…",
       cvError: "There was an error generating the CV. Please try again.",
       cvFile: "Raul-Morales-CV.docx",
