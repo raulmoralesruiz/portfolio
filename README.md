@@ -50,6 +50,16 @@ npm run build    # → dist/
 npm run preview  # sirve dist/ localmente
 ```
 
+Calidad (ESLint + type-check + CI):
+
+```bash
+npm run lint     # ESLint (config flat: astro + typescript-eslint)
+npm run check    # astro check (TypeScript)
+```
+
+Pipeline de GitHub Actions (`.github/workflows/ci.yml`):
+`npm ci` → `lint` → `check` → `build` en cada push/PR.
+
 ## 📤 Despliegue
 
 El deploy hace `build` + `rsync --delete` a TrueNAS:
@@ -73,7 +83,9 @@ cp .deployrc.example .deployrc
 /
 ├── src/
 │   ├── data/cv.ts            # FUENTE ÚNICA de datos (ES + EN): secciones, CV, etiquetas UI
-│   ├── components/           # Secciones del diseño "Adelante" (Adelante.astro, Contact.astro, …)
+│   ├── components/           # Adelante (Adelante.astro, Contact.astro) + /original/
+│   │                         # (Header, About, Skills, Projects, Experience, Education,
+│   │                         #  Certifications, SectionNav)
 │   ├── layouts/              # AdelanteLayout.astro (tema, meta, fuentes) y Layout.astro (original)
 │   ├── pages/                # / (ES), /en/ (EN), /original/* (diseño archivado), 404
 │   ├── styles/adelante.css   # Design tokens, componentes y bloque @media print (PDF)

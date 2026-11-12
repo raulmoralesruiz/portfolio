@@ -463,6 +463,10 @@ html.js .at .reveal {
   background: var(--at-amber);
   color: var(--at-on-accent);
 }
+.at-nav a.at-navlink:focus-visible {
+  outline: 3px solid var(--at-amber);
+  outline-offset: 3px;
+}
 
 /* ---------- Texto de About (resalta los <strong> del contenido) ---------- */
 .at .about-text strong {

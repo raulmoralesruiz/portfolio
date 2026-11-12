@@ -2,4 +2,8 @@
 #   cp .deployrc.example .deployrc
 DEPLOY_HOST=192.168.x.x
 DEPLOY_USER=raul
-DEPLOY_PATH=/mnt/data-nas/www/portfolio
+# Raíz web REAL: el contenedor Docker `portfolio` (nginx:alpine) monta
+# /mnt/data-nas/www/portfolio/astro → /usr/share/nginx/html.
+# ⚠️ NO apuntar a /mnt/data-nas/www/portfolio (raíz): allí vive nginx/nginx.conf
+#    (montado como default.conf del contenedor); rsync --delete lo borraría.
+DEPLOY_PATH=/mnt/data-nas/www/portfolio/astro

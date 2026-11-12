@@ -10,7 +10,9 @@
 # Config (una sola vez): copia .deployrc.example a .deployrc y rellena:
 #   DEPLOY_HOST  IP u hostname de TrueNAS en la LAN (ej. 192.168.1.10)
 #   DEPLOY_USER  usuario SSH con escritura en la ruta destino
-#   DEPLOY_PATH  (opcional, por defecto /mnt/data-nas/www/portfolio)
+#   DEPLOY_PATH  (opcional, por defecto /mnt/data-nas/www/portfolio/astro —
+#                la raíz web real; NO uses /mnt/data-nas/www/portfolio: allí
+#                vive nginx/nginx.conf y --delete lo borraría)
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -23,7 +25,7 @@ fi
 
 DEPLOY_HOST="${DEPLOY_HOST:-}"
 DEPLOY_USER="${DEPLOY_USER:-$USER}"
-DEPLOY_PATH="${DEPLOY_PATH:-/mnt/data-nas/www/portfolio}"
+DEPLOY_PATH="${DEPLOY_PATH:-/mnt/data-nas/www/portfolio/astro}"
 
 if [[ -z "$DEPLOY_HOST" ]]; then
   echo "error: DEPLOY_HOST no definido." >&2
