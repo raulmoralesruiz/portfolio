@@ -223,6 +223,73 @@ body {
   box-shadow: 0 0 0 var(--at-neon);
 }
 
+/* ---------- FAB: CV (móvil/tablet) ----------
+   Botón flotante fijo (esquina inferior derecha) que descarga el CV.
+   Solo < 1024px (móvil + tablet); oculto en desktop (ahí hay nav + hero).
+   Mismos códigos neo-brutalistas: borde 3px, sombra dura, 0 radius.
+   .at-fab--hidden lo apaga cuando la sección de contacto está en pantalla
+   (IntersectionObserver) para no solaparse con su botón de CV. */
+.at-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 3.25rem;
+  min-width: 3.25rem;
+  padding: 0.6rem 0.9rem;
+  border: 3px solid var(--at-ink);
+  background: var(--at-green);
+  color: var(--at-on-accent);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--at-shadow);
+  transition: transform 120ms ease, box-shadow 120ms ease,
+    opacity 160ms ease, visibility 160ms ease;
+}
+.at-fab:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--at-shadow);
+}
+.at-fab:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--at-shadow);
+}
+.at-fab:focus-visible {
+  outline: 3px solid var(--at-amber);
+  outline-offset: 3px;
+}
+.at-fab:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+/* Oculto (sin saltos de layout): desaparece cuando contacto está visible. */
+.at-fab--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* Ámbar cuando el FAB se solapa con la Ficha verde (sección 01): comparten
+   #24c87f y no se distinguirían. Solo cambia el relleno; el texto teal oscuro,
+   el borde de 3px y la sombra dura se mantienen. Se activa con JS (PE). */
+.at-fab--amber {
+  background: var(--at-amber);
+}
+/* Desktop (lg+): el FAB no existe (ya hay nav + botón de hero). */
+@media (min-width: 1024px) {
+  .at-fab {
+    display: none;
+  }
+}
+
 /* ---------- Subrayado a mano alzada (ámbar) ----------
    Trazo SVG detrás del texto (técnica de programa.adelanteandalucia.org).
    Estático y visible por defecto (PE); con JS se "dibuja" al entrar
@@ -394,35 +461,6 @@ html.js .at .reveal {
 }
 .at-nav a.at-navlink:hover {
   background: var(--at-amber);
-  color: var(--at-on-accent);
-}
-
-/* ---------- Selector de idioma (nav) ---------- */
-.at-langgroup {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.at-lang {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.25rem;
-  padding: 0 0.6rem;
-  border: 3px solid var(--at-ink);
-  background: transparent;
-  color: var(--at-ink);
-  font-weight: 800;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-}
-.at-lang:hover {
-  background: var(--at-amber);
-  color: var(--at-on-accent);
-}
-.at-lang[aria-current="true"] {
-  background: var(--at-green);
   color: var(--at-on-accent);
 }
 

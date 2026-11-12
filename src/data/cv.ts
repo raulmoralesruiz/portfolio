@@ -102,6 +102,7 @@ export interface CV {
     verProyecto: string;
     themeAriaLight: string;
     themeAriaDark: string;
+    langSwitchTo: string; // aria-label del toggle de idioma (muestra el destino)
   };
 }
 
@@ -220,6 +221,7 @@ export const cv: Record<Lang, CV> = {
       verProyecto: "proyecto",
       themeAriaLight: "Cambiar a tema claro (crema)",
       themeAriaDark: "Cambiar a tema oscuro",
+      langSwitchTo: "Cambiar a inglés",
     },
   },
 
@@ -337,6 +339,7 @@ export const cv: Record<Lang, CV> = {
       verProyecto: "project",
       themeAriaLight: "Switch to light theme (cream)",
       themeAriaDark: "Switch to dark theme",
+      langSwitchTo: "Switch to Spanish",
     },
   },
 };

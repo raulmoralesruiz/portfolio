@@ -27,6 +27,9 @@ const currentUrl = lang === 'es' ? esUrl : enUrl;
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Fraunces (fuente del hero/LCP): preload para reducir el FOUT. Solo la
+         normal (la itálica no es crítica para LCP; prelastrarla gastaría banda). -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fuentes/fraunces-latin-normal.woff2" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="alternate" hreflang="es" href={esUrl} />

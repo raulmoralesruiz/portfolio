@@ -86,10 +86,9 @@ const tilesBand = [
           <a href={`#${s.anchor}`} class="at-navlink">{s.label}</a>
         ))}
       </div>
-      <div class="at-langgroup ml-1" role="group" aria-label={lang === "es" ? "Idioma" : "Language"}>
-        <a href="/" class="at-lang" aria-current={lang === "es" ? "true" : undefined}>ES</a>
-        <a href="/en/" class="at-lang" aria-current={lang === "en" ? "true" : undefined}>EN</a>
-      </div>
+      <a href={lang === "es" ? "/en/" : "/"} class="at-btn ml-1 !min-h-11 !py-2 !px-3 !text-sm" aria-label={ui.langSwitchTo}>
+        {lang === "es" ? "EN" : "ES"}
+      </a>
       <button id="at-theme-toggle" type="button" class="at-btn !min-h-11 !py-2 !px-3 !text-sm" aria-label={ui.themeAriaLight} aria-pressed="true">
         <span id="at-theme-icon" aria-hidden="true">☀</span>
       </button>
@@ -99,7 +98,7 @@ const tilesBand = [
   <main id="contenido">
     <!-- ===== HERO ===== -->
     <section id="top" class="max-w-6xl mx-auto px-4 pt-14 pb-16 md:pt-20 md:pb-24">
-      <div class="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
+      <div class="grid md:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
         <div class="reveal">
           <p class="at-eyebrow mb-6">{ui.greeting}</p>
           <h1 class="at-display text-[clamp(3.25rem,9vw,7rem)] mb-6">{data.header.name}</h1>
@@ -140,7 +139,7 @@ const tilesBand = [
         <div class="about-text space-y-5 text-lg leading-relaxed reveal">
           {data.about.map((paragraph) => (<p set:html={paragraph} />))}
         </div>
-        <div class="at-card at-card-green p-6 reveal">
+        <div id="at-ficha" class="at-card at-card-green p-6 reveal">
           <p class="font-bold uppercase tracking-[0.18em] text-xs mb-5">{ui.ficha}</p>
           <dl class="space-y-5">
             <div>
@@ -214,7 +213,7 @@ const tilesBand = [
         </article>
       ))}
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.projects.filter((p) => !p.featured).map((project, i) => (
           <article class={`at-card p-6 flex flex-col reveal ${i === 1 ? "at-card-amber" : ""}`}>
             <h3 class="at-display text-2xl mb-3">{project.title}</h3>
@@ -328,6 +327,17 @@ const tilesBand = [
         </div>
       </div>
     </footer>
+
+    <!-- ============ FAB: CV (móvil/tablet; oculto en desktop) ============
+         Hereda TODA la lógica .docx de [data-cv] (hero + contacto):
+         estados "Generando…/✓/error" y reset. Se oculta con .at-fab--hidden
+         cuando la sección de contacto está en pantalla (IntersectionObserver). -->
+    <button id="at-cv-fab" type="button" data-cv data-fab-hide={"#" + data.anchors.contact} class="at-fab">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/>
+      </svg>
+      <span data-label>CV</span>
+    </button>
   </main>
 
   <!-- ============ TOGGLE DE TEMA (script inline, sin dependencias) ============
@@ -394,13 +404,59 @@ const tilesBand = [
           }
         } catch (err) {
           console.error(err);
-          if (label) label.textContent = ui.cvError;
+          if (label) {
+            label.textContent = ui.cvError;
+            // Reset tras un delay (como el éxito): el usuario puede reintentar limpiamente.
+            setTimeout(() => { if (label) label.textContent = original; }, 4000);
+          }
         } finally {
           btn.disabled = false;
         }
       });
     }
     document.querySelectorAll<HTMLElement>("[data-cv]").forEach(bindCVButton);
+
+    // ---- FAB: se oculta cuando la sección de contacto está en pantalla ----
+    // (ahí ya hay su botón de CV; evitamos solapamiento/redundancia).
+    // Sin JS o sin IntersectionObserver el FAB sigue visible: no rompe nada.
+    const fab = document.getElementById("at-cv-fab");
+    const fabHideSel = fab?.getAttribute("data-fab-hide");
+    if (fab && fabHideSel && "IntersectionObserver" in window) {
+      const fabTarget = document.querySelector(fabHideSel);
+      if (fabTarget) {
+        const fabIO = new IntersectionObserver(
+          (entries) => {
+            const visible = entries.some((e) => e.isIntersecting);
+            fab.classList.toggle("at-fab--hidden", visible);
+          },
+          { threshold: 0.15 },
+        );
+        fabIO.observe(fabTarget);
+      }
+    }
+
+    // ---- FAB: ámbar cuando se solapa con la Ficha verde (sección 01) ----
+    // El FAB y la Ficha comparten #24c87f: al solaparse no se distinguen.
+    // Comprobamos la intersección de rects en scroll/resize (rAF) y activamos
+    // .at-fab--amber solo mientras se solapan. Sin JS: verde (PE, sin regresión).
+    const ficha = document.getElementById("at-ficha");
+    if (fab && ficha) {
+      let fabTicking = false;
+      const fabCheckOverlap = () => {
+        const a = fab.getBoundingClientRect();
+        const b = ficha.getBoundingClientRect();
+        const overlap = !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+        fab.classList.toggle("at-fab--amber", overlap);
+      };
+      const fabOnScroll = () => {
+        if (fabTicking) return;
+        fabTicking = true;
+        requestAnimationFrame(() => { fabCheckOverlap(); fabTicking = false; });
+      };
+      window.addEventListener("scroll", fabOnScroll, { passive: true });
+      window.addEventListener("resize", fabOnScroll);
+      fabCheckOverlap();
+    }
 
     // ---- Subrayado "trazo": se dibuja al entrar en viewport ----
     // Sin JS (o sin IntersectionObserver) el trazo queda estático y visible.
@@ -424,13 +480,37 @@ const tilesBand = [
     const copyBtn = document.getElementById("at-copy-email");
     if (copyBtn) {
       const original = copyBtn.textContent;
-      copyBtn.addEventListener("click", async () => {
+      // Fallback para contextos sin navigator.clipboard (no seguro / browser viejo):
+      // textarea temporal + execCommand("copy"). Devuelve si el copiado fue exitoso.
+      const fallbackCopy = (text: string): boolean => {
         try {
-          await navigator.clipboard.writeText(copyBtn.dataset.email ?? "");
-          copyBtn.textContent = ui.emailCopied;
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "absolute";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          ta.remove();
+          return ok;
         } catch {
-          copyBtn.textContent = ui.emailCopyError;
+          return false;
         }
+      };
+      copyBtn.addEventListener("click", async () => {
+        const email = copyBtn.dataset.email ?? "";
+        let ok = false;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(email);
+            ok = true;
+          }
+        } catch {
+          ok = false;
+        }
+        if (!ok) ok = fallbackCopy(email);
+        copyBtn.textContent = ok ? ui.emailCopied : ui.emailCopyError;
         setTimeout(() => { copyBtn.textContent = original; }, 2000);
       });
     }
