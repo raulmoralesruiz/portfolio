@@ -29,9 +29,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# assets img
-src/assets/img/
-
 # agent tooling (skill installs, local to each harness)
 .opencode/
 .pi/
