@@ -162,11 +162,13 @@ body {
   background: var(--at-amber);
   color: var(--at-on-accent);
 }
-/* Chips sobre ámbar: sólidos en tinta (lenguaje .at-chip-solid, la misma
-   pareja ámbar+teal de los tiles) — contraste máximo sobre el ámbar. */
+/* Chips sobre ámbar: fondo neutro (--at-card-soft) + borde y texto en tinta
+   (--at-ink). Antes el fondo y el borde eran ambos --at-ink, así que el borde
+   se perdía contra el fondo; ahora el borde se distingue del contenido. */
 .at-card-amber .at-chip:not(.at-chip-solid):not(.at-chip-amber) {
-  background: var(--at-ink);
-  color: var(--at-on-ink);
+  background: var(--at-card-soft);
+  color: var(--at-ink);
+  border-color: var(--at-ink);
 }
 .at-card-cream {
   background: var(--at-card-soft);
