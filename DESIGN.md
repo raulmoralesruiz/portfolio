@@ -161,7 +161,7 @@ Grids are bold and mobile-first:
 - **Hero:** `3fr / 2fr` at `lg` — copy + actions on the left; the portrait card (with `raulmorales.eu` + `ES · EN` chips) stacked over the 7-tile mosaic band on the right.
 - **About:** `2fr / 1fr` at `md` — prose on the left, the green **Ficha** spec-card on the right.
 - **Skills:** 2-up at `sm`; odd cards get the cream surface for a checkerboard rhythm.
-- **Projects:** the featured project is a full-width card crowned by the mosaic band; the rest are 3-up at `md`, with the middle card in amber as the visual anchor.
+- **Projects:** the featured project is a full-width card crowned by the mosaic band; the rest are 3-up at `md`, with the middle card in green as the visual anchor.
 - **Experience / Education:** rows with a fixed `10rem` period column (amber chip for experience, plain chip for education).
 - **Certifications:** 2-up at `sm`, 3-up at `lg`.
 - **Contact:** full-bleed dark panel (diamond pattern), centered `max-w-4xl`.
@@ -214,8 +214,7 @@ The two soft ornaments are patterns, not shapes:
 
 - 3px ink border, hard shadow, 24px padding, 0px radius.
 - **Default:** card surface (white / #002b2b).
-- **Green (`.at-card-green`):** the Ficha spec-card — green surface, teal text.
-- **Amber (`.at-card-amber`):** the middle project card.
+- **Green (`.at-card-green`):** the RM monogram, the Ficha spec-card, and the middle project card — green surface, teal text.
 - **Cream (`.at-card-cream`):** the soft surface, for alternating skill cards.
 
 ### Chips (`.at-chip`)

@@ -150,17 +150,6 @@ body {
   background: var(--at-green);
   color: var(--at-on-accent);
 }
-.at-card-amber {
-  background: var(--at-amber);
-  color: var(--at-on-accent);
-}
-/* Chips sobre ámbar: "cajón" más oscuro que el fondo del card
-   (mismo principio que --at-card-soft sobre --at-card). El velo de
-   negro oscurece el ámbar en ambos temas; el texto on-accent se lee
-   sobre el ámbar oscurecido. */
-.at-card-amber .at-chip:not(.at-chip-solid):not(.at-chip-amber) {
-  background: rgba(0, 0, 0, 0.15);
-}
 .at-card-cream {
   background: var(--at-card-soft);
 }

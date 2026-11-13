@@ -739,17 +739,17 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
     );
   }
 
-  // Resto: rejilla de 2 columnas (la 2ª tarjeta, ámbar, como en Adelante)
+  // Resto: rejilla de 2 columnas (la 2ª tarjeta, verde, como en Adelante;
+  // chips y botones con el mismo tratamiento que las tarjetas normales)
   const rest = data.projects.filter((pr) => !pr.featured);
   if (rest.length) {
     const restCards = rest.map((project, i) => {
-      const amber = i === 1;
-      const fill = amber ? p.amber : p.card;
-      const color = amber ? p.onAccent : p.ink;
-      const chipFill = amber ? "D8A42B" : p.cardSoft;
+      const green = i === 1;
+      const fill = green ? p.green : p.card;
+      const color = green ? p.onAccent : p.ink;
       const btns: BtnSpec[] = [
         { text: ui.docxView, link: project.link, fill: p.green, color: p.onAccent },
-        { text: "GitHub", link: project.github, ...(amber ? { fill: "D8A42B", color: p.onAccent } : {}) },
+        { text: "GitHub", link: project.github },
       ];
       return card(
         withSpacers(
@@ -762,7 +762,7 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
               children: [new TextRun({ text: project.description, font: F_BODY, size: 19, color })],
               spacing: { before: 0, after: 180 },
             }),
-            ...chipRows(p, project.tech.map((t) => ({ text: t, o: { fill: chipFill, color, size: 17 } })), CARD_W_HALF),
+            ...chipRows(p, project.tech.map((t) => ({ text: t, o: { fill: p.cardSoft, color: p.ink, size: 17 } })), CARD_W_HALF),
             ...btnRows(p, btns, CARD_W_HALF),
           ],
           160,
