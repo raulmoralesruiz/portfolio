@@ -229,6 +229,26 @@ body {
   box-shadow: 0 0 0 var(--at-neon);
 }
 
+/* ---------- Toggle de tema: iconos sol/luna (SVG, no glifos Unicode) ----------
+   Mismo lenguaje que los demás iconos a mano (trazo 3, esquinas redondeadas
+   en las puntas). El CSS decide cuál se ve según [data-theme]:
+   sol en tema oscuro (acción: a claro) y luna en claro (acción: a oscuro).
+   Sin data-theme (no debería pasar: el layout lo pinta pre-paint) → sol,
+   coherente con el dark-by-default. */
+.at-theme-icon {
+  display: inline-flex;
+  line-height: 0;
+}
+.at-theme-icon .at-icon-moon {
+  display: none;
+}
+[data-theme="light"] .at-theme-icon .at-icon-sun {
+  display: none;
+}
+[data-theme="light"] .at-theme-icon .at-icon-moon {
+  display: block;
+}
+
 /* ---------- FAB: CV (móvil/tablet) ----------
    Botón flotante fijo (esquina inferior derecha) que descarga el CV.
    Solo < 1024px (móvil + tablet); oculto en desktop (ahí hay nav + hero).

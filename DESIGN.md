@@ -33,6 +33,21 @@ typography:
     fontWeight: 700
     lineHeight: 1.5
     letterSpacing: "0.18em"
+  # Intentional UI-chrome steps for dense neo-brutalist controls, set
+  # deliberately between the label (0.75rem) and body (1.125rem) steps.
+  # Documented so they read as part of the system, not type-scale drift.
+  button:
+    fontSize: "0.9rem"   # .at-btn, .at-fab
+  chip:
+    fontSize: "0.85rem"  # .at-chip
+  navlink:
+    fontSize: "0.8rem"   # .at-navlink
+  # Print (@media print, A4): the giant hero display is capped so the
+  # name/role fit the ~762px print column. Intentional print steps.
+  printName:
+    fontSize: "3.25rem"  # #top h1 (print)
+  printRole:
+    fontSize: "1.75rem"  # #top .at-display.italic (print)
 rounded:
   none: "0px"
 spacing:
