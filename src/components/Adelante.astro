@@ -223,7 +223,7 @@ const tilesBand = [
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.projects.filter((p) => !p.featured).map((project, i) => (
-          <article class={`at-card p-6 flex flex-col reveal ${i === 1 ? "at-card-green" : ""}`}>
+          <article class={`at-card p-6 flex flex-col reveal ${i === 1 ? "at-card-amber" : ""}`}>
             <h3 class="at-display text-2xl mb-3">{project.title}</h3>
             <p class="leading-relaxed mb-5 flex-1">{project.description}</p>
             <ul class="flex flex-wrap gap-2 mb-6">
