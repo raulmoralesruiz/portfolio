@@ -249,6 +249,30 @@ body {
   display: block;
 }
 
+/* ---------- Transición de tema (el "flip") ----------
+   El toggle oscuro↔claro cambia las variables de superficie en
+   <html data-theme>. Sin transición el cambio es un "snap" que se lee
+   como un salto; con una transición corta y confiada (200ms, solo
+   color/fondo/borde/sombra → paint, no layout) se lee como un flip
+   deliberado: el mundo entero cambia en un solo latido.
+   El botón ya trae su propia transición de 120ms (hover), así que aquí
+   solo toco las superficies grandes para no pisarla.
+   En prefers-reduced-motion la transición de COLOR se conserva (el
+   workflow la trata como meaningful, no como "movimiento"), por lo que
+   NO la apago en ese bloque. */
+body,
+.at,
+.at-nav,
+.at-card,
+.at-chip,
+.at-diamonds {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
 /* ---------- FAB: CV (móvil/tablet) ----------
    Botón flotante fijo (esquina inferior derecha) que descarga el CV.
    Solo < 1024px (móvil + tablet); oculto en desktop (ahí hay nav + hero).
@@ -504,6 +528,9 @@ html.js .at .reveal {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--at-ink);
+  /* El hover ámbar se lee como respuesta (feedback inmediato, 120ms).
+     Solo color: no hay movimiento espacial que reducir en reduced-motion. */
+  transition: background-color 120ms ease, color 120ms ease;
 }
 .at-nav a.at-navlink:hover {
   background: var(--at-amber);
