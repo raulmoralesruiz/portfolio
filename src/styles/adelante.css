@@ -137,10 +137,18 @@ body {
   max-width: 8rem;
 }
 
-/* ---------- Tarjetas con borde duro ---------- */
+/* ---------- Tarjetas con borde duro ----------
+   Sombra "a petición": en reposo la caja es plana (borde + fondo, sin
+   sombra); al pasar el ratón aparece la sombra dura. Las cajas NO se
+   levantan (solo los botones, que sí son accionables). La transición de
+   box-shadow la aporta el bloque de flip de tema (200ms). */
 .at-card {
   border: 3px solid var(--at-ink);
   background: var(--at-card);
+  box-shadow: none;
+  transition: transform 120ms ease, box-shadow 200ms ease;
+}
+.at-card:hover {
   box-shadow: 5px 5px 0 var(--at-shadow);
 }
 .at-card-soft {
@@ -182,12 +190,13 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 5px 5px 0 var(--at-shadow);
+  /* Sombra "a petición": sin sombra en reposo; aparece al hover (ver :hover). */
+  box-shadow: none;
   transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
 }
 .at-btn:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 var(--at-shadow);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--at-shadow);
 }
 .at-btn:active {
   transform: translate(5px, 5px);
@@ -220,13 +229,13 @@ body {
 .at-btn-neon {
   background: var(--at-neon);
   color: var(--at-on-accent);
-  box-shadow: 5px 5px 0 var(--at-neon);
+  box-shadow: none;
 }
 .at-btn-neon:hover {
-  box-shadow: 3px 3px 0 var(--at-neon);
+  box-shadow: 5px 5px 0 var(--at-shadow);
 }
 .at-btn-neon:active {
-  box-shadow: 0 0 0 var(--at-neon);
+  box-shadow: 0 0 0 var(--at-shadow);
 }
 
 /* ---------- Toggle de tema: iconos sol/luna (SVG, no glifos Unicode) ----------
@@ -300,13 +309,14 @@ body,
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 5px 5px 0 var(--at-shadow);
+  /* Sombra "a petición": sin sombra en reposo; aparece al hover (ver :hover). */
+  box-shadow: none;
   transition: transform 120ms ease, box-shadow 120ms ease,
     opacity 160ms ease, visibility 160ms ease;
 }
 .at-fab:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 var(--at-shadow);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--at-shadow);
 }
 .at-fab:active {
   transform: translate(5px, 5px);
@@ -402,6 +412,11 @@ body,
   border: 3px solid var(--at-ink);
   background: var(--at-tile-gap);
   padding: 3px;
+  /* Sombra "a petición": sin sombra en reposo; aparece al hover. */
+  box-shadow: none;
+  transition: box-shadow 120ms ease;
+}
+.at-tiles:hover {
   box-shadow: 5px 5px 0 var(--at-shadow);
 }
 .at-tiles > * {
@@ -453,6 +468,11 @@ body,
 
 /* ---------- Patrón de diamantes (secciones oscuras) ---------- */
 .at-diamonds {
+  /* En modo claro --at-shadow coincide con el fondo de la sección (--at-panel),
+     así que la sombra de hover de los botones no se ve. La forzamos a
+     --at-panel-text (crema), que sí contrasta. En modo oscuro --at-shadow ya
+     es crema, así que esto no cambia nada. */
+  --at-shadow: var(--at-panel-text);
   background-color: var(--at-panel);
   background-image: repeating-conic-gradient(
     from 45deg,
@@ -462,10 +482,24 @@ body,
   background-size: 28px 28px;
 }
 
-/* ---------- Filas de timeline ---------- */
+/* Botón "Descargar CV": el fondo neutro crema (--at-canvas) se fundía con el
+   borde y la sombra crema, así que no se distinguían. Le damos un fondo oscuro
+   (--at-panel-deep: #003030 en claro, #001515 en oscuro) y texto crema para
+   que el borde/sombra crema y el texto destaquen. */
+#at-cv-contact {
+  background: var(--at-panel-deep);
+  color: var(--at-panel-text);
+}
+
+/* ---------- Filas de timeline ----------
+   Sombra "a petición": sin sombra en reposo; aparece al hover. */
 .at-row {
   border: 3px solid var(--at-ink);
   background: var(--at-card);
+  box-shadow: none;
+  transition: box-shadow 120ms ease;
+}
+.at-row:hover {
   box-shadow: 5px 5px 0 var(--at-shadow);
 }
 
@@ -492,9 +526,21 @@ html.js .at .reveal {
     opacity: 1;
     transform: none;
   }
+  /* Sombra "a petición": en reduced-motion la sombra SÍ aparece al hover
+     (es un estado significativo, como el color), pero se apaga el
+     "levantamiento" (transform = movimiento espacial) y las transiciones. */
   .at .at-btn,
   .at .at-btn:hover,
-  .at .at-btn:active {
+  .at .at-btn:active,
+  .at .at-fab,
+  .at .at-fab:hover,
+  .at .at-fab:active,
+  .at .at-card,
+  .at .at-card:hover,
+  .at .at-tiles,
+  .at .at-tiles:hover,
+  .at .at-row,
+  .at .at-row:hover {
     transition: none;
     transform: none;
   }

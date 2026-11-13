@@ -316,17 +316,17 @@ const tilesBand = [
 
         <div class="inline-flex flex-wrap items-center justify-center gap-3 border-[3px] border-[var(--at-panel-text)] px-4 py-3 mb-8 bg-[var(--at-panel-deep)] reveal">
           <span class="at-num text-base select-all">{email}</span>
-          <button id="at-copy-email" type="button" data-email={email} aria-live="polite" class="at-btn at-btn-amber !min-h-10 !py-1.5 !px-4 !text-xs">{ui.copyEmail}</button>
+          <button id="at-copy-email" type="button" data-email={email} aria-live="polite" class="at-btn at-btn-amber !border-[var(--at-panel-text)] !min-h-10 !py-1.5 !px-4 !text-xs">{ui.copyEmail}</button>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-4 reveal">
-          <a href={`mailto:${email}`} class="at-btn at-btn-neon !text-base !px-8 !py-4">{ui.contactCta} <span aria-hidden="true">✳</span></a>
-          <button id="at-cv-contact" type="button" data-cv class="at-btn !text-base !px-8 !py-4">
+          <a href={`mailto:${email}`} class="at-btn at-btn-neon !border-[var(--at-panel-text)] !text-base !px-8 !py-4">{ui.contactCta} <span aria-hidden="true">✳</span></a>
+          <button id="at-cv-contact" type="button" data-cv class="at-btn !border-[var(--at-panel-text)] !text-base !px-8 !py-4">
             <span data-label aria-live="polite">{ui.download} CV</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
             </svg>
           </button>
-          <button id="at-pdf-contact" type="button" data-pdf class="at-btn at-btn-amber !text-base !px-8 !py-4">
+          <button id="at-pdf-contact" type="button" data-pdf class="at-btn at-btn-amber !border-[var(--at-panel-text)] !text-base !px-8 !py-4">
             <span data-label>{ui.exportPdf}</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polyline points="6 9 6 2 18 2 18 9" />
