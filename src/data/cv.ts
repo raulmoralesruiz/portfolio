@@ -178,6 +178,7 @@ export const cv: Record<Lang, CV> = {
       { title: "Kéfir Control", description: "Aplicación minimalista para gestionar la fermentación de kéfir de leche", tech: ["Flutter", "Dart", "Android", "iOS"], link: "https://kefircontrol.raulmorales.eu", github: "https://github.com/raulmoralesruiz/kefir-control" },
       { title: "Portfolio Radio", description: "Portfolio de voz de radio", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://radio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/radio-portfolio" },
       { title: "Mi Portfolio", description: "Portfolio personal creado con Astro. Evolución de AboutMe, mi iteración anterior en Angular.", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
+      { title: "Llama Control Center", description: "Centro de control local para servidores llama.cpp: telemetría en vivo, benchmarks de prompts y ajuste Multi-GPU, todo desde un dashboard web.", tech: ["Python", "FastAPI", "React", "TypeScript", "WebSocket", "SQLite"], link: "https://github.com/raulmoralesruiz/llama-control-center", github: "https://github.com/raulmoralesruiz/llama-control-center" },
     ],
 
     ui: {
@@ -297,6 +298,7 @@ export const cv: Record<Lang, CV> = {
       { title: "Kéfir Control", description: "Minimalist app to manage the fermentation of milk kefir", tech: ["Flutter", "Dart", "Android", "iOS"], link: "https://kefircontrol.raulmorales.eu", github: "https://github.com/raulmoralesruiz/kefir-control" },
       { title: "Portfolio Radio", description: "Radio voice portfolio", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://radio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/radio-portfolio" },
       { title: "My Portfolio", description: "Personal portfolio built with Astro. Evolution of AboutMe, my earlier Angular iteration.", tech: ["Astro", "Tailwind", "HTML", "CSS"], link: "https://portfolio.raulmorales.eu", github: "https://github.com/raulmoralesruiz/portfolio" },
+      { title: "Llama Control Center", description: "Local control center for llama.cpp servers: live telemetry, prompt benchmarks and multi-GPU tuning, all from a web dashboard.", tech: ["Python", "FastAPI", "React", "TypeScript", "WebSocket", "SQLite"], link: "https://github.com/raulmoralesruiz/llama-control-center", github: "https://github.com/raulmoralesruiz/llama-control-center" },
     ],
 
     ui: {

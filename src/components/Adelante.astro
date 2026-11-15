@@ -241,7 +241,9 @@ const tilesBand = [
               {project.tech.map((t) => (<li class="at-chip !text-xs">{t}</li>))}
             </ul>
             <div class="flex gap-3">
+              {project.link !== project.github && (
               <a href={project.link} target="_blank" rel="noopener noreferrer" class="at-btn at-btn-solid !min-h-11 !py-2 !px-4 !text-xs">{ui.docxView} <span aria-hidden="true">↗</span></a>
+              )}
               <a href={project.github} target="_blank" rel="noopener noreferrer" class="at-btn !min-h-11 !py-2 !px-4 !text-xs">GitHub <span aria-hidden="true">↗</span></a>
             </div>
           </article>

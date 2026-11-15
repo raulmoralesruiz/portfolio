@@ -750,7 +750,9 @@ export async function generateWordDocument(lang: Lang): Promise<Blob> {
       const chipFill = amber ? p.ink : p.cardSoft;
       const chipColor = amber ? p.onInk : p.ink;
       const btns: BtnSpec[] = [
-        { text: ui.docxView, link: project.link, fill: p.green, color: p.onAccent },
+        ...(project.link !== project.github
+          ? [{ text: ui.docxView, link: project.link, fill: p.green, color: p.onAccent }]
+          : []),
         { text: "GitHub", link: project.github, ...(amber ? { fill: p.canvas, color: p.ink } : {}) },
       ];
       return card(

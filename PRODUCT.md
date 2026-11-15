@@ -52,7 +52,8 @@ Desarrollador frontend con profundidad full-stack real y experiencia previa de a
 
 - **Foto:** `src/assets/img/raul.png` — referenciada por `Adelante.astro` (y por `About.astro` en la versión archivada); commiteada en el repo para que el build sea autocontenido desde un clone fresco.
 - **Certificaciones (PDFs, en el repo):** `public/cursos/bigschool_ia.pdf`, `public/cursos/midu_mcp.pdf`, `public/cursos/mongo_m001.pdf`, `public/cursos/udemy_angular.pdf`.
-- **Proyectos con enlaces vivos** (en `src/data/cv.ts`): Virus! (frontend, backend y docs), Kéfir Control, Portfolio Radio, AboutMe.
+- **Proyectos con enlaces vivos** (en `src/data/cv.ts`): Virus! (frontend, backend y docs), Kéfir Control, Portfolio Radio, Mi Portfolio.
+- **Llama Control Center** (solo GitHub, sin URL de producción — app local): cuando `link === github`, los renderers (Adelante, Projects, DOCX) muestran un único botón de GitHub, sin botón "Ver"/"Demo".
 - **Experiencia:** Babel (2021–presente), NTT Data (2019–2021), MGS (2013–2019).
 - **Formación:** IES Jacarandá (2021), Colegio Altair (2013).
 - **Ausencias que no fabricar:** no hay testimonios, clientes nombrados, métricas, cifras de rendimiento ni reseñas. No inventar ninguno.
